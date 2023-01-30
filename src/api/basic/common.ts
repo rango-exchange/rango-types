@@ -17,12 +17,6 @@ export {
   AssetWithTicker,
 }
 
-export function assetToString(asset: Asset): string {
-  if (!!asset.address)
-    return `${asset.blockchain}.${asset.symbol}--${asset.address}`
-  else return `${asset.blockchain}.${asset.symbol}`
-}
-
 /**
  * A fee unit, including the type of asset and the amount of fee
  *
