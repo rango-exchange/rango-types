@@ -1,4 +1,5 @@
 import { AssetWithTicker } from '../common'
+import { BaseTransaction } from './base'
 
 /**
  * CosmosCoin representing fee coins
@@ -26,8 +27,8 @@ export type CosmosMessage = {
   account_number: number | null
   rpcUrl: string | null
   chainId: string | null
-  msgs: any[]
-  protoMsgs: any[]
+  msgs: unknown[]
+  protoMsgs: unknown[]
   memo: string | null
   fee: CosmosStdFee | null
 }
@@ -62,9 +63,8 @@ export type CosmosRawTransferData = {
  * @property {CosmosRawTransferData} rawTransfer - An alternative to CosmosMessage object for the cosmos wallets that do not support generic Cosmos messages
  *
  */
-export interface CosmosTransaction {
+export interface CosmosTransaction extends BaseTransaction {
   type: 'COSMOS'
-  blockChain: string
   fromWalletAddress: string
   data: CosmosMessage
   rawTransfer: CosmosRawTransferData

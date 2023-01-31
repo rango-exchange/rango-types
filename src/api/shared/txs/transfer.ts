@@ -1,7 +1,8 @@
 import { AssetWithTicker } from '../common'
+import { BaseTransaction } from './base'
 
 /**
- * TransferTransaction. This type of transaction is used for non-EVM and non-Cosmos blockchains including BTC, LTC, BCH
+ * TransferTransaction. This type of transaction is used for UTXO blockchains including BTC, LTC, BCH
  *
  * @property {TransactionType} type - This fields equals to TRANSFER for all TransferTransactions
  * @property {string} blockChain - The blockchain that this transaction will be executed in, same as the input blockchain of creating transaction
@@ -14,9 +15,8 @@ import { AssetWithTicker } from '../common'
  * @property {string | null} memo - The memo of transaction, can be null
  *
  */
-export interface Transfer {
+export interface Transfer extends BaseTransaction {
   type: 'TRANSFER'
-  blockChain: string
   method: string
   asset: AssetWithTicker
   amount: string
