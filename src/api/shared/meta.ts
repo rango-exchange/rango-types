@@ -1,7 +1,7 @@
 import { Asset, SwapperType } from './common'
 import { TransactionType } from './transactions'
 
-export type MetaInfoType = 'CosmosMetaInfo' | 'EvmMetaInfo'
+export type MetaInfoType = 'CosmosMetaInfo' | 'EvmMetaInfo' // TODO UPDATE
 
 /**
  * EVM Chain Info
@@ -247,20 +247,20 @@ export const isStarknetBlockchain = (
 ): blockchainMeta is StarkNetBlockchainMeta =>
   blockchainMeta.type === 'STARKNET'
 
-export const evmBlockchains = (allBlockChains: BlockchainMeta[]) =>
-  allBlockChains.filter(isEvmBlockchain)
+export const evmBlockchains = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isEvmBlockchain)
 
-export const solanaBlockchain = (allBlockChains: BlockchainMeta[]) =>
-  allBlockChains.filter(isSolanaBlockchain)
+export const solanaBlockchain = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isSolanaBlockchain)
 
-export const starknetBlockchain = (allBlockChains: BlockchainMeta[]) =>
-  allBlockChains.filter(isStarknetBlockchain)
+export const starknetBlockchain = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isStarknetBlockchain)
 
-export const tronBlockchain = (allBlockChains: BlockchainMeta[]) =>
-  allBlockChains.filter(isTronBlockchain)
+export const tronBlockchain = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isTronBlockchain)
 
-export const cosmosBlockchains = (allBlockChains: BlockchainMeta[]) =>
-  allBlockChains.filter(isCosmosBlockchain)
+export const cosmosBlockchains = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isCosmosBlockchain)
 
-export const transferBlockchains = (allBlockChains: BlockchainMeta[]) =>
-  allBlockChains.filter(isTransferBlockchain)
+export const transferBlockchains = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isTransferBlockchain)
