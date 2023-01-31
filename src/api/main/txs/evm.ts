@@ -1,9 +1,7 @@
-import { TransactionType } from '../transactions'
-
 /**
  * The transaction object for all EVM-based blockchains, including Ethereum, BSC, Polygon, Harmony, etc
  *
- * @property {TransactionType} type - This fields equals to TransactionType.EVM for all EvmTransactions
+ * @property {TransactionType} type - This fields equals to EVM for all EvmTransactions
  * @property {boolean} isApprovalTx - Determines that this transaction is an approval transaction or not, if true user
  * should approve the transaction and call create transaction endpoint again to get the original tx. Beware that most
  * of the fields of this object will be passed directly to the wallet without any change.
@@ -18,7 +16,7 @@ import { TransactionType } from '../transactions'
  *
  */
 export interface EvmTransaction {
-  type: TransactionType.EVM
+  type: 'EVM'
   isApprovalTx: boolean
   blockChain: string
   from: string | null

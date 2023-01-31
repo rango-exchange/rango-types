@@ -1,10 +1,7 @@
 import { Asset, SwapperType } from './common'
 import { TransactionType } from './transactions'
 
-export enum MetaInfoType {
-  CosmosMetaInfo = 'CosmosMetaInfo',
-  EvmMetaInfo = 'EvmMetaInfo',
-}
+export type MetaInfoType = 'CosmosMetaInfo' | 'EvmMetaInfo'
 
 /**
  * EVM Chain Info
@@ -21,7 +18,7 @@ export enum MetaInfoType {
  *
  */
 export type EVMChainInfo = {
-  infoType: MetaInfoType.EvmMetaInfo
+  infoType: 'EvmMetaInfo'
   chainName: string
   nativeCurrency: {
     name: string
@@ -41,7 +38,7 @@ export type EVMChainInfo = {
  *
  */
 export type CosmosChainInfo = {
-  infoType: MetaInfoType.CosmosMetaInfo
+  infoType: 'CosmosMetaInfo'
   experimental: boolean
   rpc: string
   rest: string
@@ -120,6 +117,7 @@ export type SwapperMetaDto = SwapperMeta
 /**
  * Blockchain Meta Information
  *
+ * @property {TransactionType} type - Type of the blockchain
  * @property {string} name - Unique name of blockchain, this field is used in all endpoints as the identifier
  * @property {number} defaultDecimals - The default decimals of blockchain, do not use it in computations, use Token.decimals instead
  * @property {Asset[]} feeAssets - List of assets that can be used as fee in this blockchain
@@ -130,12 +128,12 @@ export type SwapperMetaDto = SwapperMeta
  * @property {string} shortName - Short name for the blockchain
  * @property {string} color - Suggested color for the blockchain
  * @property {boolean} enabled - Is blockchain enabled or not in Rango
- * @property {TransactionType} type - Type of the blockchain
  * @property {string | null} chainId - e.g. "0xa86a" for Avax, "osmosis-1" for Osmosis, etc.
  * @property {EVMChainInfo | CosmosChainInfo | null} info - Chain specific information
  *
  */
 export type BlockchainMetaBase = {
+  type: TransactionType
   name: string
   shortName: string
   displayName: string
@@ -145,24 +143,23 @@ export type BlockchainMetaBase = {
   logo: string
   color: string
   enabled: boolean
-  type: TransactionType
   chainId: string | null
   info: EVMChainInfo | CosmosChainInfo | null
 }
 
 export interface EvmBlockchainMeta extends BlockchainMetaBase {
-  type: TransactionType.EVM
+  type: 'EVM'
   chainId: string
   info: EVMChainInfo
 }
 
 export interface CosmosBlockchainMeta extends BlockchainMetaBase {
-  type: TransactionType.COSMOS
+  type: 'COSMOS'
   chainId: string
   info: CosmosChainInfo
 }
 export interface TransferBlockchainMeta extends BlockchainMetaBase {
-  type: TransactionType.TRANSFER
+  type: 'TRANSFER'
   chainId: null
   info: null
 }

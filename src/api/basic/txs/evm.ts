@@ -1,10 +1,9 @@
 import { EvmBlockchainMeta } from '../meta'
-import { TransactionType } from '../transactions'
 
 /**
  * The transaction object for all EVM-based blockchains, including Ethereum, BSC, Polygon, Harmony, etc
  *
- * @property {TransactionType} type - This fields equals to TransactionType.EVM for all EVMTransactions
+ * @property {TransactionType} type - This fields equals to EVM for all EVMTransactions
  * @property {EvmBlockchainMeta} blockChain - The blockchain info that this transaction is going to run in
  * @property {string | null} from - The source wallet address, it can be null
  * @property {string} approveTo - Address of source token erc20 contract for increasing approve amount
@@ -17,7 +16,7 @@ import { TransactionType } from '../transactions'
  *
  */
 export interface EvmTransaction {
-  type: TransactionType
+  type: 'EVM'
   blockChain: EvmBlockchainMeta
   from: string | null
   approveTo: string | null
