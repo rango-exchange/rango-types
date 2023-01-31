@@ -7,6 +7,7 @@ import {
   CosmosBlockchainMeta,
   TransferBlockchainMeta,
   BlockchainMeta,
+  SwapperMeta,
 } from '../shared'
 
 export {
@@ -18,6 +19,7 @@ export {
   CosmosBlockchainMeta,
   TransferBlockchainMeta,
   BlockchainMeta,
+  SwapperMeta,
 }
 
 /**
@@ -55,12 +57,12 @@ export type Token = {
  * @property {BlockchainMeta[]} blockchains - List of all supported blockchains
  * @property {Token[]} tokens - List of all tokens
  * @property {Token[]} popularTokens - List of popular tokens, a subset of tokens field
- * @property {SwapperMetaDto[]} swappers - List of all DEXes & Bridges
+ * @property {SwapperMeta[]} swappers - List of all DEXes & Bridges
  *
  */
 export type MetaResponse = {
   blockchains: BlockchainMeta[]
   tokens: Token[]
   popularTokens: Token[]
-  swappers: SwapperMetaDto[]
+  swappers: SwapperMeta[]
 }

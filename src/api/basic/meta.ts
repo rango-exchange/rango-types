@@ -2,6 +2,7 @@ import {
   EVMChainInfo,
   CosmosChainInfo,
   SwapperMetaDto,
+  SwapperMeta,
   BlockchainMetaBase,
   EvmBlockchainMeta,
   CosmosBlockchainMeta,
@@ -13,6 +14,7 @@ export {
   EVMChainInfo,
   CosmosChainInfo,
   SwapperMetaDto,
+  SwapperMeta,
   BlockchainMetaBase,
   EvmBlockchainMeta,
   CosmosBlockchainMeta,
@@ -49,11 +51,11 @@ export type Token = {
  *
  * @property {BlockchainMeta[]} blockchains - List of all supported blockchains
  * @property {Token[]} tokens - List of all tokens
- * @property {SwapperMetaDto[]} swappers - List of all DEXes & Bridges
+ * @property {SwapperMeta[]} swappers - List of all DEXes & Bridges
  *
  */
 export type MetaResponse = {
   blockchains: BlockchainMeta[]
   tokens: Token[]
-  swappers: SwapperMetaDto[]
+  swappers: SwapperMeta[]
 }
