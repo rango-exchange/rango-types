@@ -1,3 +1,5 @@
+import { BaseTransaction } from './base'
+
 /**
  * Account metadata used to define instructions
  */
@@ -37,9 +39,8 @@ export type SolanaSignature = {
  * @property {SolanaInstruction[]} instructions, The instructions to atomically execute
  *
  */
-export interface SolanaTransaction {
+export interface SolanaTransaction extends BaseTransaction {
   type: 'SOLANA'
-  blockChain: string
   from: string
   identifier: string
   recentBlockhash: string | null
