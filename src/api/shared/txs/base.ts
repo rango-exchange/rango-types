@@ -10,6 +10,6 @@ import { TransactionType } from '../transactions'
  */
 export interface BaseTransaction {
   type: TransactionType
-  blockChain: string
+  blockChain: string // TODO use network, object for evm transaction of basic api
   externalTxId: string | null // TODO double check
 }
