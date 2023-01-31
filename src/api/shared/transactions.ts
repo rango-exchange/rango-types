@@ -1,14 +1,19 @@
 /**
  * The type of transaction
  */
-export enum TransactionType {
-  EVM = 'EVM',
-  TRANSFER = 'TRANSFER',
-  COSMOS = 'COSMOS',
-  SOLANA = 'SOLANA',
-  TRON = 'TRON',
-  STARKNET = 'STARKNET',
-}
+export type TransactionType =
+  | 'EVM'
+  | 'TRANSFER'
+  | 'COSMOS'
+  | 'SOLANA'
+  | 'TRON'
+  | 'STARKNET'
+
+/**
+ * The type of transaction
+ * @deprecated use TransactionType instead
+ */
+export type GenericTransactionType = TransactionType
 
 /**
  * A transaction's url that can be displayed to advanced user to track the progress
@@ -42,11 +47,7 @@ export type ReportTransactionRequest = {
 /**
  * The status of transaction in tracking
  */
-export enum TransactionStatus {
-  FAILED = 'failed',
-  RUNNING = 'running',
-  SUCCESS = 'success',
-}
+export type TransactionStatus = 'failed' | 'running' | 'success'
 
 /**
  * Response body of check-approval
