@@ -6,6 +6,8 @@ export enum TransactionType {
   TRANSFER = 'TRANSFER',
   COSMOS = 'COSMOS',
   SOLANA = 'SOLANA',
+  TRON = 'TRON',
+  STARKNET = 'STARKNET',
 }
 
 /**

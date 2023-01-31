@@ -1,9 +1,15 @@
 import { Asset, SwapperType } from './common'
 import { TransactionType } from './transactions'
 
+export enum MetaInfoType {
+  CosmosMetaInfo = 'CosmosMetaInfo',
+  EvmMetaInfo = 'EvmMetaInfo',
+}
+
 /**
  * EVM Chain Info
  *
+ * @property {MetaInfoType} infoType
  * @property {string} chainName - Chain name, e.g. Polygon Mainnet
  * @property {name: string, symbol: string, decimals: null} nativeCurrency
  * @property {string[]} rpcUrls - e.g. "https://polygon-rpc.com"
@@ -15,6 +21,7 @@ import { TransactionType } from './transactions'
  *
  */
 export type EVMChainInfo = {
+  infoType: MetaInfoType.EvmMetaInfo
   chainName: string
   nativeCurrency: {
     name: string
@@ -34,13 +41,15 @@ export type EVMChainInfo = {
  *
  */
 export type CosmosChainInfo = {
+  infoType: MetaInfoType.CosmosMetaInfo
   experimental: boolean
   rpc: string
   rest: string
-  cosmostationLcdUrl: string | null
-  cosmostationApiUrl: string | null
-  cosmostationDenomTracePath: string
-  mintScanName: string | null
+  chainId: string
+  cosmostationLcdUrl?: string
+  cosmostationApiUrl?: string
+  cosmostationDenomTracePath?: string
+  mintScanName?: string | null
   chainName: string
   stakeCurrency: {
     coinDenom: string
@@ -76,11 +85,11 @@ export type CosmosChainInfo = {
   }[]
   features: string[]
   explorerUrlToTx: string
-  gasPriceStep: {
+  gasPriceStep?: {
     low: number
     average: number
     high: number
-  } | null
+  }
 }
 
 /**
@@ -93,13 +102,20 @@ export type CosmosChainInfo = {
  * @property {SwapperType[]} types - Type of the transaction supported by the swapper
  *
  */
-export type SwapperMetaDto = {
+export type SwapperMeta = {
   id: string
   title: string
   logo: string
   swapperGroup: string
   types: SwapperType[]
 }
+
+/**
+ * Metadata of Swapper
+ * @deprecated use SwapperMeta istead
+ *
+ */
+export type SwapperMetaDto = SwapperMeta
 
 /**
  * Blockchain Meta Information

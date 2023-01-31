@@ -1,4 +1,4 @@
-import { SwapperMetaDto, Token } from './meta'
+import { SwapperMeta, Token } from './meta'
 import {
   Asset,
   Amount,
@@ -38,7 +38,7 @@ export type SwapFee = {
  *
  * @property {Token} from - The source asset
  * @property {Token} to - The destination asset
- * @property {SwapperMetaDto} swapper - Swapper for this path
+ * @property {SwapperMeta} swapper - Swapper for this path
  * @property {SwapperType} swapperType - Type of swapper
  * @property {string} expectedOutput - Expected output
  * @property {number} estimatedTimeInSeconds - Expected duration
@@ -47,7 +47,7 @@ export type SwapFee = {
 export type QuotePath = {
   from: Token
   to: Token
-  swapper: SwapperMetaDto
+  swapper: SwapperMeta
   swapperType: SwapperType
   expectedOutput: string
   estimatedTimeInSeconds: number
@@ -75,7 +75,7 @@ export type AmountRestriction = {
  * @property {string} outputAmount - The estimation of Rango from output amount for Y
  * @property {string} outputAmountMin - The estimation of Rango from output amount for Y
  * @property {number | null} outputAmountUsd - The estimation of Rango from output usd value for Y
- * @property {SwapperMetaDto} swapper - Swapper suggested for this path
+ * @property {SwapperMeta} swapper - Swapper suggested for this path
  * @property {QuotePath[] | null} path - The internal routing of this step showing how the initial swap request will
  * be split and executed. This can be used for previewing purpose to give the user a sense of what's going to happen.
  * Null indicates that there is no internal mechanism and swapping is simple and straight-forward.
@@ -93,7 +93,7 @@ export type QuoteSimulationResult = {
   outputAmount: string
   outputAmountMin: string
   outputAmountUsd: number | null
-  swapper: SwapperMetaDto
+  swapper: SwapperMeta
   path: QuotePath[] | null
   fee: SwapFee[]
   feeUsd: number | null
