@@ -31,6 +31,36 @@ export type EVMChainInfo = {
   transactionUrl: string
 }
 
+// TODO ADD DOC
+// TODO ADD BASE INFO
+export type StarkNetInfo = {
+  infoType: 'StarkNetMetaInfo'
+  chainName: string
+  nativeCurrency: {
+    name: string
+    symbol: string
+    decimals: number
+  }
+  blockExplorerUrls: string[]
+  addressUrl: string
+  transactionUrl: string
+}
+
+// TODO ADD DOC
+// TODO ADD BASE INFO
+export type TronInfo = {
+  infoType: 'TronMetaInfo'
+  chainName: string
+  nativeCurrency: {
+    name: string
+    symbol: string
+    decimals: number
+  }
+  blockExplorerUrls: string[]
+  addressUrl: string
+  transactionUrl: string
+}
+
 /**
  * Cosmos Chain Info - Used for adding experimental chains to keplr if needed
  *
@@ -144,7 +174,7 @@ export type BlockchainMetaBase = {
   color: string
   enabled: boolean
   chainId: string | null
-  info: EVMChainInfo | CosmosChainInfo | null
+  info: EVMChainInfo | CosmosChainInfo | StarkNetInfo | TronInfo | null
 }
 
 export interface EvmBlockchainMeta extends BlockchainMetaBase {
@@ -158,13 +188,79 @@ export interface CosmosBlockchainMeta extends BlockchainMetaBase {
   chainId: string
   info: CosmosChainInfo
 }
+
 export interface TransferBlockchainMeta extends BlockchainMetaBase {
   type: 'TRANSFER'
   chainId: null
   info: null
 }
 
+export interface SolanaBlockchainMeta extends BlockchainMetaBase {
+  type: 'SOLANA'
+  chainId: string
+  info: null
+}
+
+export interface StarkNetBlockchainMeta extends BlockchainMetaBase {
+  type: 'STARKNET'
+  chainId: string
+  info: StarkNetInfo
+}
+
+export interface TronBlockchainMeta extends BlockchainMetaBase {
+  type: 'TRON'
+  chainId: string // TODO check
+  info: TronInfo
+}
+
 export type BlockchainMeta =
   | EvmBlockchainMeta
   | CosmosBlockchainMeta
   | TransferBlockchainMeta
+  | SolanaBlockchainMeta
+  | StarkNetBlockchainMeta
+  | TronBlockchainMeta
+
+export const isEvmBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is EvmBlockchainMeta => blockchainMeta.type === 'EVM'
+
+export const isCosmosBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is CosmosBlockchainMeta => blockchainMeta.type === 'COSMOS'
+
+export const isSolanaBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is SolanaBlockchainMeta => blockchainMeta.type === 'SOLANA'
+
+export const isTronBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is TronBlockchainMeta => blockchainMeta.type === 'TRON'
+
+export const isTransferBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is TransferBlockchainMeta =>
+  blockchainMeta.type === 'TRANSFER'
+
+export const isStarknetBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is StarkNetBlockchainMeta =>
+  blockchainMeta.type === 'STARKNET'
+
+export const evmBlockchains = (allBlockChains: BlockchainMeta[]) =>
+  allBlockChains.filter(isEvmBlockchain)
+
+export const solanaBlockchain = (allBlockChains: BlockchainMeta[]) =>
+  allBlockChains.filter(isSolanaBlockchain)
+
+export const starknetBlockchain = (allBlockChains: BlockchainMeta[]) =>
+  allBlockChains.filter(isStarknetBlockchain)
+
+export const tronBlockchain = (allBlockChains: BlockchainMeta[]) =>
+  allBlockChains.filter(isTronBlockchain)
+
+export const cosmosBlockchains = (allBlockChains: BlockchainMeta[]) =>
+  allBlockChains.filter(isCosmosBlockchain)
+
+export const transferBlockchains = (allBlockChains: BlockchainMeta[]) =>
+  allBlockChains.filter(isTransferBlockchain)
