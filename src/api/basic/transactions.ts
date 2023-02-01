@@ -3,6 +3,7 @@ import { Token } from './meta'
 import { CosmosTransaction, EvmTransaction, Transfer } from './txs'
 import {
   TransactionType,
+  GenericTransactionType,
   SwapExplorerUrl,
   ReportTransactionRequest,
   TransactionStatus,
@@ -11,6 +12,7 @@ import {
 
 export {
   TransactionType,
+  GenericTransactionType,
   SwapExplorerUrl,
   ReportTransactionRequest,
   TransactionStatus,

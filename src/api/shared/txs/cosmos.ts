@@ -1,5 +1,6 @@
 import { AssetWithTicker } from '../common'
 import { TransactionType } from '../transactions'
+import { BaseTransaction } from './base'
 
 /**
  * CosmosCoin representing fee coins
@@ -27,8 +28,8 @@ export type CosmosMessage = {
   account_number: number | null
   rpcUrl: string | null
   chainId: string | null
-  msgs: any[]
-  protoMsgs: any[]
+  msgs: unknown[]
+  protoMsgs: unknown[]
   memo: string | null
   fee: CosmosStdFee | null
 }
@@ -56,16 +57,15 @@ export type CosmosRawTransferData = {
 /**
  * A Cosmos transaction, child of GenericTransaction
  *
- * @property {TransactionType} type - This fields equals to TransactionType.COSMOS for all CosmosTransactions
+ * @property {TransactionType} type - This fields equals to COSMOS for all CosmosTransactions
  * @property {string} blockChain - The blockchain that this transaction will be executed in, same as the input blockchain of creating transaction
  * @property {string} fromWalletAddress - Address of wallet that this transaction should be executed in, same as the create transaction request's input
  * @property {CosmosMessage} data - Transaction data
  * @property {CosmosRawTransferData} rawTransfer - An alternative to CosmosMessage object for the cosmos wallets that do not support generic Cosmos messages
  *
  */
-export interface CosmosTransaction {
+export interface CosmosTransaction extends BaseTransaction {
   type: TransactionType.COSMOS
-  blockChain: string
   fromWalletAddress: string
   data: CosmosMessage
   rawTransfer: CosmosRawTransferData
