@@ -14,7 +14,7 @@ export enum TransactionType {
  * The type of transaction
  * @deprecated use TransactionType instead
  */
-export type GenericTransactionType = TransactionType
+export const GenericTransactionType = TransactionType
 
 /**
  * A transaction's url that can be displayed to advanced user to track the progress

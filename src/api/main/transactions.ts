@@ -1,5 +1,6 @@
 import {
   TransactionType,
+  GenericTransactionType,
   SwapExplorerUrl,
   ReportTransactionRequest,
   TransactionStatus,
@@ -8,6 +9,7 @@ import {
 
 export {
   TransactionType,
+  GenericTransactionType,
   SwapExplorerUrl,
   ReportTransactionRequest,
   TransactionStatus,
