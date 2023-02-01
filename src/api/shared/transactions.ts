@@ -11,6 +11,12 @@ export enum TransactionType {
 }
 
 /**
+ * The type of transaction
+ * @deprecated use TransactionType instead
+ */
+export const GenericTransactionType = TransactionType
+
+/**
  * A transaction's url that can be displayed to advanced user to track the progress
  *
  * @property {string} url - Url of the transaction in blockchain explorer. example: https://etherscan.io/tx/0xa1a3...

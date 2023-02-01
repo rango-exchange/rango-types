@@ -1,17 +1,29 @@
 import { Asset, SwapperType } from './common'
 import { TransactionType } from './transactions'
 
-export enum MetaInfoType {
-  CosmosMetaInfo = 'CosmosMetaInfo',
-  EvmMetaInfo = 'EvmMetaInfo',
+export type MetaInfoType =
+  | 'CosmosMetaInfo'
+  | 'EvmMetaInfo'
+  | 'StarkNetMetaInfo'
+  | 'TronMetaInfo'
+
+/**
+ * ChainInfoBase
+ * Base type for all chains info type
+ *
+ * @property {MetaInfoType} infoType - Type of chain info
+ *
+ */
+export type ChainInfoBase = {
+  infoType: MetaInfoType
 }
 
 /**
  * EVM Chain Info
  *
- * @property {MetaInfoType} infoType
+ * @property {MetaInfoType} infoType - equals to EvmMetaInfo for EvmChainInfo
  * @property {string} chainName - Chain name, e.g. Polygon Mainnet
- * @property {name: string, symbol: string, decimals: null} nativeCurrency
+ * @property {name: string, symbol: string, decimals: number} nativeCurrency
  * @property {string[]} rpcUrls - e.g. "https://polygon-rpc.com"
  * @property {string[]} blockExplorerUrls - e.g. "https://polygonscan.com"
  * @property {string} addressUrl - Explorer address base url for this blockchain,
@@ -20,8 +32,8 @@ export enum MetaInfoType {
  * e.g. "https://bscscan.com/tx/{txHash}"
  *
  */
-export type EVMChainInfo = {
-  infoType: MetaInfoType.EvmMetaInfo
+export interface EVMChainInfo extends ChainInfoBase {
+  infoType: 'EvmMetaInfo'
   chainName: string
   nativeCurrency: {
     name: string
@@ -35,13 +47,61 @@ export type EVMChainInfo = {
 }
 
 /**
+ * StarkNet Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to StarkNetMetaInfo for StarkNetChainInfo
+ * @property {string} chainName - Chain name
+ * @property {name: string, symbol: string, decimals: number} nativeCurrency
+ * @property {string[]} blockExplorerUrls
+ * @property {string} addressUrl - Explorer address base url for this blockchain
+ * @property {string} transactionUrl - Explorer transaction base url for this blockchain
+ *
+ */
+export interface StarkNetChainInfo extends ChainInfoBase {
+  infoType: 'StarkNetMetaInfo'
+  chainName: string
+  nativeCurrency: {
+    name: string
+    symbol: string
+    decimals: number
+  }
+  blockExplorerUrls: string[]
+  addressUrl: string
+  transactionUrl: string
+}
+
+/**
+ * Tron Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to TronMetaInfo  for TronChainInfo
+ * @property {string} chainName - Chain name
+ * @property {name: string, symbol: string, decimals: number} nativeCurrency
+ * @property {string[]} blockExplorerUrls
+ * @property {string} addressUrl - Explorer address base url for this blockchain
+ * @property {string} transactionUrl - Explorer transaction base url for this blockchain
+ *
+ */
+export interface TronChainInfo extends ChainInfoBase {
+  infoType: 'TronMetaInfo'
+  chainName: string
+  nativeCurrency: {
+    name: string
+    symbol: string
+    decimals: number
+  }
+  blockExplorerUrls: string[]
+  addressUrl: string
+  transactionUrl: string
+}
+
+/**
  * Cosmos Chain Info - Used for adding experimental chains to keplr if needed
  *
  * @see https://github.com/osmosis-labs/osmosis-frontend/blob/0b88e39740cb087be576f464bfcd6cc2971ed2fd/packages/web/config/chain-infos.ts
  *
  */
-export type CosmosChainInfo = {
-  infoType: MetaInfoType.CosmosMetaInfo
+export interface CosmosChainInfo extends ChainInfoBase {
+  infoType: 'CosmosMetaInfo'
   experimental: boolean
   rpc: string
   rest: string
@@ -120,6 +180,7 @@ export type SwapperMetaDto = SwapperMeta
 /**
  * Blockchain Meta Information
  *
+ * @property {TransactionType} type - Type of the blockchain
  * @property {string} name - Unique name of blockchain, this field is used in all endpoints as the identifier
  * @property {number} defaultDecimals - The default decimals of blockchain, do not use it in computations, use Token.decimals instead
  * @property {Asset[]} feeAssets - List of assets that can be used as fee in this blockchain
@@ -130,12 +191,12 @@ export type SwapperMetaDto = SwapperMeta
  * @property {string} shortName - Short name for the blockchain
  * @property {string} color - Suggested color for the blockchain
  * @property {boolean} enabled - Is blockchain enabled or not in Rango
- * @property {TransactionType} type - Type of the blockchain
  * @property {string | null} chainId - e.g. "0xa86a" for Avax, "osmosis-1" for Osmosis, etc.
  * @property {EVMChainInfo | CosmosChainInfo | null} info - Chain specific information
  *
  */
 export type BlockchainMetaBase = {
+  type: TransactionType
   name: string
   shortName: string
   displayName: string
@@ -145,9 +206,13 @@ export type BlockchainMetaBase = {
   logo: string
   color: string
   enabled: boolean
-  type: TransactionType
   chainId: string | null
-  info: EVMChainInfo | CosmosChainInfo | null
+  info:
+    | EVMChainInfo
+    | CosmosChainInfo
+    | StarkNetChainInfo
+    | TronChainInfo
+    | null
 }
 
 export interface EvmBlockchainMeta extends BlockchainMetaBase {
@@ -161,13 +226,35 @@ export interface CosmosBlockchainMeta extends BlockchainMetaBase {
   chainId: string
   info: CosmosChainInfo
 }
+
 export interface TransferBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.TRANSFER
   chainId: null
   info: null
 }
 
+export interface SolanaBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.SOLANA
+  chainId: string
+  info: null
+}
+
+export interface StarkNetBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.STARKNET
+  chainId: string
+  info: StarkNetChainInfo
+}
+
+export interface TronBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.TRON
+  chainId: string
+  info: TronChainInfo
+}
+
 export type BlockchainMeta =
   | EvmBlockchainMeta
   | CosmosBlockchainMeta
   | TransferBlockchainMeta
+  | SolanaBlockchainMeta
+  | StarkNetBlockchainMeta
+  | TronBlockchainMeta
