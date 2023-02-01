@@ -1,13 +1,14 @@
 /**
  * The type of transaction
  */
-export type TransactionType =
-  | 'EVM'
-  | 'TRANSFER'
-  | 'COSMOS'
-  | 'SOLANA'
-  | 'TRON'
-  | 'STARKNET'
+export enum TransactionType {
+  EVM = 'EVM',
+  TRANSFER = 'TRANSFER',
+  COSMOS = 'COSMOS',
+  SOLANA = 'SOLANA',
+  TRON = 'TRON',
+  STARKNET = 'STARKNET',
+}
 
 /**
  * The type of transaction
@@ -47,7 +48,11 @@ export type ReportTransactionRequest = {
 /**
  * The status of transaction in tracking
  */
-export type TransactionStatus = 'failed' | 'running' | 'success'
+export enum TransactionStatus {
+  FAILED = 'failed',
+  RUNNING = 'running',
+  SUCCESS = 'success',
+}
 
 /**
  * Response body of check-approval

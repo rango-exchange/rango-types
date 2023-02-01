@@ -1,3 +1,4 @@
+import { TransactionType } from '../transactions'
 import { BaseTransaction } from './base'
 
 export type TrxContractParameter = {
@@ -21,7 +22,7 @@ export type TrxRawData = {
 /**
  * TronTransaction
  *
- * @property type - 'TRON'
+ * @property {TransactionType} type - TransactionType.TRON
  * @property {boolean} isApprovalTx - Whether or not the transaction is an approval transaction.
  * @property {TrxRawData | null} raw_data - This is the raw data of the transaction.
  * @property {string | null} raw_data_hex - The raw hex data of the transaction.
@@ -30,7 +31,7 @@ export type TrxRawData = {
  * @property {object} __payload__
  */
 export interface TronTransaction extends BaseTransaction {
-  type: 'TRON'
+  type: TransactionType.TRON
   isApprovalTx: boolean
   raw_data: TrxRawData | null
   raw_data_hex: string | null

@@ -1,4 +1,4 @@
-import { BaseTransaction } from '../../shared'
+import { BaseTransaction, TransactionType } from '../../shared'
 
 /**
  * The transaction object for all EVM-based blockchains, including Ethereum, BSC, Polygon, Harmony, etc
@@ -18,7 +18,7 @@ import { BaseTransaction } from '../../shared'
  *
  */
 export interface EvmTransaction extends BaseTransaction {
-  type: 'EVM'
+  type: TransactionType.EVM
   isApprovalTx: boolean
   from: string | null
   to: string
