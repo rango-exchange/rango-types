@@ -1,4 +1,5 @@
 import { AssetWithTicker } from '../common'
+import { TransactionType } from '../transactions'
 import { BaseTransaction } from './base'
 
 /**
@@ -64,7 +65,7 @@ export type CosmosRawTransferData = {
  *
  */
 export interface CosmosTransaction extends BaseTransaction {
-  type: 'COSMOS'
+  type: TransactionType.COSMOS
   fromWalletAddress: string
   data: CosmosMessage
   rawTransfer: CosmosRawTransferData

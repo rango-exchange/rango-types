@@ -1,4 +1,5 @@
 import { AssetWithTicker } from '../common'
+import { TransactionType } from '../transactions'
 import { BaseTransaction } from './base'
 
 /**
@@ -16,7 +17,7 @@ import { BaseTransaction } from './base'
  *
  */
 export interface Transfer extends BaseTransaction {
-  type: 'TRANSFER'
+  type: TransactionType.TRANSFER
   method: string
   asset: AssetWithTicker
   amount: string

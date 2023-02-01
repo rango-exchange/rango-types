@@ -1,3 +1,4 @@
+import { TransactionType } from '../transactions'
 import { BaseTransaction } from './base'
 
 /**
@@ -40,7 +41,7 @@ export type SolanaSignature = {
  *
  */
 export interface SolanaTransaction extends BaseTransaction {
-  type: 'SOLANA'
+  type: TransactionType.SOLANA
   from: string
   identifier: string
   recentBlockhash: string | null

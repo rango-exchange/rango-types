@@ -216,37 +216,37 @@ export type BlockchainMetaBase = {
 }
 
 export interface EvmBlockchainMeta extends BlockchainMetaBase {
-  type: 'EVM'
+  type: TransactionType.EVM
   chainId: string
   info: EVMChainInfo
 }
 
 export interface CosmosBlockchainMeta extends BlockchainMetaBase {
-  type: 'COSMOS'
+  type: TransactionType.COSMOS
   chainId: string
   info: CosmosChainInfo
 }
 
 export interface TransferBlockchainMeta extends BlockchainMetaBase {
-  type: 'TRANSFER'
+  type: TransactionType.TRANSFER
   chainId: null
   info: null
 }
 
 export interface SolanaBlockchainMeta extends BlockchainMetaBase {
-  type: 'SOLANA'
+  type: TransactionType.SOLANA
   chainId: string
   info: null
 }
 
 export interface StarkNetBlockchainMeta extends BlockchainMetaBase {
-  type: 'STARKNET'
+  type: TransactionType.STARKNET
   chainId: string
   info: StarkNetChainInfo
 }
 
 export interface TronBlockchainMeta extends BlockchainMetaBase {
-  type: 'TRON'
+  type: TransactionType.TRON
   chainId: string
   info: TronChainInfo
 }
