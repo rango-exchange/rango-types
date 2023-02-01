@@ -8,6 +8,7 @@ import {
   ReportTransactionRequest,
   TransactionStatus,
   CheckApprovalResponse,
+  RoutingResultType,
 } from '../shared'
 
 export {
@@ -146,7 +147,7 @@ export type StatusResponse = {
  *
  * @property {string} requestId - The unique requestId which is generated for this request by the server. It should be
  * passed down to all other endpoints if this swap continues on. e.g. d10657ce-b13a-405c-825b-b47f8a5016ad
- * @property {string} resultType - Type of result (OK or error type)
+ * @property {RoutingResultType} resultType - Type of result (OK or error type)
  * @property {QuoteSimulationResult | null} route - Suggested route
  * @property {string | null} error - Error message
  * @property {EvmTransaction | CosmosTransaction | Transfer | null} transaction - Transaction data
@@ -154,7 +155,7 @@ export type StatusResponse = {
  */
 export type SwapResponse = {
   requestId: string
-  resultType: 'OK' | 'HIGH_IMPACT' | 'INPUT_LIMIT_ISSUE' | 'NO_ROUTE'
+  resultType: RoutingResultType
   route: QuoteSimulationResult | null
   error: string | null
   tx: EvmTransaction | CosmosTransaction | Transfer | null
