@@ -18,7 +18,17 @@ export type TrxRawData = {
   timestamp: number
 }
 
-// TODO ADD DOCS
+/**
+ * TronTransaction
+ *
+ * @property type - 'TRON'
+ * @property {boolean} isApprovalTx - Whether or not the transaction is an approval transaction.
+ * @property {TrxRawData | null} raw_data - This is the raw data of the transaction.
+ * @property {string | null} raw_data_hex - The raw hex data of the transaction.
+ * @property {string} txID - The transaction ID.
+ * @property {boolean} visible - boolean
+ * @property {object} __payload__
+ */
 export interface TronTransaction extends BaseTransaction {
   type: 'TRON'
   isApprovalTx: boolean
