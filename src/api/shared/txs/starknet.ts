@@ -6,7 +6,14 @@ export type StarknetCallData = {
   entrypoint: string
 }
 
-// TODO DOC
+/**
+ * StarknetTransaction
+ *
+ * @property type - 'STARKNET'
+ * @property {boolean} isApprovalTx - If the transaction is an approval transaction, this will be true.
+ * @property {StarknetCallData[]} calls - An array of StarknetCallData objects.
+ *
+ */
 export interface StarknetTransaction extends BaseTransaction {
   type: 'STARKNET'
   isApprovalTx: boolean

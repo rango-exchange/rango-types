@@ -1,14 +1,29 @@
 import { Asset, SwapperType } from './common'
 import { TransactionType } from './transactions'
 
-export type MetaInfoType = 'CosmosMetaInfo' | 'EvmMetaInfo' // TODO UPDATE
+export type MetaInfoType =
+  | 'CosmosMetaInfo'
+  | 'EvmMetaInfo'
+  | 'StarkNetMetaInfo'
+  | 'TronMetaInfo'
+
+/**
+ * ChainInfoBase
+ * Base type for all chains info type
+ *
+ * @property {MetaInfoType} infoType - Type of chain info
+ *
+ */
+export type ChainInfoBase = {
+  infoType: MetaInfoType
+}
 
 /**
  * EVM Chain Info
  *
- * @property {MetaInfoType} infoType
+ * @property {MetaInfoType} infoType - equals to EvmMetaInfo for EvmChainInfo
  * @property {string} chainName - Chain name, e.g. Polygon Mainnet
- * @property {name: string, symbol: string, decimals: null} nativeCurrency
+ * @property {name: string, symbol: string, decimals: number} nativeCurrency
  * @property {string[]} rpcUrls - e.g. "https://polygon-rpc.com"
  * @property {string[]} blockExplorerUrls - e.g. "https://polygonscan.com"
  * @property {string} addressUrl - Explorer address base url for this blockchain,
@@ -17,7 +32,7 @@ export type MetaInfoType = 'CosmosMetaInfo' | 'EvmMetaInfo' // TODO UPDATE
  * e.g. "https://bscscan.com/tx/{txHash}"
  *
  */
-export type EVMChainInfo = {
+export interface EVMChainInfo extends ChainInfoBase {
   infoType: 'EvmMetaInfo'
   chainName: string
   nativeCurrency: {
@@ -31,9 +46,18 @@ export type EVMChainInfo = {
   transactionUrl: string
 }
 
-// TODO ADD DOC
-// TODO ADD BASE INFO
-export type StarkNetInfo = {
+/**
+ * StarkNet Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to StarkNetMetaInfo for StarkNetChainInfo
+ * @property {string} chainName - Chain name
+ * @property {name: string, symbol: string, decimals: number} nativeCurrency
+ * @property {string[]} blockExplorerUrls
+ * @property {string} addressUrl - Explorer address base url for this blockchain
+ * @property {string} transactionUrl - Explorer transaction base url for this blockchain
+ *
+ */
+export interface StarkNetChainInfo extends ChainInfoBase {
   infoType: 'StarkNetMetaInfo'
   chainName: string
   nativeCurrency: {
@@ -46,9 +70,18 @@ export type StarkNetInfo = {
   transactionUrl: string
 }
 
-// TODO ADD DOC
-// TODO ADD BASE INFO
-export type TronInfo = {
+/**
+ * Tron Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to TronMetaInfo  for TronChainInfo
+ * @property {string} chainName - Chain name
+ * @property {name: string, symbol: string, decimals: number} nativeCurrency
+ * @property {string[]} blockExplorerUrls
+ * @property {string} addressUrl - Explorer address base url for this blockchain
+ * @property {string} transactionUrl - Explorer transaction base url for this blockchain
+ *
+ */
+export interface TronChainInfo extends ChainInfoBase {
   infoType: 'TronMetaInfo'
   chainName: string
   nativeCurrency: {
@@ -67,7 +100,7 @@ export type TronInfo = {
  * @see https://github.com/osmosis-labs/osmosis-frontend/blob/0b88e39740cb087be576f464bfcd6cc2971ed2fd/packages/web/config/chain-infos.ts
  *
  */
-export type CosmosChainInfo = {
+export interface CosmosChainInfo extends ChainInfoBase {
   infoType: 'CosmosMetaInfo'
   experimental: boolean
   rpc: string
@@ -174,7 +207,12 @@ export type BlockchainMetaBase = {
   color: string
   enabled: boolean
   chainId: string | null
-  info: EVMChainInfo | CosmosChainInfo | StarkNetInfo | TronInfo | null
+  info:
+    | EVMChainInfo
+    | CosmosChainInfo
+    | StarkNetChainInfo
+    | TronChainInfo
+    | null
 }
 
 export interface EvmBlockchainMeta extends BlockchainMetaBase {
@@ -204,13 +242,13 @@ export interface SolanaBlockchainMeta extends BlockchainMetaBase {
 export interface StarkNetBlockchainMeta extends BlockchainMetaBase {
   type: 'STARKNET'
   chainId: string
-  info: StarkNetInfo
+  info: StarkNetChainInfo
 }
 
 export interface TronBlockchainMeta extends BlockchainMetaBase {
   type: 'TRON'
-  chainId: string // TODO check
-  info: TronInfo
+  chainId: string
+  info: TronChainInfo
 }
 
 export type BlockchainMeta =
@@ -220,47 +258,3 @@ export type BlockchainMeta =
   | SolanaBlockchainMeta
   | StarkNetBlockchainMeta
   | TronBlockchainMeta
-
-export const isEvmBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is EvmBlockchainMeta => blockchainMeta.type === 'EVM'
-
-export const isCosmosBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is CosmosBlockchainMeta => blockchainMeta.type === 'COSMOS'
-
-export const isSolanaBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is SolanaBlockchainMeta => blockchainMeta.type === 'SOLANA'
-
-export const isTronBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is TronBlockchainMeta => blockchainMeta.type === 'TRON'
-
-export const isTransferBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is TransferBlockchainMeta =>
-  blockchainMeta.type === 'TRANSFER'
-
-export const isStarknetBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is StarkNetBlockchainMeta =>
-  blockchainMeta.type === 'STARKNET'
-
-export const evmBlockchains = (blockchains: BlockchainMeta[]) =>
-  blockchains.filter(isEvmBlockchain)
-
-export const solanaBlockchain = (blockchains: BlockchainMeta[]) =>
-  blockchains.filter(isSolanaBlockchain)
-
-export const starknetBlockchain = (blockchains: BlockchainMeta[]) =>
-  blockchains.filter(isStarknetBlockchain)
-
-export const tronBlockchain = (blockchains: BlockchainMeta[]) =>
-  blockchains.filter(isTronBlockchain)
-
-export const cosmosBlockchains = (blockchains: BlockchainMeta[]) =>
-  blockchains.filter(isCosmosBlockchain)
-
-export const transferBlockchains = (blockchains: BlockchainMeta[]) =>
-  blockchains.filter(isTransferBlockchain)
