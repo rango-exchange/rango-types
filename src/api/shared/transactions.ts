@@ -30,19 +30,40 @@ export type SwapExplorerUrl = {
 }
 
 /**
- * Data of the event including its type and an extra metadata
+ * APIErrorCode
+ *
+ * Error code of a swap failure
+ *
+ */
+export type APIErrorCode =
+  | 'TX_FAIL'
+  | 'FETCH_TX_FAILED'
+  | 'USER_REJECT'
+  | 'USER_CANCEL'
+  | 'CALL_WALLET_FAILED'
+  | 'SEND_TX_FAILED'
+  | 'CALL_OR_SEND_FAILED'
+  | 'CLIENT_UNEXPECTED_BEHAVIOUR'
+
+/**
+ * ReportTransactionRequest
+ *
  * It should be used when an error happened in client and we want to inform server that transaction failed,
  * E.g. user rejected the transaction dialog or and an RPC error raised during signing tx by user.
  *
  * @property {string} requestId - The requestId from best route endpoint
- * @property {string} eventType - Type of the event that happened, example: TX_FAIL
+ * @property {APIErrorCode} eventType - Type of the event that happened, example: USER_REJECT
+ * @property {number} step - Step number in which failure happened
+ * @property {string} reason - Reason or message for the error
  * @property {[key: string]: string} data - A list of key-value for extra details
  *
  */
 export type ReportTransactionRequest = {
   requestId: string
-  eventType: 'TX_FAIL'
-  data: { [key: string]: string }
+  eventType: APIErrorCode
+  step?: number
+  reason?: string
+  data?: { [key: string]: string }
 }
 
 /**
@@ -58,8 +79,11 @@ export enum TransactionStatus {
  * Response body of check-approval
  *
  * @property {boolean} isApproved - A flag which indicates that the approve tx is done or not
+ * @property {TransactionStatus | null} txStatus - Status of approve transaction in blockchain,
+ * if isArppoved is false and txStatus is failed, it seems that approve transaction failed in blockchain
  *
  */
 export type CheckApprovalResponse = {
   isApproved: boolean
+  txStatus: TransactionStatus | null
 }
