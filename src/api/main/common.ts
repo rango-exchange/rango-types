@@ -53,7 +53,7 @@ export type SwapFee = {
  * @property {number} decimals - Decimals of the source/destination asset of this step, example: 18
  * @property {string} logo - Absolute path of the logo of the source/destination asset of this step
  * @property {string} blockchainLogo - Absolute path of the logo of the asset blockchain
- * @property {string | null} usdPrice - Usd price unit for the asset if available
+ * @property {number | null} usdPrice - Usd price unit for the asset if available
  *
  */
 export type SwapResultAsset = {
@@ -63,7 +63,7 @@ export type SwapResultAsset = {
   logo: string
   blockchainLogo: string
   decimals: number
-  usdPrice: string | null
+  usdPrice: number | null
 }
 
 /**
