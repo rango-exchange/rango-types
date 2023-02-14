@@ -61,12 +61,12 @@ export type CosmosRawTransferData = {
  * @property {string} blockChain - The blockchain that this transaction will be executed in, same as the input blockchain of creating transaction
  * @property {string} fromWalletAddress - Address of wallet that this transaction should be executed in, same as the create transaction request's input
  * @property {CosmosMessage} data - Transaction data
- * @property {CosmosRawTransferData} rawTransfer - An alternative to CosmosMessage object for the cosmos wallets that do not support generic Cosmos messages
+ * @property {CosmosRawTransferData | null} rawTransfer - An alternative to CosmosMessage object for the cosmos wallets that do not support generic Cosmos messages
  *
  */
 export interface CosmosTransaction extends BaseTransaction {
   type: TransactionType.COSMOS
   fromWalletAddress: string
   data: CosmosMessage
-  rawTransfer: CosmosRawTransferData
+  rawTransfer: CosmosRawTransferData | null
 }
