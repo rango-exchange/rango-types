@@ -15,6 +15,8 @@ import { BaseTransaction, TransactionType } from '../../shared'
  * @property {string | null} nonce - The nonce value for transaction
  * @property {string | null} gasPrice - The suggested gas price for this transaction
  * @property {string | null} gasLimit - The suggested gas limit for this transaction
+ * @property {string | null} maxPriorityFeePerGas - Suggested max priority fee per gas for this transaction
+ * @property {string | null} maxFeePerGas - Suggested max fee per gas for this transaction
  *
  */
 export interface EvmTransaction extends BaseTransaction {
@@ -27,4 +29,6 @@ export interface EvmTransaction extends BaseTransaction {
   nonce: string | null
   gasLimit: string | null
   gasPrice: string | null
+  maxPriorityFeePerGas: string | null
+  maxFeePerGas: string | null
 }

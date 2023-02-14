@@ -13,6 +13,8 @@ import { EvmBlockchainMeta } from '../meta'
  * @property {string | null} value - The amount of transaction in case of native token transfer
  * @property {string | null} gasPrice - The suggested gas price for this transaction
  * @property {string | null} gasLimit - The suggested gas limit for this transaction
+ * @property {string | null} maxPriorityFeePerGas - Suggested max priority fee per gas for this transaction
+ * @property {string | null} maxFeePerGas - Suggested max fee per gas for this transaction
  *
  */
 export interface EvmTransaction {
@@ -26,4 +28,6 @@ export interface EvmTransaction {
   value: string | null
   gasLimit: string | null
   gasPrice: string | null
+  maxPriorityFeePerGas: string | null
+  maxFeePerGas: string | null
 }
