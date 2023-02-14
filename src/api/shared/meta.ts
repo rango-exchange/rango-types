@@ -190,6 +190,7 @@ export type SwapperMetaDto = SwapperMeta
  * @property {string} displayName - Display name for the blockchain
  * @property {string} shortName - Short name for the blockchain
  * @property {string} color - Suggested color for the blockchain
+ * @property {number} sort - Suggested sort for the blockchain
  * @property {boolean} enabled - Is blockchain enabled or not in Rango
  * @property {string | null} chainId - e.g. "0xa86a" for Avax, "osmosis-1" for Osmosis, etc.
  * @property {EVMChainInfo | CosmosChainInfo | null} info - Chain specific information
@@ -205,6 +206,7 @@ export type BlockchainMetaBase = {
   addressPatterns: string[]
   logo: string
   color: string
+  sort: number
   enabled: boolean
   chainId: string | null
   info:
