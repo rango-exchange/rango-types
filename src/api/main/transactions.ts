@@ -47,10 +47,12 @@ export type TransactionStatusReferral = {
  * Settings of user for swaps
  *
  * @property {string} slippage - Amount of users' preferred slippage in percent
+ * @property {string} infiniteApprove - Infinite approval settings, default is false
  *
  */
 export type UserSettings = {
   slippage: string
+  infiniteApprove?: boolean
 }
 
 /**
