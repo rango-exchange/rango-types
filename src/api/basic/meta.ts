@@ -32,7 +32,7 @@ export {
  * @property {string} name - The token name, e.g: Binance Pegged ETH
  * @property {number} decimals - Decimals of token in blockchain, example: 18
  * @property {string} image - Url of its image, example: https://api.rango.exchange/tokens/ETH/ETH.png
- * @property {string | decimals} usdPrice - The token unit price
+ * @property {number | null} usdPrice - The token unit price
  *
  */
 export type Token = {
@@ -43,7 +43,7 @@ export type Token = {
   name: string
   decimals: number
   image: string
-  usdPrice: string | null
+  usdPrice: number | null
 }
 
 /**
