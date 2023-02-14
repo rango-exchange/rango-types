@@ -52,6 +52,7 @@ export type SwapFee = {
  * @property {string | number} address - Contract address of the source/dest asset of this step, null for native token
  * @property {number} decimals - Decimals of the source/destination asset of this step, example: 18
  * @property {string} logo - Absolute path of the logo of the source/destination asset of this step
+ * @property {string} blockchainLogo - Absolute path of the logo of the asset blockchain
  * @property {string | null} usdPrice - Usd price unit for the asset if available
  *
  */
@@ -60,6 +61,7 @@ export type SwapResultAsset = {
   address: string | null
   symbol: string
   logo: string
+  blockchainLogo: string
   decimals: number
   usdPrice: string | null
 }
@@ -133,7 +135,9 @@ export type TimeStat = {
 /**
  * A step of a multi-step swap route
  *
- * @property {string} swapperId - Unique Id of swapper. example: 1INCH_BSC, TERRASWAP
+ * @property {string} swapperId - Unique Id of swapper. example: PARASWAP
+ *
+ * @property {string} swapperLogo - Logo of the swapper
  *
  * @property {SwapperType} swapperType - Type of swapper. example: BRIDGE, DEX, AGGREGATOR
  *
@@ -155,13 +159,13 @@ export type TimeStat = {
  *
  * @property {SwapFee[]} fee - List of fees that are taken from user in this step
  *
- * @property {number | null} fromAmountMinValue - The minimum amount unit, the precision that will be applied to
+ * @property {string | null} fromAmountMinValue - The minimum amount unit, the precision that will be applied to
  * transaction amount in create transaction endpoint automatically by Rango. This field is informational and there is
  * no need to apply it in client-side.
  *
- * @property {number | null} fromAmountMaxValue - Exactly the same as fromAmountMinValue, but for the maximum limit
+ * @property {string | null} fromAmountMaxValue - Exactly the same as fromAmountMinValue, but for the maximum limit
  *
- * @property {number | null} fromAmountPrecision - The minimum amount unit, the precision that will be applied to
+ * @property {string | null} fromAmountPrecision - The minimum amount unit, the precision that will be applied to
  * transaction amount in create transaction endpoint automatically by Rango. This field is informational and there
  * is no need to apply it in client-side
  *
@@ -183,6 +187,7 @@ export type TimeStat = {
  */
 export type SwapResult = {
   swapperId: string
+  swapperLogo: string
   swapperType: SwapperType
   swapChainType: 'INTER_CHAIN' | 'INTRA_CHAIN'
   from: SwapResultAsset
@@ -191,9 +196,9 @@ export type SwapResult = {
   toAmount: string
   routes: SwapRoute[] | null
   fee: SwapFee[]
-  fromAmountMaxValue: number | null
-  fromAmountMinValue: number | null
-  fromAmountPrecision: number | null
+  fromAmountMaxValue: string | null
+  fromAmountMinValue: string | null
+  fromAmountPrecision: string | null
   fromAmountRestrictionType: AmountRestrictionType
   estimatedTimeInSeconds: number
   timeStat: TimeStat | null
