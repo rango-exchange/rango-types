@@ -105,7 +105,6 @@ export interface CosmosChainInfo extends ChainInfoBase {
   experimental: boolean
   rpc: string
   rest: string
-  chainId: string
   cosmostationLcdUrl?: string | null
   cosmostationApiUrl?: string | null
   cosmostationDenomTracePath?: string | null
@@ -225,6 +224,7 @@ export interface EvmBlockchainMeta extends BlockchainMetaBase {
 
 export interface CosmosBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.COSMOS
+  chainId: string | null
   info: CosmosChainInfo | null
 }
 
