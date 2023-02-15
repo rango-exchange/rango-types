@@ -106,9 +106,9 @@ export interface CosmosChainInfo extends ChainInfoBase {
   rpc: string
   rest: string
   chainId: string
-  cosmostationLcdUrl?: string
-  cosmostationApiUrl?: string
-  cosmostationDenomTracePath?: string
+  cosmostationLcdUrl?: string | null
+  cosmostationApiUrl?: string | null
+  cosmostationDenomTracePath?: string | null
   mintScanName?: string | null
   chainName: string
   stakeCurrency: {
