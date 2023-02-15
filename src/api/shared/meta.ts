@@ -149,7 +149,7 @@ export interface CosmosChainInfo extends ChainInfoBase {
     low: number
     average: number
     high: number
-  }
+  } | null
 }
 
 /**
@@ -225,8 +225,7 @@ export interface EvmBlockchainMeta extends BlockchainMetaBase {
 
 export interface CosmosBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.COSMOS
-  chainId: string
-  info: CosmosChainInfo
+  info: CosmosChainInfo | null
 }
 
 export interface TransferBlockchainMeta extends BlockchainMetaBase {
