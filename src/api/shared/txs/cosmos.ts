@@ -3,7 +3,7 @@ import { TransactionType } from '../transactions'
 import { BaseTransaction } from './base'
 
 /**
- * CosmosCoin representing fee coins
+ * CosmosCoin
  */
 export type CosmosCoin = {
   amount: string
@@ -11,166 +11,23 @@ export type CosmosCoin = {
 }
 
 /**
- * CosmosStdFee representing fee for cosmos transaction
+ * CosmosProtoMsg
  */
-export type CosmosStdFee = {
-  amount: CosmosCoin[]
-  gas: string
-}
-
-/**
- * `CosmosIBCTokenAndAmount`
- *
- * @property {string} denom - The token denom.
- * @property {string} amount - The amount of the token to be sent.
- */
-export type CosmosIBCTokenAndAmount = {
-  denom: string
-  amount: string
-}
-
-/**
- * `CosmosIBCTimeoutHeight`
- *
- * @property {string} revision_number - The revision number of the IBC module.
- * @property {string} revision_height - The height at which the revision was applied.
- */
-export type CosmosIBCTimeoutHeight = {
-  revision_number: string
-  revision_height: string
-}
-
-/**
- * `CosmosIBCTransferMessageValue`
- *
- * @property {string} source_port - The port that the transfer is coming from.
- * @property {string} source_channel - The channel that the transfer is coming from
- * @property {CosmosIBCTokenAndAmount} token - The token and amount to transfer.
- * @property {string} sender - The address of the sender
- * @property {string} receiver - The address of the receiver of the transfer.
- * @property {CosmosIBCTimeoutHeight} timeout_height - The height at which the transfer will expire.
- */
-export type CosmosIBCTransferMessageValue = {
-  source_port: string
-  source_channel: string
-  token: CosmosIBCTokenAndAmount
-  sender: string
-  receiver: string
-  timeout_height: CosmosIBCTimeoutHeight
-}
-
-/**
- * `CosmosIBCTransferMessage`
- *
- * @property {string} __type - This is the type of the message
- * @property {string} type - The type of the message
- * @property {CosmosIBCTransferMessageValue} value - CosmosIBCTransferMessageValue
- */
-export type CosmosIBCTransferMessage = {
-  __type: string
-  type: string
-  value: CosmosIBCTransferMessageValue
-}
-
-export type TerraSwapSingleSwapCW20Send = {
-  amount: string
-  contract: string
-  msg: string
-}
-export type TerraSwapSingleSwapFromCW20TokenCallWrapper = {
-  send: TerraSwapSingleSwapCW20Send
-}
-
-export type TerraSwapSingleSwapNativeToken = { denom: string }
-export type TerraSwapSingleSwapAssetInfo = {
-  native_token: TerraSwapSingleSwapNativeToken
-}
-export type TerraSwapSingleSwapOfferAsset = {
-  amount: string
-  info: TerraSwapSingleSwapAssetInfo
-}
-export type TerraSwapSingleSwap = {
-  offer_asset: TerraSwapSingleSwapOfferAsset
-}
-export type TerraSwapSingleSwapFromNativeTokenCallWrapper = {
-  swap: TerraSwapSingleSwap
-}
-
-export type CosmosExecuteMessage =
-  | TerraSwapSingleSwapFromCW20TokenCallWrapper
-  | TerraSwapSingleSwapFromNativeTokenCallWrapper
-
-export type Coin = { denom: string; amount: string }
-
-export type OsmosisSwapMessage = {
-  __type: string
-  type: string
+export type CosmosProtoMsg = {
+  type_url: string
   value: number[]
 }
 
-export type MsgExecuteContract = {
-  __type: string
-  sender: string
-  contract: string
-  execute_msg: CosmosExecuteMessage
-  coins: Coin[]
+/**
+ * CosmosFee representing fee for cosmos transaction
+ */
+export type CosmosFee = {
+  gas: string
+  amount: CosmosCoin[]
 }
-
-export type MsgSend = {
-  __type: string
-  inputs: InputOutput[]
-  outputs: InputOutput[]
-  aminoPrefix: string
-}
-export type InputOutput = { address: string; coins: Coin[] }
-
-export type DirectMsgSend = {
-  __type: string
-  typeUrl: string
-  value: SifchainMsgSendValue
-}
-export type SifchainMsgSendValue = {
-  amount: Coin[]
-  fromAddress: string
-  toAddress: string
-}
-
-export type DirectCosmosIBCTimeoutHeight = {
-  revisionNumber: string
-  revisionHeight: string
-}
-
-export type DirectCosmosIBCTransferMessageValue = {
-  sourcePort: string
-  sourceChannel: string
-  token: CosmosIBCTokenAndAmount
-  sender: string
-  receiver: string
-  timeoutHeight: DirectCosmosIBCTimeoutHeight
-  timeoutTimestamp: string | null
-}
-
-export type DirectCosmosIBCTransferMessage = {
-  __type: string
-  typeUrl: string
-  value: DirectCosmosIBCTransferMessageValue
-}
-
-export type Msg =
-  | CosmosIBCTransferMessage
-  | MsgExecuteContract
-  | OsmosisSwapMessage
-  | MsgSend
-  | DirectMsgSend
-  | DirectCosmosIBCTransferMessage
-
-export type ProtoMsg = { type_url: string; value: number[] }
-
-export type CosmosFeeAmount = { denom: string; amount: string }
-export type CosmosFee = { gas: string; amount: CosmosFeeAmount[] }
 
 /**
- * Main transaction object for COSMOS type transactions (including Terra, Osmosis, ...)
+ * Main transaction object for COSMOS type transactions
  */
 export type CosmosMessage = {
   signType: 'AMINO' | 'DIRECT'
@@ -179,8 +36,8 @@ export type CosmosMessage = {
   account_number: number | null
   rpcUrl: string
   chainId: string | null
-  msgs: Msg[]
-  protoMsgs: ProtoMsg[]
+  msgs: any[] // TODO
+  protoMsgs: CosmosProtoMsg[]
   memo: string | null
   fee: CosmosFee | null
 }
