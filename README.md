@@ -8,3 +8,9 @@
 ```shell
   npm install rango-types --save
 ```
+
+or
+
+```shell
+  yarn add rango-types
+```
