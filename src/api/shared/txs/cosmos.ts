@@ -3,7 +3,7 @@ import { TransactionType } from '../transactions'
 import { BaseTransaction } from './base'
 
 /**
- * CosmosCoin representing fee coins
+ * CosmosCoin
  */
 export type CosmosCoin = {
   amount: string
@@ -11,29 +11,36 @@ export type CosmosCoin = {
 }
 
 /**
- * CosmosStdFee representing fee for cosmos transaction
+ * CosmosProtoMsg
  */
-export type CosmosStdFee = {
-  amount: CosmosCoin[]
-  gas: string
+export type CosmosProtoMsg = {
+  type_url: string
+  value: number[]
 }
 
 /**
- * Main transaction object for COSMOS type transactions (including Terra, Osmosis, ...)
+ * CosmosFee representing fee for cosmos transaction
+ */
+export type CosmosFee = {
+  gas: string
+  amount: CosmosCoin[]
+}
+
+/**
+ * Main transaction object for COSMOS type transactions
  */
 export type CosmosMessage = {
   signType: 'AMINO' | 'DIRECT'
   sequence: string | null
   source: number | null
   account_number: number | null
-  rpcUrl: string | null
+  rpcUrl: string
   chainId: string | null
-  msgs: unknown[]
-  protoMsgs: unknown[]
+  msgs: any[] // TODO
+  protoMsgs: CosmosProtoMsg[]
   memo: string | null
-  fee: CosmosStdFee | null
+  fee: CosmosFee | null
 }
-
 /**
  * An alternative to CosmosMessage object for the cosmos wallets that do not support generic Cosmos messages (e.g. XDefi)
  *

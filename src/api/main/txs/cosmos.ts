@@ -1,14 +1,14 @@
 import {
   CosmosCoin,
+  CosmosFee,
   CosmosMessage,
   CosmosRawTransferData,
-  CosmosStdFee,
   CosmosTransaction,
 } from '../../shared'
 
 export {
   CosmosCoin,
-  CosmosStdFee,
+  CosmosFee,
   CosmosMessage,
   CosmosRawTransferData,
   CosmosTransaction,
