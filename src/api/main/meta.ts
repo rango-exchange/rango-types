@@ -8,6 +8,8 @@ import {
   TransferBlockchainMeta,
   BlockchainMeta,
   SwapperMeta,
+  MessagingProtocol,
+  MessagingProtocolsResponse,
 } from '../shared'
 
 export {
@@ -20,6 +22,8 @@ export {
   TransferBlockchainMeta,
   BlockchainMeta,
   SwapperMeta,
+  MessagingProtocol,
+  MessagingProtocolsResponse,
 }
 
 /**

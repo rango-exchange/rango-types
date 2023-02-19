@@ -8,6 +8,8 @@ import {
   CosmosBlockchainMeta,
   TransferBlockchainMeta,
   BlockchainMeta,
+  MessagingProtocol,
+  MessagingProtocolsResponse,
 } from '../shared'
 
 export {
@@ -20,6 +22,8 @@ export {
   CosmosBlockchainMeta,
   TransferBlockchainMeta,
   BlockchainMeta,
+  MessagingProtocol,
+  MessagingProtocolsResponse,
 }
 
 /**

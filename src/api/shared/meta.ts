@@ -259,3 +259,23 @@ export type BlockchainMeta =
   | SolanaBlockchainMeta
   | StarkNetBlockchainMeta
   | TronBlockchainMeta
+
+/**
+ * MessagingProtocol
+ *
+ * @property {string} id - The unique identifier for the messaging protocol.
+ *
+ */
+export type MessagingProtocol = {
+  id: string
+}
+
+/**
+ * Metadata info for all supported messaging protcols
+ *
+ * @property {MessagingProtocol[]} protocols - List of all supported messaging protocols, e.g. AXELAR, ...
+ *
+ */
+export type MessagingProtocolsResponse = {
+  protocols: MessagingProtocol[]
+}
