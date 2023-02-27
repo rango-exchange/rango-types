@@ -1,3 +1,4 @@
+import * as mainAPI from './api/main'
+import * as basicAPI from './api/basic'
 export * from './api/shared'
-export * as mainAPI from './api/main'
-export * as basicAPI from './api/basic'
+export { mainAPI, basicAPI }
