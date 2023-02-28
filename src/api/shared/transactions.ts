@@ -14,7 +14,12 @@ export enum TransactionType {
  * The type of transaction
  * @deprecated use TransactionType instead
  */
-export const GenericTransactionType = TransactionType
+export enum GenericTransactionType {
+  EVM = 'EVM',
+  TRANSFER = 'TRANSFER',
+  COSMOS = 'COSMOS',
+  SOLANA = 'SOLANA',
+}
 
 /**
  * A transaction's url that can be displayed to advanced user to track the progress
