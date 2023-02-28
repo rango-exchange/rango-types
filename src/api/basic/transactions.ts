@@ -38,18 +38,21 @@ export type StatusRequest = {
  * @property {Asset} from - The source asset
  * @property {Asset} to - The destination asset
  * @property {string} amount - The human-readable amount of asset X that is going to be swapped, example: 0.28
- * @property {string[]} [swappers] - List of all accepted swappers, an empty list means no filter is required
  * @property {string} fromAddress - User source wallet address
  * @property {string} toAddress - User destination wallet address
- * @property {string | number} referrerAddress - Referrer address
- * @property {string | number} referrerFee - Referrer fee in percent, (e.g. 0.3 means: 0.3% fee based on input amount)
- * @property {boolean} disableEstimate - check pre-requests of a swap before creating tx (e.g. check having enough balance)
  * @property {string} slippage - User slippage for this swap (e.g. 5.0 which means 5% slippage)
+ * @property {boolean} [disableEstimate] - check pre-requests of a swap before creating tx (e.g. check having enough balance)
+ * @property {string | number} [referrerAddress] - Referrer address
+ * @property {string | number} [referrerFee] - Referrer fee in percent, (e.g. 0.3 means: 0.3% fee based on input amount)
+ * @property {string[]} [swappers] - List of all accepted swappers, an empty list means no filter is required
+ * @property {boolean} [swappersExclude] - Indicates include/exclude mode for the swappers param
+ * @property {string[]} [swapperGroups] - List of all accepted swapper groups, an empty list means no filter is required
+ * @property {boolean} [swappersGroupsExclude] - Indicates include/exclude mode for the swappers group param
  * @property {string[]} [messagingProtocols] - List of all messaging protocols, an empty list means no filter is required
  * @property {string} [sourceContract] - Address of your contract on source chain (will be called in case of refund in the source chain)
  * @property {string} [destinationContract] - Address of your contract on destination chain (will be called in case of success/refund in the destination chain)
  * @property {string} [imMessage] - The message that you want to pass to your contract on the destination chain
- * @property {boolean} contractCall - Mark it true if you are going to call this swap via your own contract, so we
+ * @property {boolean} [contractCall] - Mark it true if you are going to call this swap via your own contract, so we
  * will filter routes that are not possible to be called from a contract
  *
  */
@@ -57,13 +60,16 @@ export type SwapRequest = {
   from: Asset
   to: Asset
   amount: string
-  swappers?: string[]
   fromAddress: string
   toAddress: string
-  referrerAddress: string | null
-  referrerFee: string | null
-  disableEstimate: boolean
   slippage: string
+  disableEstimate?: boolean
+  referrerAddress?: string | null
+  referrerFee?: string | null
+  swappers?: string[]
+  swappersExclude?: boolean
+  swapperGroups?: string[]
+  swappersGroupsExclude?: boolean
   messagingProtocols?: string[]
   sourceContract?: string
   destinationContract?: string
