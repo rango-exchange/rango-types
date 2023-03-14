@@ -89,6 +89,7 @@ export type BlockchainValidationStatus = {
  * @property {boolean} checkPrerequisites - It should be false when client just likes to preview the route to user,
  * and true when user really accepted to swap. If true, server will be much slower to respond, but will check some
  * pre-requisites including balance of X and required fees in user's wallets
+ * @property {string} [slippage] - User slippage, used to filter routes which are incompatible with this slippage
  * @property {boolean} [forceExecution] - Use this flag if you want to ignore checkPrerequisites before executing the route
  * @property {string | null} [affiliateRef] - The affiliate ref that client likes to send to Rango, so in cases of
  * 1inch, Thorchain, etc. that support affiliation, the referrer will earn some money if user accept the route and
@@ -112,6 +113,7 @@ export type BestRouteRequest = {
   connectedWallets: UserWalletBlockchain[]
   selectedWallets: { [key: string]: string }
   checkPrerequisites: boolean
+  slippage?: string
   forceExecution?: boolean
   affiliateRef?: string | null
   disableMultiStepTx?: boolean
