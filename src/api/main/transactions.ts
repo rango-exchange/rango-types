@@ -5,7 +5,13 @@ import {
   ReportTransactionRequest,
   TransactionStatus,
   CheckApprovalResponse,
+  CosmosTransaction,
+  Transfer,
+  SolanaTransaction,
+  TronTransaction,
+  StarknetTransaction,
 } from '../shared'
+import { EvmTransaction } from './txs'
 
 export {
   TransactionType,
@@ -17,6 +23,7 @@ export {
 }
 
 /**
+ * @deprecated use Transaction type instead
  * Parent model for all types of transactions
  * Check EvmTransaction, TransferTransaction and CosmosTransaction models for more details
  *
@@ -108,6 +115,17 @@ export type SwapperStatusStep = {
 }
 
 /**
+ * Type of the transaction
+ */
+export type Transaction =
+  | EvmTransaction
+  | CosmosTransaction
+  | SolanaTransaction
+  | TronTransaction
+  | StarknetTransaction
+  | Transfer
+
+/**
  * Response of check transaction status containing the latest status of transaction
  *
  * @property {TransactionStatus | null} status - Status of the transaction, while the status is running or null, the
@@ -116,7 +134,7 @@ export type SwapperStatusStep = {
  * the status is successful or failed, example: 1635271424813
  * @property {string | null} extraMessage - A message in case of failure, that could be shown to the user
  * @property {string | null} outputAmount - The output amount of the transaction if it was successful, exmaple: 0.28
- * @property {GenericTransaction | null} newTx - if a transaction needs more than one-step transaction to be signed by
+ * @property {Transaction | null} newTx - if a transaction needs more than one-step transaction to be signed by
  * the user, the next step transaction will be returned in this field.
  * @property {string | null} diagnosisUrl - In some special cases [e.g. AnySwap], the user should follow some steps
  * outside Rango to get its assets back (refund). You can show this link to the user to help him
@@ -130,7 +148,7 @@ export type TransactionStatusResponse = {
   timestamp: number | null
   extraMessage: string | null
   outputAmount: string | null
-  newTx: GenericTransaction | null
+  newTx: Transaction | null
   diagnosisUrl: string | null
   explorerUrl: SwapExplorerUrl[] | null
   referrals: TransactionStatusReferral[] | null
@@ -143,11 +161,11 @@ export type TransactionStatusResponse = {
  *
  * @property {string | null} error - Error message about the incident if ok == false
  * @property {boolean} ok - If true, Rango has created a non-null transaction and the error message is null
- * @property {GenericTransaction | null} transaction - Transaction's raw data
+ * @property {Transaction | null} transaction - Transaction data
  *
  */
 export type CreateTransactionResponse = {
   error: string | null
   ok: boolean
-  transaction: GenericTransaction | null
+  transaction: Transaction | null
 }
