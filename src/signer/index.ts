@@ -1,8 +1,31 @@
 import { Transaction, TransactionType } from '../api/main'
 
 export interface ISigner<Tx extends Transaction> {
-  signMessage(msg: string): Promise<string>
-  signAndSendTx(tx: Tx): Promise<string>
+  /*
+   * Sign a message with the private key of the given address.
+   * @param msg The message to sign.
+   * @param address The address of the account to sign with.
+   * @param chainId The chainId of the network to sign with.
+   * @returns The signed message.
+   */
+  signMessage(
+    msg: string,
+    address: string,
+    chainId: string | null
+  ): Promise<string>
+
+  /*
+   * Sign and send a transaction with the private key of the given address.
+   * @param tx The transaction to sign.
+   * @param address The address of the account to sign with.
+   * @param chainId The chainId of the network to sign with.
+   * @returns The signed transaction hash.
+   */
+  signAndSendTx(
+    tx: Tx,
+    address: string,
+    chainId: string | null
+  ): Promise<string>
 }
 
 export class SignerFactory {
