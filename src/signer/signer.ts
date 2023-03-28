@@ -1,6 +1,6 @@
 import { Transaction, TransactionType } from '../api/main'
 
-export interface ISigner<Tx extends Transaction> {
+export interface GenericSigner<Tx extends Transaction> {
   /*
    * Sign a message with the private key of the given address.
    * @param msg The message to sign.
@@ -37,12 +37,14 @@ export class SignerFactory {
 
   registerSigner<Tx extends Transaction>(
     txType: TransactionType,
-    signer: ISigner<Tx>
+    signer: GenericSigner<Tx>
   ): void {
     this.signers[txType] = signer
   }
 
-  getSigner<Tx extends Transaction>(txType: TransactionType): ISigner<Tx> {
+  getSigner<Tx extends Transaction>(
+    txType: TransactionType
+  ): GenericSigner<Tx> {
     if (this.signers && txType in this.signers) return this.signers[txType]
     throw new Error('Signer not found for ' + txType)
   }
