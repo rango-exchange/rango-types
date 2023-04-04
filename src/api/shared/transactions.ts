@@ -42,6 +42,7 @@ export type SwapExplorerUrl = {
  */
 export type APIErrorCode =
   | 'TX_FAIL'
+  | 'TX_EXPIRED'
   | 'FETCH_TX_FAILED'
   | 'USER_REJECT'
   | 'USER_CANCEL'
