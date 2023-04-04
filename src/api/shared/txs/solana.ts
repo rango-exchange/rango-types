@@ -31,6 +31,7 @@ export type SolanaSignature = {
  * This type of transaction is used for all solana transactions
  *
  * @property {TransactionType} type - This fields equals to SOLANA for all SolanaTransactions
+ * @property {'LEGACY' | 'VERSIONED'} txType - Type of the solana transaction
  * @property {string} blockChain, equals to SOLANA
  * @property {string} from, Source wallet address
  * @property {string} identifier, Transaction hash used in case of retry
@@ -42,6 +43,7 @@ export type SolanaSignature = {
  */
 export interface SolanaTransaction extends BaseTransaction {
   type: TransactionType.SOLANA
+  txType: 'LEGACY' | 'VERSIONED'
   from: string
   identifier: string
   recentBlockhash: string | null
