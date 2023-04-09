@@ -20,12 +20,12 @@ export {
  * Minimum required slippage of a step
  *
  * @property {boolean} error - If true, means that Rango failed to compute slippage for this step.
- * @property {number} slippage - The slippage amount in percent, example: 5
+ * @property {string} slippage - The slippage amount in percent, example: 5
  *
  */
 export type RecommendedSlippage = {
   error: boolean
-  slippage: number
+  slippage: string
 }
 
 /**
@@ -157,6 +157,8 @@ export type TimeStat = {
  * be split and executed. This can be used for previewing purpose to give the user a sense of what's going to happen.
  * Null indicates that there is no internal mechanism and swapping is simple and straight-forward.
  *
+ * @property {SwapResult[] | null} internalSwaps - The internal swaps for this step. Used for aggregators' internal steps.
+ *
  * @property {SwapFee[]} fee - List of fees that are taken from user in this step
  *
  * @property {string | null} fromAmountMinValue - The minimum amount unit, the precision that will be applied to
@@ -195,6 +197,7 @@ export type SwapResult = {
   fromAmount: string
   toAmount: string
   routes: SwapRoute[] | null
+  internalSwaps: SwapResult[] | null
   fee: SwapFee[]
   fromAmountMaxValue: string | null
   fromAmountMinValue: string | null
