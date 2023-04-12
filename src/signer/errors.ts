@@ -35,10 +35,12 @@ export type SignerOperationName =
 export class SignerError extends Error {
   public readonly code: SignerErrorCode
   public readonly root?: any
+  public _isSignerError = true
 
   constructor(code: SignerErrorCode, m?: string | undefined, root?: any) {
     super(m || getDefaultErrorMessage(code))
     Object.setPrototypeOf(this, SignerError.prototype)
+    SignerError.prototype._isSignerError = true
     this.code = code
     this.root = root
     if (
