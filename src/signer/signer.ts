@@ -29,7 +29,7 @@ export interface GenericSigner<Tx extends Transaction> {
 }
 
 export class SignerFactory {
-  private signers: any = {}
+  protected signers: { [key in TransactionType]?: GenericSigner<Transaction> }
 
   constructor() {
     this.signers = {}
@@ -45,7 +45,10 @@ export class SignerFactory {
   getSigner<Tx extends Transaction>(
     txType: TransactionType
   ): GenericSigner<Tx> {
-    if (this.signers && txType in this.signers) return this.signers[txType]
+    if (this.signers && txType in this.signers) {
+      const signer = this.signers[txType]
+      if (!!signer) return signer
+    }
     throw new Error('Signer not found for ' + txType)
   }
 }
