@@ -53,6 +53,13 @@ export class SignerError extends Error {
     }
   }
 
+  static isSignerError(obj: unknown): obj is SignerError {
+    return (
+      obj instanceof SignerError ||
+      Object.prototype.hasOwnProperty('_isSignerError')
+    )
+  }
+
   static isRejectedError(error: any): boolean {
     const POSSIBLE_REJECTION_ERRORS = [
       'rejected by user',
