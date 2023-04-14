@@ -52,6 +52,26 @@ export type APIErrorCode =
   | 'CLIENT_UNEXPECTED_BEHAVIOUR'
 
 /**
+ * The function checks if a given string value is a valid API error code.
+ * @param {string} value - a string that represents a possible API error code.
+ * @returns A boolean value is being returned, indicating whether the input `value` is of type
+ * `APIErrorCode` or not.
+ */
+export function isAPIErrorCode(value: string): value is APIErrorCode {
+  return Object.keys([
+    'TX_FAIL',
+    'TX_EXPIRED',
+    'FETCH_TX_FAILED',
+    'USER_REJECT',
+    'USER_CANCEL',
+    'CALL_WALLET_FAILED',
+    'SEND_TX_FAILED',
+    'CALL_OR_SEND_FAILED',
+    'CLIENT_UNEXPECTED_BEHAVIOUR',
+  ]).includes(value)
+}
+
+/**
  * ReportTransactionRequest
  *
  * It should be used when an error happened in client and we want to inform server that transaction failed,
