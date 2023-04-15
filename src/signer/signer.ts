@@ -29,7 +29,7 @@ export interface GenericSigner<Tx extends Transaction> {
 }
 
 export class SignerFactory {
-  protected signers: { [key in TransactionType]?: GenericSigner<Transaction> }
+  public signers: { [key in TransactionType]?: GenericSigner<Transaction> } = {}
 
   constructor() {
     this.signers = {}
