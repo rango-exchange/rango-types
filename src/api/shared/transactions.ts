@@ -58,7 +58,7 @@ export type APIErrorCode =
  * `APIErrorCode` or not.
  */
 export function isAPIErrorCode(value: string): value is APIErrorCode {
-  return Object.keys([
+  return [
     'TX_FAIL',
     'TX_EXPIRED',
     'FETCH_TX_FAILED',
@@ -68,7 +68,7 @@ export function isAPIErrorCode(value: string): value is APIErrorCode {
     'SEND_TX_FAILED',
     'CALL_OR_SEND_FAILED',
     'CLIENT_UNEXPECTED_BEHAVIOUR',
-  ]).includes(value)
+  ].includes(value)
 }
 
 /**
