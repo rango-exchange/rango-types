@@ -90,6 +90,7 @@ export type BlockchainValidationStatus = {
  * and true when user really accepted to swap. If true, server will be much slower to respond, but will check some
  * pre-requisites including balance of X and required fees in user's wallets
  * @property {string} [slippage] - User slippage, used to filter routes which are incompatible with this slippage
+ * @property {string} [destination] - Custom destination for the route
  * @property {boolean} [forceExecution] - Use this flag if you want to ignore checkPrerequisites before executing the route
  * @property {string | null} [affiliateRef] - The affiliate ref that client likes to send to Rango, so in cases of
  * 1inch, Thorchain, etc. that support affiliation, the referrer will earn some money if user accept the route and
@@ -104,6 +105,7 @@ export type BlockchainValidationStatus = {
  * @property {number} [maxLength] - Maximum number of steps in a route
  * @property {boolean} contractCall - Mark it true if you are going to call this route via your own contract, so we
  * will filter routes that are not possible to be called from a contract
+ * @property {boolean} [experimental] - For enabling experimental features in routing
  *
  */
 export type BestRouteRequest = {
@@ -114,6 +116,7 @@ export type BestRouteRequest = {
   selectedWallets: { [key: string]: string }
   checkPrerequisites: boolean
   slippage?: string
+  destination?: string
   forceExecution?: boolean
   affiliateRef?: string | null
   disableMultiStepTx?: boolean
@@ -125,6 +128,7 @@ export type BestRouteRequest = {
   transactionTypes?: TransactionType[]
   maxLength?: number
   contractCall?: boolean
+  experimental?: boolean
 }
 
 /**
