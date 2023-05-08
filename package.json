@@ -1,6 +1,6 @@
 {
   "name": "rango-types",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "Rango Exchange Types",
   "main": "lib/index.js",
   "types": "lib",
@@ -27,7 +27,8 @@
     "Multi-Chain"
   ],
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "src"
   ],
   "author": "rango.exchange",
   "license": "GPL-3.0",
