@@ -103,13 +103,25 @@ export enum TransactionStatus {
 
 /**
  * Response body of check-approval
+ * You could stop check approval if:
+ *  1- approved successfully
+ *  => isApproved = true
+ *  2- approval transaction failed
+ *  => isApproved = false && txStatus === 'failed'
+ *  3- approval transaction succeeded but currentApprovedAmount is still less than requiredApprovedAmount
+ *  (e.g. user changed transaction data and enter another approve amount in MetaMask)
+ *  => isApproved = false && txStatus == 'success'
  *
  * @property {boolean} isApproved - A flag which indicates that the approve tx is done or not
  * @property {TransactionStatus | null} txStatus - Status of approve transaction in blockchain,
  * if isArppoved is false and txStatus is failed, it seems that approve transaction failed in blockchain
+ * @property {string | null} requiredApprovedAmount - required amount to be approved by user
+ * @property {string | null} currentApprovedAmount - current approved amount by user
  *
  */
 export type CheckApprovalResponse = {
   isApproved: boolean
   txStatus: TransactionStatus | null
+  requiredApprovedAmount: string | null
+  currentApprovedAmount: string | null
 }
