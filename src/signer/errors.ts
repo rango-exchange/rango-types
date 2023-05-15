@@ -56,7 +56,7 @@ export class SignerError extends Error {
   static isSignerError(obj: unknown): obj is SignerError {
     return (
       obj instanceof SignerError ||
-      Object.prototype.hasOwnProperty('_isSignerError')
+      Object.prototype.hasOwnProperty.call(obj, '_isSignerError')
     )
   }
 
