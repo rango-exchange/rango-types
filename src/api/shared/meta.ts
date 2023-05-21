@@ -34,15 +34,6 @@ export type ChainInfoBase = {
  */
 export interface EVMChainInfo extends ChainInfoBase {
   infoType: 'EvmMetaInfo'
-  chainName: string
-  nativeCurrency: {
-    name: string
-    symbol: string
-    decimals: number
-  }
-  rpcUrls: string[]
-  blockExplorerUrls: string[]
-  addressUrl: string
   transactionUrl: string
 }
 
@@ -59,14 +50,6 @@ export interface EVMChainInfo extends ChainInfoBase {
  */
 export interface StarkNetChainInfo extends ChainInfoBase {
   infoType: 'StarkNetMetaInfo'
-  chainName: string
-  nativeCurrency: {
-    name: string
-    symbol: string
-    decimals: number
-  }
-  blockExplorerUrls: string[]
-  addressUrl: string
   transactionUrl: string
 }
 
@@ -83,14 +66,6 @@ export interface StarkNetChainInfo extends ChainInfoBase {
  */
 export interface TronChainInfo extends ChainInfoBase {
   infoType: 'TronMetaInfo'
-  chainName: string
-  nativeCurrency: {
-    name: string
-    symbol: string
-    decimals: number
-  }
-  blockExplorerUrls: string[]
-  addressUrl: string
   transactionUrl: string
 }
 
@@ -102,53 +77,6 @@ export interface TronChainInfo extends ChainInfoBase {
  */
 export interface CosmosChainInfo extends ChainInfoBase {
   infoType: 'CosmosMetaInfo'
-  experimental: boolean
-  rpc: string
-  rest: string
-  cosmostationLcdUrl?: string | null
-  cosmostationApiUrl?: string | null
-  cosmostationDenomTracePath?: string | null
-  mintScanName?: string | null
-  chainName: string
-  stakeCurrency: {
-    coinDenom: string
-    coinMinimalDenom: string
-    coinDecimals: number
-    coinGeckoId: string
-    coinImageUrl: string
-  }
-  bip44: {
-    coinType: number
-  }
-  bech32Config: {
-    bech32PrefixAccAddr: string
-    bech32PrefixAccPub: string
-    bech32PrefixValAddr: string
-    bech32PrefixValPub: string
-    bech32PrefixConsAddr: string
-    bech32PrefixConsPub: string
-  }
-  currencies: {
-    coinDenom: string
-    coinMinimalDenom: string
-    coinDecimals: number
-    coinGeckoId: string
-    coinImageUrl: string
-  }[]
-  feeCurrencies: {
-    coinDenom: string
-    coinMinimalDenom: string
-    coinDecimals: number
-    coinGeckoId: string
-    coinImageUrl: string
-  }[]
-  features: string[]
-  explorerUrlToTx: string
-  gasPriceStep?: {
-    low: number
-    average: number
-    high: number
-  } | null
 }
 
 /**
@@ -195,19 +123,17 @@ export type SwapperMetaDto = SwapperMeta
  * @property {EVMChainInfo | CosmosChainInfo | null} info - Chain specific information
  *
  */
-export type BlockchainMetaBase = {
-  type: TransactionType
-  name: string
+
+export interface BlockchainMetaBase extends BlockchainBase {
   shortName: string
   displayName: string
-  defaultDecimals: number
-  feeAssets: Asset[]
   addressPatterns: string[]
   logo: string
   color: string
   sort: number
   enabled: boolean
   chainId: string | null
+  addressUrl: string
   info:
     | EVMChainInfo
     | CosmosChainInfo
@@ -216,44 +142,108 @@ export type BlockchainMetaBase = {
     | null
 }
 
-export interface EvmBlockchainMeta extends BlockchainMetaBase {
-  type: TransactionType.EVM
-  chainId: string
+export type BlockchainBase = {
+  type: TransactionType
+  name: string
+}
+
+export interface EvmBlockchainMeta extends EvmBlockchain {
   info: EVMChainInfo
 }
 
-export interface CosmosBlockchainMeta extends BlockchainMetaBase {
+export interface EvmBlockchain extends BlockchainBase {
+  type: TransactionType.EVM
+  chainId: string // A 0x-prefixed hexadecimal string
+  chainName: string
+  nativeCurrency: {
+    name: string
+    symbol: string // 2-6 characters long
+    decimals: number
+  }
+  rpcUrls: string[]
+  blockExplorerUrls?: string[]
+  iconUrls?: string[] // Currently ignored.
+}
+
+export interface CosmosBlockchainMeta extends BlockchainBase {
   type: TransactionType.COSMOS
   chainId: string | null
-  info: CosmosChainInfo | null
+  chainName: string
+  experimental: boolean
+  rpc: string
+  rest: string
+  stakeCurrency: {
+    coinDenom: string
+    coinMinimalDenom: string
+    coinDecimals: number
+    coinGeckoId: string
+    coinImageUrl: string
+  }
+  bip44: {
+    coinType: number
+  }
+  bech32Config: {
+    bech32PrefixAccAddr: string
+    bech32PrefixAccPub: string
+    bech32PrefixValAddr: string
+    bech32PrefixValPub: string
+    bech32PrefixConsAddr: string
+    bech32PrefixConsPub: string
+  }
+  currencies: {
+    coinDenom: string
+    coinMinimalDenom: string
+    coinDecimals: number
+    coinGeckoId: string
+    coinImageUrl: string
+  }[]
+  feeCurrencies: {
+    coinDenom: string
+    coinMinimalDenom: string
+    coinDecimals: number
+    coinGeckoId: string
+    coinImageUrl: string
+  }[]
+  features: string[]
+  gasPriceStep?: {
+    low: number
+    average: number
+    high: number
+  } | null
 }
 
-export interface TransferBlockchainMeta extends BlockchainMetaBase {
+export interface TransferBlockchainMeta extends BlockchainBase {
   type: TransactionType.TRANSFER
   chainId: null
-  info: null
 }
 
-export interface SolanaBlockchainMeta extends BlockchainMetaBase {
+export interface SolanaBlockchainMeta extends BlockchainBase {
   type: TransactionType.SOLANA
   chainId: string
-  info: null
 }
 
-export interface StarkNetBlockchainMeta extends BlockchainMetaBase {
+export interface StarkNetBlockchainMeta extends BlockchainBase {
   type: TransactionType.STARKNET
-  chainId: string
-  info: StarkNetChainInfo
+  id: string
+  chainId: string // A 0x-prefixed hexadecimal string
+  chainName: string
+  rpcUrl: string
+  accountImplementation?: string
+
+  nativeCurrency?: {
+    name: string
+    symbol: string // 2-6 characters long
+    decimals: 18
+  }
 }
 
-export interface TronBlockchainMeta extends BlockchainMetaBase {
+export interface TronBlockchainMeta extends BlockchainBase {
   type: TransactionType.TRON
   chainId: string
-  info: TronChainInfo
 }
 
 export type BlockchainMeta =
-  | EvmBlockchainMeta
+  | EvmBlockchain
   | CosmosBlockchainMeta
   | TransferBlockchainMeta
   | SolanaBlockchainMeta
