@@ -34,7 +34,6 @@ export type ChainInfoBase = {
  */
 export interface EVMChainInfo extends ChainInfoBase {
   infoType: 'EvmMetaInfo'
-  transactionUrl: string
 }
 
 /**
@@ -50,7 +49,6 @@ export interface EVMChainInfo extends ChainInfoBase {
  */
 export interface StarkNetChainInfo extends ChainInfoBase {
   infoType: 'StarkNetMetaInfo'
-  transactionUrl: string
 }
 
 /**
@@ -66,7 +64,6 @@ export interface StarkNetChainInfo extends ChainInfoBase {
  */
 export interface TronChainInfo extends ChainInfoBase {
   infoType: 'TronMetaInfo'
-  transactionUrl: string
 }
 
 /**
@@ -124,17 +121,20 @@ export type SwapperMetaDto = SwapperMeta
  *
  */
 
-export interface BlockchainMetaBase extends BlockchainBase {
-  shortName: string
-  displayName: string
-  addressPatterns: string[]
-  logo: string
-  color: string
-  sort: number
-  enabled: boolean
+export type BlockchainMetaBase = {
+  type: TransactionType
+  name: string
+  shortName?: string
+  displayName?: string
+  addressPatterns?: string[]
+  logo?: string
+  color?: string
+  sort?: number
+  enabled?: boolean
   chainId: string | null
-  addressUrl: string
-  info:
+  addressUrl?: string
+  transactionUrl?: string
+  info?:
     | EVMChainInfo
     | CosmosChainInfo
     | StarkNetChainInfo
@@ -142,16 +142,7 @@ export interface BlockchainMetaBase extends BlockchainBase {
     | null
 }
 
-export type BlockchainBase = {
-  type: TransactionType
-  name: string
-}
-
-export interface EvmBlockchainMeta extends EvmBlockchain {
-  info: EVMChainInfo
-}
-
-export interface EvmBlockchain extends BlockchainBase {
+export interface EvmBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.EVM
   chainId: string // A 0x-prefixed hexadecimal string
   chainName: string
@@ -165,7 +156,7 @@ export interface EvmBlockchain extends BlockchainBase {
   iconUrls?: string[] // Currently ignored.
 }
 
-export interface CosmosBlockchainMeta extends BlockchainBase {
+export interface CosmosBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.COSMOS
   chainId: string | null
   chainName: string
@@ -212,17 +203,17 @@ export interface CosmosBlockchainMeta extends BlockchainBase {
   } | null
 }
 
-export interface TransferBlockchainMeta extends BlockchainBase {
+export interface TransferBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.TRANSFER
   chainId: null
 }
 
-export interface SolanaBlockchainMeta extends BlockchainBase {
+export interface SolanaBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.SOLANA
   chainId: string
 }
 
-export interface StarkNetBlockchainMeta extends BlockchainBase {
+export interface StarkNetBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.STARKNET
   id: string
   chainId: string // A 0x-prefixed hexadecimal string
@@ -237,13 +228,13 @@ export interface StarkNetBlockchainMeta extends BlockchainBase {
   }
 }
 
-export interface TronBlockchainMeta extends BlockchainBase {
+export interface TronBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.TRON
   chainId: string
 }
 
 export type BlockchainMeta =
-  | EvmBlockchain
+  | EvmBlockchainMeta
   | CosmosBlockchainMeta
   | TransferBlockchainMeta
   | SolanaBlockchainMeta
