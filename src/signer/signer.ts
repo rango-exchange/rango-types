@@ -40,8 +40,17 @@ export interface GenericSigner<Tx extends Transaction> {
   ): Promise<{ hash: string; response?: any }>
 }
 
-export class SignerFactory {
-  public signers: { [key in TransactionType]?: GenericSigner<Transaction> } = {}
+export interface SignerFactory {
+  registerSigner<Tx extends Transaction>(
+    txType: TransactionType,
+    signer: GenericSigner<Tx>
+  ): void
+  getSigner<Tx extends Transaction>(txType: TransactionType): GenericSigner<Tx>
+}
+
+export class DefaultSignerFactory implements SignerFactory {
+  private signers: { [key in TransactionType]?: GenericSigner<Transaction> } =
+    {}
 
   constructor() {
     this.signers = {}
