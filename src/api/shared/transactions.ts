@@ -46,10 +46,12 @@ export type APIErrorCode =
   | 'FETCH_TX_FAILED'
   | 'USER_REJECT'
   | 'USER_CANCEL'
+  | 'USER_CANCELED_TX'
   | 'CALL_WALLET_FAILED'
   | 'SEND_TX_FAILED'
   | 'CALL_OR_SEND_FAILED'
   | 'CLIENT_UNEXPECTED_BEHAVIOUR'
+  | 'INSUFFICIENT_APPROVE'
 
 /**
  * The function checks if a given string value is a valid API error code.
@@ -64,10 +66,12 @@ export function isAPIErrorCode(value: string): value is APIErrorCode {
     'FETCH_TX_FAILED',
     'USER_REJECT',
     'USER_CANCEL',
+    'USER_CANCELED_TX',
     'CALL_WALLET_FAILED',
     'SEND_TX_FAILED',
     'CALL_OR_SEND_FAILED',
     'CLIENT_UNEXPECTED_BEHAVIOUR',
+    'INSUFFICIENT_APPROVE',
   ].includes(value)
 }
 
