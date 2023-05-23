@@ -25,7 +25,19 @@ export interface GenericSigner<Tx extends Transaction> {
     tx: Tx,
     address: string,
     chainId: string | null
-  ): Promise<string>
+  ): Promise<{ hash: string; response?: any }>
+
+  /*
+   * Sign and send a transaction with the private key of the given address
+   * @param txHash signed transaction hash
+   * @param confirmations number of block confirmation desired before returning response
+   * @returns The signed transaction hash or the replaced one and transaction response
+   */
+  wait?(
+    txHash: string,
+    txResponse?: any,
+    confirmations?: number
+  ): Promise<{ hash: string; response?: any }>
 }
 
 export class SignerFactory {
