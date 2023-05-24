@@ -39,3 +39,7 @@ export interface TronTransaction extends BaseTransaction {
   visible: boolean
   __payload__: object
 }
+
+export const isTronTransaction = (transaction: {
+  type: TransactionType
+}): transaction is TronTransaction => transaction.type === TransactionType.TRON

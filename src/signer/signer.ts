@@ -28,7 +28,7 @@ export interface GenericSigner<Tx extends Transaction> {
   ): Promise<{ hash: string; response?: any }>
 
   /*
-   * Sign and send a transaction with the private key of the given address
+   * Wait for the transaction receipt using txHash and txResponse
    * @param txHash signed transaction hash
    * @param confirmations number of block confirmation desired before returning response
    * @returns The signed transaction hash or the replaced one and transaction response

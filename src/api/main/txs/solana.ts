@@ -3,6 +3,7 @@ import {
   SolanaInstructionKey,
   SolanaSignature,
   SolanaTransaction,
+  isSolanaTransaction,
 } from '../../shared'
 
 export {
@@ -10,4 +11,5 @@ export {
   SolanaInstructionKey,
   SolanaSignature,
   SolanaTransaction,
+  isSolanaTransaction,
 }

@@ -77,3 +77,8 @@ export interface CosmosTransaction extends BaseTransaction {
   data: CosmosMessage
   rawTransfer: CosmosRawTransferData | null
 }
+
+export const isCosmosTransaction = (transaction: {
+  type: TransactionType
+}): transaction is CosmosTransaction =>
+  transaction.type === TransactionType.COSMOS

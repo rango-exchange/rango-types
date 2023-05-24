@@ -1,3 +1,3 @@
-import { Transfer } from '../../shared'
+import { Transfer, isTransferTransaction } from '../../shared'
 
-export { Transfer }
+export { Transfer, isTransferTransaction }
