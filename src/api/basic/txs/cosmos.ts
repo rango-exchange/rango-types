@@ -4,6 +4,7 @@ import {
   CosmosMessage,
   CosmosRawTransferData,
   CosmosTransaction,
+  isCosmosTransaction,
 } from '../../shared'
 
 export {
@@ -12,4 +13,5 @@ export {
   CosmosMessage,
   CosmosRawTransferData,
   CosmosTransaction,
+  isCosmosTransaction,
 }

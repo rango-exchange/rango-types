@@ -20,3 +20,8 @@ export interface StarknetTransaction extends BaseTransaction {
   isApprovalTx: boolean
   calls: StarknetCallData[]
 }
+
+export const isStarknetTransaction = (transaction: {
+  type: TransactionType
+}): transaction is StarknetTransaction =>
+  transaction.type === TransactionType.STARKNET

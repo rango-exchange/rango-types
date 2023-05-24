@@ -32,3 +32,7 @@ export interface EvmTransaction extends BaseTransaction {
   maxPriorityFeePerGas: string | null
   maxFeePerGas: string | null
 }
+
+export const isEvmTransaction = (transaction: {
+  type: TransactionType
+}): transaction is EvmTransaction => transaction.type === TransactionType.EVM

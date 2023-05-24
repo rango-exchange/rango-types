@@ -51,3 +51,8 @@ export interface SolanaTransaction extends BaseTransaction {
   serializedMessage: number[] | null
   instructions: SolanaInstruction[]
 }
+
+export const isSolanaTransaction = (transaction: {
+  type: TransactionType
+}): transaction is SolanaTransaction =>
+  transaction.type === TransactionType.SOLANA

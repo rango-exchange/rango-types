@@ -26,3 +26,7 @@ export interface Transfer extends BaseTransaction {
   recipientAddress: string
   memo: string | null
 }
+
+export const isTransferTransaction = (transaction: {
+  type: TransactionType
+}): transaction is Transfer => transaction.type === TransactionType.TRANSFER

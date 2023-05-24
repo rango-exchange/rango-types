@@ -1,4 +1,5 @@
 import { EvmBlockchainMeta } from '../meta'
+import { TransactionType } from '../transactions'
 
 /**
  * The transaction object for all EVM-based blockchains, including Ethereum, BSC, Polygon, Harmony, etc
@@ -18,7 +19,7 @@ import { EvmBlockchainMeta } from '../meta'
  *
  */
 export interface EvmTransaction {
-  type: 'EVM'
+  type: TransactionType.EVM
   blockChain: EvmBlockchainMeta
   from: string | null
   approveTo: string | null
@@ -31,3 +32,7 @@ export interface EvmTransaction {
   maxPriorityFeePerGas: string | null
   maxFeePerGas: string | null
 }
+
+export const isEvmTransaction = (transaction: {
+  type: TransactionType
+}): transaction is EvmTransaction => transaction.type === TransactionType.EVM
