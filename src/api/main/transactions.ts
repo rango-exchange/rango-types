@@ -10,13 +10,8 @@ import {
   SolanaTransaction,
   TronTransaction,
   StarknetTransaction,
-  isCosmosTransaction,
-  isTransferTransaction,
-  isSolanaTransaction,
-  isTronTransaction,
-  isStarknetTransaction,
 } from '../shared'
-import { EvmTransaction, isEvmTransaction } from './txs'
+import { EvmTransaction } from './txs'
 
 export {
   TransactionType,
@@ -25,12 +20,6 @@ export {
   ReportTransactionRequest,
   TransactionStatus,
   CheckApprovalResponse,
-  isEvmTransaction,
-  isCosmosTransaction,
-  isTransferTransaction,
-  isSolanaTransaction,
-  isTronTransaction,
-  isStarknetTransaction,
 }
 
 /**
