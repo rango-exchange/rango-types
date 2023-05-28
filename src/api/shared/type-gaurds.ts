@@ -1,53 +1,51 @@
 import {
-  BlockchainMeta,
-  CosmosBlockchainMeta,
-  EvmBlockchainMeta,
-  SolanaBlockchainMeta,
-  StarkNetBlockchainMeta,
-  TransferBlockchainMeta,
-  TronBlockchainMeta,
+  CosmosProviderMeta,
+  EvmProviderMeta,
+  ProviderMeta,
+  SolanaProviderMeta,
+  StarkNetProviderMeta,
+  TransferProviderMeta,
+  TronProviderMeta,
 } from './meta'
 
 export const isEvmBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is EvmBlockchainMeta => blockchainMeta.type === 'EVM'
+  blockchainMeta: ProviderMeta
+): blockchainMeta is EvmProviderMeta => blockchainMeta.type === 'EVM'
 
 export const isCosmosBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is CosmosBlockchainMeta => blockchainMeta.type === 'COSMOS'
+  blockchainMeta: ProviderMeta
+): blockchainMeta is CosmosProviderMeta => blockchainMeta.type === 'COSMOS'
 
 export const isSolanaBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is SolanaBlockchainMeta => blockchainMeta.type === 'SOLANA'
+  blockchainMeta: ProviderMeta
+): blockchainMeta is SolanaProviderMeta => blockchainMeta.type === 'SOLANA'
 
 export const isTronBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is TronBlockchainMeta => blockchainMeta.type === 'TRON'
+  blockchainMeta: ProviderMeta
+): blockchainMeta is TronProviderMeta => blockchainMeta.type === 'TRON'
 
 export const isTransferBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is TransferBlockchainMeta =>
-  blockchainMeta.type === 'TRANSFER'
+  blockchainMeta: ProviderMeta
+): blockchainMeta is TransferProviderMeta => blockchainMeta.type === 'TRANSFER'
 
 export const isStarknetBlockchain = (
-  blockchainMeta: BlockchainMeta
-): blockchainMeta is StarkNetBlockchainMeta =>
-  blockchainMeta.type === 'STARKNET'
+  blockchainMeta: ProviderMeta
+): blockchainMeta is StarkNetProviderMeta => blockchainMeta.type === 'STARKNET'
 
-export const evmBlockchains = (blockchains: BlockchainMeta[]) =>
+export const evmBlockchains = (blockchains: ProviderMeta[]) =>
   blockchains.filter(isEvmBlockchain)
 
-export const solanaBlockchain = (blockchains: BlockchainMeta[]) =>
+export const solanaBlockchain = (blockchains: ProviderMeta[]) =>
   blockchains.filter(isSolanaBlockchain)
 
-export const starknetBlockchain = (blockchains: BlockchainMeta[]) =>
+export const starknetBlockchain = (blockchains: ProviderMeta[]) =>
   blockchains.filter(isStarknetBlockchain)
 
-export const tronBlockchain = (blockchains: BlockchainMeta[]) =>
+export const tronBlockchain = (blockchains: ProviderMeta[]) =>
   blockchains.filter(isTronBlockchain)
 
-export const cosmosBlockchains = (blockchains: BlockchainMeta[]) =>
+export const cosmosBlockchains = (blockchains: ProviderMeta[]) =>
   blockchains.filter(isCosmosBlockchain)
 
-export const transferBlockchains = (blockchains: BlockchainMeta[]) =>
+export const transferBlockchains = (blockchains: ProviderMeta[]) =>
   blockchains.filter(isTransferBlockchain)

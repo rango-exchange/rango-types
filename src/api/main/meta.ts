@@ -58,14 +58,14 @@ export type Token = {
 /**
  * Metadata info for all blockchains and tokens supported
  *
- * @property {BlockchainMetaBase[]} blockchains - List of all supported blockchains
+ * @property {BlockchainMeta[]} blockchains - List of all supported blockchains
  * @property {Token[]} tokens - List of all tokens
  * @property {Token[]} popularTokens - List of popular tokens, a subset of tokens field
  * @property {SwapperMeta[]} swappers - List of all DEXes & Bridges
  *
  */
 export type MetaResponse = {
-  blockchains: BlockchainMetaBase[]
+  blockchains: BlockchainMeta[]
   tokens: Token[]
   popularTokens: Token[]
   swappers: SwapperMeta[]
