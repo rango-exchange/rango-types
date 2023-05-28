@@ -1,8 +1,9 @@
 {
   "name": "rango-types",
-  "version": "0.1.37",
+  "version": "0.1.38",
   "description": "Rango Exchange Types",
   "main": "lib/index.js",
+  "type": "module",
   "types": "lib",
   "repository": {
     "type": "git",
