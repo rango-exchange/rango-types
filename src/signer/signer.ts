@@ -30,11 +30,13 @@ export interface GenericSigner<Tx extends Transaction> {
   /*
    * Wait for the transaction receipt using txHash and txResponse
    * @param txHash signed transaction hash
+   * @param chainId for the transaction
    * @param confirmations number of block confirmation desired before returning response
    * @returns The signed transaction hash or the replaced one and transaction response
    */
   wait?(
     txHash: string,
+    chainId?: string,
     txResponse?: any,
     confirmations?: number
   ): Promise<{ hash: string; response?: any }>
