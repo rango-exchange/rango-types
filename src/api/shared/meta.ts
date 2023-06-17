@@ -286,12 +286,6 @@ export type ProviderMetaBase = {
   chainId: string | null
   addressUrl?: string
   transactionUrl?: string
-  info?:
-    | EVMChainInfo
-    | CosmosChainInfo
-    | StarkNetChainInfo
-    | TronChainInfo
-    | null
 }
 export interface EvmProviderMeta extends ProviderMetaBase {
   type: TransactionType.EVM
@@ -347,6 +341,7 @@ export interface CosmosProviderMeta extends ProviderMetaBase {
     coinImageUrl: string
   }[]
   features: string[]
+  explorerUrlToTx?: string
   gasPriceStep?: {
     low: number
     average: number

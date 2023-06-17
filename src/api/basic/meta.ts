@@ -58,7 +58,7 @@ export type Token = {
  * @property {SwapperMeta[]} swappers - List of all DEXes & Bridges
  *
  */
- export type MetaResponse = {
+export type MetaResponse = {
   blockchains: BlockchainMeta[]
   tokens: Token[]
   swappers: SwapperMeta[]
