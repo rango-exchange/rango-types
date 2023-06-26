@@ -10,6 +10,7 @@ import {
   SolanaTransaction,
   TronTransaction,
   StarknetTransaction,
+  TonTransaction,
 } from '../shared'
 import { EvmTransaction } from './txs'
 
@@ -123,6 +124,7 @@ export type Transaction =
   | SolanaTransaction
   | TronTransaction
   | StarknetTransaction
+  | TonTransaction
   | Transfer
 
 /**
