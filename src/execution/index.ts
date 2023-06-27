@@ -75,7 +75,6 @@ export type PendingSwapStep = {
   starknetTransaction: StarknetTransaction | null
   tonTransaction: TonTransaction | null;
 
-
   // missing fields in older versions
   // keeping null for backward compatability
   swapperLogo: string | null
