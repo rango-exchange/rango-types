@@ -51,6 +51,7 @@ export type APIErrorCode =
   | 'CALL_WALLET_FAILED'
   | 'SEND_TX_FAILED'
   | 'CALL_OR_SEND_FAILED'
+  | 'TX_FAILED_IN_BLOCKCHAIN'
   | 'CLIENT_UNEXPECTED_BEHAVIOUR'
   | 'INSUFFICIENT_APPROVE'
 
@@ -71,6 +72,7 @@ export function isAPIErrorCode(value: string): value is APIErrorCode {
     'CALL_WALLET_FAILED',
     'SEND_TX_FAILED',
     'CALL_OR_SEND_FAILED',
+    'TX_FAILED_IN_BLOCKCHAIN',
     'CLIENT_UNEXPECTED_BEHAVIOUR',
     'INSUFFICIENT_APPROVE',
   ].includes(value)
