@@ -84,9 +84,10 @@ export function isAPIErrorCode(value: string): value is APIErrorCode {
  *
  * @property {string} requestId - The requestId from best route endpoint
  * @property {APIErrorCode} eventType - Type of the event that happened, example: USER_REJECT
- * @property {number} step - Step number in which failure happened
- * @property {string} reason - Reason or message for the error
- * @property {[key: string]: string} data - A list of key-value for extra details
+ * @property {number} [step] - Step number in which failure happened
+ * @property {string} [reason] - Reason or message for the error
+ * @property {[key: string]: string} [data] - A list of key-value for extra details
+ * @property {wallet?: string, errorCode? string} [tags] - A list of key-value for pre-defined tags
  *
  */
 export type ReportTransactionRequest = {
@@ -95,6 +96,7 @@ export type ReportTransactionRequest = {
   step?: number
   reason?: string
   data?: { [key: string]: string }
+  tags?: { wallet?: string; errorCode?: string }
 }
 
 /**
