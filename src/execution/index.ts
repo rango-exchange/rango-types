@@ -11,6 +11,7 @@ import {
   StarknetTransaction,
   SwapExplorerUrl,
   TronTransaction,
+  TonTransaction,
 } from '../api/shared'
 
 export type StepStatus =
@@ -72,6 +73,8 @@ export type PendingSwapStep = {
   tronTransaction: TronTransaction | null
   starknetApprovalTransaction: StarknetTransaction | null
   starknetTransaction: StarknetTransaction | null
+  tonTransaction: TonTransaction | null;
+
 
   // missing fields in older versions
   // keeping null for backward compatability
