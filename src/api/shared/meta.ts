@@ -252,6 +252,12 @@ export interface TronBlockchainMeta extends BlockchainMetaBase {
   info: TronChainInfo
 }
 
+export interface TonBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.TON
+  chainId: string
+  info: null
+}
+
 export type BlockchainMeta =
   | EvmBlockchainMeta
   | CosmosBlockchainMeta
@@ -259,6 +265,7 @@ export type BlockchainMeta =
   | SolanaBlockchainMeta
   | StarkNetBlockchainMeta
   | TronBlockchainMeta
+  | TonBlockchainMeta
 
 /**
  * MessagingProtocol

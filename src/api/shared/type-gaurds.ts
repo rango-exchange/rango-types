@@ -4,6 +4,7 @@ import {
   EvmBlockchainMeta,
   SolanaBlockchainMeta,
   StarkNetBlockchainMeta,
+  TonBlockchainMeta,
   TransferBlockchainMeta,
   TronBlockchainMeta,
 } from './meta'
@@ -34,6 +35,10 @@ export const isStarknetBlockchain = (
 ): blockchainMeta is StarkNetBlockchainMeta =>
   blockchainMeta.type === 'STARKNET'
 
+export const isTonBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is TonBlockchainMeta => blockchainMeta.type === 'TON'
+
 export const evmBlockchains = (blockchains: BlockchainMeta[]) =>
   blockchains.filter(isEvmBlockchain)
 
@@ -51,3 +56,6 @@ export const cosmosBlockchains = (blockchains: BlockchainMeta[]) =>
 
 export const transferBlockchains = (blockchains: BlockchainMeta[]) =>
   blockchains.filter(isTransferBlockchain)
+
+export const tonBlockchain = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isTonBlockchain)

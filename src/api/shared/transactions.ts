@@ -8,6 +8,7 @@ export enum TransactionType {
   SOLANA = 'SOLANA',
   TRON = 'TRON',
   STARKNET = 'STARKNET',
+  TON = 'TON',
 }
 
 /**
