@@ -2,9 +2,21 @@ export enum SignerErrorCode {
   REJECTED_BY_USER = 'REJECTED_BY_USER',
   SIGN_TX_ERROR = 'SIGN_TX_ERROR',
   SEND_TX_ERROR = 'SEND_TX_ERROR',
-  NOT_IMPLEMENTED = 'NOT_IMPLEMENTED',
+  TX_FAILED_IN_BLOCKCHAIN = 'TX_FAILED_IN_BLOCKCHAIN',
   OPERATION_UNSUPPORTED = 'OPERATION_UNSUPPORTED',
   UNEXPECTED_BEHAVIOUR = 'UNEXPECTED_BEHAVIOUR',
+  NOT_IMPLEMENTED = 'NOT_IMPLEMENTED',
+}
+
+export enum RPCErrorCode {
+  REJECTION = 'REJECTION',
+  UNDER_PRICED = 'UNDER_PRICED',
+  OUT_OF_GAS = 'OUT_OF_GAS',
+  CALL_EXCEPTION = 'CALL_EXCEPTION',
+  INSUFFICIENT_FUNDS = 'INSUFFICIENT_FUNDS',
+  INTERNAL = 'INTERNAL',
+  SLIPPAGE = 'SLIPPAGE',
+  UNKNOWN_ERROR = 'UNKNOWN',
 }
 
 export function isSignerErrorCode(value: string): value is SignerErrorCode {
@@ -18,6 +30,8 @@ export function getDefaultErrorMessage(code: SignerErrorCode): string {
     [SignerErrorCode.SEND_TX_ERROR]: 'Error sending the transaction',
     [SignerErrorCode.NOT_IMPLEMENTED]: 'Operation not implemented',
     [SignerErrorCode.OPERATION_UNSUPPORTED]: 'Unsupported operation',
+    [SignerErrorCode.TX_FAILED_IN_BLOCKCHAIN]:
+      'Transaction failed in blockchain',
     [SignerErrorCode.UNEXPECTED_BEHAVIOUR]: 'Unexpected error',
   }
   return errorMap[code]
@@ -35,14 +49,24 @@ export type SignerOperationName =
 export class SignerError extends Error {
   public readonly code: SignerErrorCode
   public readonly root?: any
+  public readonly rpcCode?: RPCErrorCode
+  public readonly trace?: any
   public _isSignerError = true
 
-  constructor(code: SignerErrorCode, m?: string | undefined, root?: any) {
+  constructor(
+    code: SignerErrorCode,
+    m?: string | undefined,
+    root?: any,
+    rpcCode?: RPCErrorCode,
+    trace?: any
+  ) {
     super(m || getDefaultErrorMessage(code))
     Object.setPrototypeOf(this, SignerError.prototype)
     SignerError.prototype._isSignerError = true
     this.code = code
     this.root = root
+    this.rpcCode = rpcCode
+    this.trace = trace
     if (
       this.code === SignerErrorCode.REJECTED_BY_USER ||
       SignerError.isRejectedError(root)
