@@ -40,6 +40,8 @@ export {
  * @property {string | null} coinSource - If the token is secondary, coinSource indicates the third-party list
  * that Rango found this token in, example: Pancake Extended List
  * @property {string | null} coinSourceUrl - The absolute url of the source list that token was extracted from
+ * @property {boolean} isPopular - If true, means that the token is popular
+ * @property {string[]} supportedSwappers - List of swappers that support this token
  *
  */
 export type Token = {
@@ -53,6 +55,26 @@ export type Token = {
   isSecondaryCoin: boolean
   coinSource: string | null
   coinSourceUrl: string | null
+  isPopular: boolean
+  supportedSwappers: string[]
+}
+
+/**
+ * Compact version of token
+ */
+export type CompactToken = {
+  b: string
+  a: string | null
+  s: string
+  n: string | null
+  d: number
+  i: string
+  p: number | null
+  ip: boolean | null
+  is: boolean | null
+  c: string | null
+  cu: string | null
+  ss: string[]
 }
 
 /**
@@ -68,5 +90,21 @@ export type MetaResponse = {
   blockchains: BlockchainMeta[]
   tokens: Token[]
   popularTokens: Token[]
+  swappers: SwapperMeta[]
+}
+
+/**
+ * Compact Metadata info for all blockchains and tokens supported
+ *
+ * @property {BlockchainMeta[]} blockchains - List of all supported blockchains
+ * @property {CompactToken[]} tokens - List of all tokens in compact format
+ * @property {Token[]} popularTokens - List of popular tokens, a subset of tokens field
+ * @property {SwapperMeta[]} swappers - List of all DEXes & Bridges
+ *
+ */
+export type CompactMetaResponse = {
+  blockchains: BlockchainMeta[]
+  tokens: CompactToken[]
+  popularTokens: CompactToken[]
   swappers: SwapperMeta[]
 }

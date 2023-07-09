@@ -36,8 +36,9 @@ export {
  * @property {string} name - The token name, e.g: Binance Pegged ETH
  * @property {number} decimals - Decimals of token in blockchain, example: 18
  * @property {string} image - Url of its image, example: https://api.rango.exchange/tokens/ETH/ETH.png
+ * @property {string} blockchainImage - Url of the blockchain image
  * @property {number | null} usdPrice - The token unit price
- *
+ * @property {boolean} isPopular - If true, means that the token is popular
  */
 export type Token = {
   blockchain: string
@@ -47,7 +48,9 @@ export type Token = {
   name: string
   decimals: number
   image: string
+  blockchainImage: string
   usdPrice: number | null
+  isPopular: boolean
 }
 
 /**
