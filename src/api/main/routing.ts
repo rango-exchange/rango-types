@@ -92,9 +92,11 @@ export type BlockchainValidationStatus = {
  * @property {string} [slippage] - User slippage, used to filter routes which are incompatible with this slippage
  * @property {string} [destination] - Custom destination for the route
  * @property {boolean} [forceExecution] - Use this flag if you want to ignore checkPrerequisites before executing the route
- * @property {string | null} [affiliateRef] - The affiliate ref that client likes to send to Rango, so in cases of
- * 1inch, Thorchain, etc. that support affiliation, the referrer will earn some money if user accept the route and
- * signs the transactions. example: K3ldk3
+ * @property {string | null} [affiliateRef] - To enable dApps to charge affiliate fees and generate income from users' transactions,
+ * the affiliate referral code should be provided. You can create this code by visiting the following link: https://app.rango.exchange/affiliate.
+ * @property {number | null} [affiliatePercent] - If you want to change the default affiliate fee percentage, you can provide a new value here.
+ * @property {{ [key: string]: string }} [affiliateWallets] - If you want to change the default affiliate wallet addresses, you can provide new values here.
+ * (Map of route blockchains to affiliate address)
  * @property {boolean} [disableMultiStepTx] - It should be true when the client doesn't want multi-step transactions
  * @property {string[]} [blockchains] - List of all accepted blockchains, an empty list means no filter is required
  * @property {string[]} [swappers] - List of all accepted swappers, an empty list means no filter is required
@@ -119,6 +121,8 @@ export type BestRouteRequest = {
   destination?: string
   forceExecution?: boolean
   affiliateRef?: string | null
+  affiliatePercent?: number | null
+  affiliateWallets?: { [key: string]: string }
   disableMultiStepTx?: boolean
   blockchains?: string[]
   swappers?: string[]
