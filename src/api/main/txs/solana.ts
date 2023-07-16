@@ -4,7 +4,7 @@ import {
   SolanaSignature,
   SolanaTransaction,
   isSolanaTransaction,
-} from '../../shared'
+} from '../../shared/index.js'
 
 export {
   SolanaInstruction,

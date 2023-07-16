@@ -5,14 +5,14 @@ import {
   SolanaTransaction,
   SwapperStatusStep,
   Transfer as TransferTransaction,
-} from '../api/main'
+} from '../api/main/index.js'
 import {
   AmountRestrictionType,
   StarknetTransaction,
   SwapExplorerUrl,
   TronTransaction,
   TonTransaction,
-} from '../api/shared'
+} from '../api/shared/index.js'
 
 export type StepStatus =
   | 'created'
@@ -73,7 +73,7 @@ export type PendingSwapStep = {
   tronTransaction: TronTransaction | null
   starknetApprovalTransaction: StarknetTransaction | null
   starknetTransaction: StarknetTransaction | null
-  tonTransaction: TonTransaction | null;
+  tonTransaction: TonTransaction | null
 
   // missing fields in older versions
   // keeping null for backward compatability

@@ -1,4 +1,4 @@
-import { SwapperMeta, Token } from './meta'
+import { SwapperMeta, Token } from './meta.js'
 import {
   Asset,
   Amount,
@@ -6,7 +6,7 @@ import {
   ExpenseType,
   AmountRestrictionType,
   AssetWithTicker,
-} from '../shared'
+} from '../shared/index.js'
 
 export {
   Asset,

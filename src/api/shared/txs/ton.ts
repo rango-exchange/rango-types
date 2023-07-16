@@ -1,5 +1,5 @@
-import { TransactionType } from '..'
-import { BaseTransaction } from './base'
+import { TransactionType } from '../index.js'
+import { BaseTransaction } from './base.js'
 
 export enum TonChainID {
   MAINNET = '-239',

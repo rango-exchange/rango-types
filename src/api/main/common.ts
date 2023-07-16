@@ -5,7 +5,7 @@ import {
   ExpenseType,
   AmountRestrictionType,
   AssetWithTicker,
-} from '../shared'
+} from '../shared/index.js'
 
 export {
   Asset,
