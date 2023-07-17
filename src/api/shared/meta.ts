@@ -1,5 +1,5 @@
-import { Asset, SwapperType } from './common'
-import { TransactionType } from './transactions'
+import { Asset, SwapperType } from './common.js'
+import { TransactionType } from './transactions.js'
 
 export type MetaInfoType =
   | 'CosmosMetaInfo'

@@ -1,5 +1,5 @@
-import { EvmBlockchainMeta } from '../meta'
-import { TransactionType } from '../transactions'
+import { EvmBlockchainMeta } from '../meta.js'
+import { TransactionType } from '../transactions.js'
 
 /**
  * The transaction object for all EVM-based blockchains, including Ethereum, BSC, Polygon, Harmony, etc

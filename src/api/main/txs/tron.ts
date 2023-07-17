@@ -4,7 +4,7 @@ import {
   TrxContractData,
   TrxContractParameter,
   isTronTransaction,
-} from '../../shared'
+} from '../../shared/index.js'
 
 export {
   TronTransaction,

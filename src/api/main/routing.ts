@@ -1,6 +1,6 @@
-import { RoutingResultType } from '../shared'
-import type { Amount, Asset, SwapResult } from './common'
-import type { TransactionType } from './transactions'
+import { RoutingResultType } from '../shared/index.js'
+import type { Amount, Asset, SwapResult } from './common.js'
+import type { TransactionType } from './transactions.js'
 
 export { RoutingResultType }
 

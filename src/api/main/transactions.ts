@@ -11,8 +11,8 @@ import {
   TronTransaction,
   StarknetTransaction,
   TonTransaction,
-} from '../shared'
-import { EvmTransaction } from './txs'
+} from '../shared/index.js'
+import { EvmTransaction } from './txs/index.js'
 
 export {
   TransactionType,

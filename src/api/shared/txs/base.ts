@@ -1,4 +1,4 @@
-import { TransactionType } from '../transactions'
+import { TransactionType } from '../transactions.js'
 
 /**
  * Base transaction for all Rango supported transactions

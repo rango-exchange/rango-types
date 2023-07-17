@@ -1,4 +1,4 @@
-import { Amount, Asset } from './common'
+import { Amount, Asset } from './common.js'
 
 /**
  * Pair of the asset and its amount in wallet balance
