@@ -1,4 +1,4 @@
-import { BaseTransaction, TransactionType } from '../../shared'
+import { BaseTransaction, TransactionType } from '../../shared/index.js'
 
 /**
  * The transaction object for all EVM-based blockchains, including Ethereum, BSC, Polygon, Harmony, etc

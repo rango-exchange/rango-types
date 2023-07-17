@@ -1,4 +1,4 @@
-import { Transaction, TransactionType } from '../api/main'
+import { Transaction, TransactionType } from '../api/main/index.js'
 
 export interface GenericSigner<Tx extends Transaction> {
   /*

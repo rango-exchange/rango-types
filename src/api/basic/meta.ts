@@ -10,7 +10,7 @@ import {
   BlockchainMeta,
   MessagingProtocol,
   MessagingProtocolsResponse,
-} from '../shared'
+} from '../shared/index.js'
 
 export {
   EVMChainInfo,

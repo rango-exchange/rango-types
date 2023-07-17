@@ -1,5 +1,5 @@
-import { TransactionType } from '../transactions'
-import { BaseTransaction } from './base'
+import { TransactionType } from '../transactions.js'
+import { BaseTransaction } from './base.js'
 
 /**
  * Account metadata used to define instructions

@@ -7,7 +7,7 @@ import {
   TonBlockchainMeta,
   TransferBlockchainMeta,
   TronBlockchainMeta,
-} from './meta'
+} from './meta.js'
 
 export const isEvmBlockchain = (
   blockchainMeta: BlockchainMeta

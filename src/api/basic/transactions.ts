@@ -1,6 +1,6 @@
-import { Asset, QuoteSimulationResult } from './common'
-import { Token } from './meta'
-import { CosmosTransaction, EvmTransaction, Transfer } from './txs'
+import { Asset, QuoteSimulationResult } from './common.js'
+import { Token } from './meta.js'
+import { CosmosTransaction, EvmTransaction, Transfer } from './txs/index.js'
 import {
   TransactionType,
   GenericTransactionType,
@@ -9,7 +9,7 @@ import {
   TransactionStatus,
   CheckApprovalResponse,
   RoutingResultType,
-} from '../shared'
+} from '../shared/index.js'
 
 export {
   TransactionType,

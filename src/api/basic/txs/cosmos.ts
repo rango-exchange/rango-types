@@ -5,7 +5,7 @@ import {
   CosmosRawTransferData,
   CosmosTransaction,
   isCosmosTransaction,
-} from '../../shared'
+} from '../../shared/index.js'
 
 export {
   CosmosCoin,

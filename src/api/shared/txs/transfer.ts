@@ -1,6 +1,6 @@
-import { AssetWithTicker } from '../common'
-import { TransactionType } from '../transactions'
-import { BaseTransaction } from './base'
+import { AssetWithTicker } from '../common.js'
+import { TransactionType } from '../transactions.js'
+import { BaseTransaction } from './base.js'
 
 /**
  * TransferTransaction. This type of transaction is used for UTXO blockchains including BTC, LTC, BCH

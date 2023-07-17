@@ -1,5 +1,5 @@
-import { RoutingResultType } from '../shared'
-import type { Asset, QuoteSimulationResult } from './common'
+import { RoutingResultType } from '../shared/index.js'
+import type { Asset, QuoteSimulationResult } from './common.js'
 
 export { RoutingResultType }
 
