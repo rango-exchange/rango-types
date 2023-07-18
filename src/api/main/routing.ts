@@ -108,6 +108,9 @@ export type BlockchainValidationStatus = {
  * @property {boolean} contractCall - Mark it true if you are going to call this route via your own contract, so we
  * will filter routes that are not possible to be called from a contract
  * @property {boolean} [experimental] - For enabling experimental features in routing
+ * @property {string | null} [sourceContract] - Address of your contract on source chain (will be called in case of refund in the source chain)
+ * @property {string | null} [destinationContract] - Address of your contract on destination chain (will be called in case of success/refund in the destination chain)
+ * @property {string | null} [imMessage] - The message that you want to pass to your contract on the destination chain
  *
  */
 export type BestRouteRequest = {
@@ -133,7 +136,10 @@ export type BestRouteRequest = {
   maxLength?: number
   contractCall?: boolean
   experimental?: boolean
-}
+  sourceContract?: string | null;
+  destinationContract?: string | null;
+  imMessage?: string | null;
+};
 
 /**
  * The response of best route, if the result fields is null, it means that no route is found
