@@ -44,7 +44,7 @@ jobs:
         run: |
           # Replace 'patch' with 'minor' or 'major' if you want to bump a different version part
           npm version patch --no-git-tag-version
-          git commit -am "Bump version to v$(node -p "require('./package.json').version")"
+          git commit -am "chore: bump version to v$(node -p "require('./package.json').version")"
           git push
 
       - name: Publish to npm
