@@ -286,3 +286,51 @@ export type MessagingProtocol = {
 export type MessagingProtocolsResponse = {
   protocols: MessagingProtocol[]
 }
+
+/**
+ * The MetaRequest type is used to specify the filter parameters for the meta endpoint.
+ *
+ * @property {string[]} [blockchains] - An array of strings representing the blockchains to include in
+ * the request.
+ * @property {boolean} [blockchainsExclude] - A boolean value indicating whether the specified
+ * blockchains should be excluded or included in the response. If set to true, the specified blockchains
+ * will be excluded. If set to false or not provided, the specified blockchains will be included.
+ * @property {string[]} [swappers] - An array of strings representing the Id of swappers.
+ * @property {boolean} [swappersExclude] - The `swappersExclude` property is a boolean value that
+ * indicates whether to exclude or include specific swappers in the response. If set to `true`, it means
+ * that the swappers specified in the `swappers` property should be excluded from the response. If set
+ * to `false` or not
+ * @property {string[]} [swappersGroups] - The `swappersGroups` property is an array of strings that
+ * represents the groups of swappers. This property allows you to
+ * specify which swapper groups you want to include or exclude
+ * @property {boolean} [swappersGroupsExclude] - The `swappersGroupsExclude` property is a boolean value
+ * that determines whether to exclude or include swapper groups. If set to `true`, it means that the
+ * specified swapper groups should be excluded from the response. If set to `false` or not provided, the
+ * specified swapper groups should
+ * @property {TransactionType[]} [transactionTypes] - The `transactionTypes` property is an array of
+ * `TransactionType` values. It specifies the types of transactions that should be included in the meta
+ * response.
+ * @property {boolean} [transactionTypesExclude] - The `transactionTypesExclude` property is a boolean
+ * value that indicates whether the specified transaction types should be excluded or included in the
+ * response. If set to `true`, the specified transaction types will be excluded from the response. If set
+ * to `false` or not provided, the specified transaction types will be
+ * @property {boolean} [excludeSecondaries] - The `excludeSecondaries` property is a boolean flag that
+ * indicates whether secondary tokens should be excluded from the response.
+ * @property {boolean} [excludeNonPopulars] - The `excludeNonPopulars` property is a boolean value that
+ * indicates whether non-popular token should be excluded from the response.
+ * @property {boolean} [ignoreSupportedSwappers] - A boolean value indicating whether to include supported
+ * swappers list per token in response.
+ */
+export type MetaRequest = {
+  blockchains?: string[]
+  blockchainsExclude?: boolean
+  swappers?: string[]
+  swappersExclude?: boolean
+  swappersGroups?: string[]
+  swappersGroupsExclude?: boolean
+  transactionTypes?: TransactionType[]
+  transactionTypesExclude?: boolean
+  excludeSecondaries?: boolean
+  excludeNonPopulars?: boolean
+  ignoreSupportedSwappers?: boolean
+}

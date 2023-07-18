@@ -41,7 +41,7 @@ export {
  * that Rango found this token in, example: Pancake Extended List
  * @property {string | null} coinSourceUrl - The absolute url of the source list that token was extracted from
  * @property {boolean} isPopular - If true, means that the token is popular
- * @property {string[]} supportedSwappers - List of swappers that support this token
+ * @property {string[]} [supportedSwappers] - List of swappers that support this token
  *
  */
 export type Token = {
@@ -56,7 +56,7 @@ export type Token = {
   coinSource: string | null
   coinSourceUrl: string | null
   isPopular: boolean
-  supportedSwappers: string[]
+  supportedSwappers?: string[]
 }
 
 /**
@@ -66,15 +66,15 @@ export type CompactToken = {
   b: string
   a: string | null
   s: string
-  n: string | null
+  n?: string
   d: number
   i: string
-  p: number | null
-  ip: boolean | null
-  is: boolean | null
-  c: string | null
-  cu: string | null
-  ss: string[]
+  p?: number
+  ip?: boolean
+  is?: boolean
+  c?: string
+  cu?: string
+  ss?: string[]
 }
 
 /**
