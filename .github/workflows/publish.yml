@@ -6,11 +6,14 @@ on:
 
 jobs:
   publish:
+    if: "!contains(github.event.head_commit.message, 'publish workflow')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: main
+          token: ${{ secrets.PAT }}
 
       - name: Setup NodeJS
         uses: actions/setup-node@v3
@@ -43,7 +46,7 @@ jobs:
         run: |
           # Replace 'patch' with 'minor' or 'major' if you want to bump a different version part
           npm version patch --no-git-tag-version
-          git commit -am "chore: bump version to v$(node -p "require('./package.json').version")"
+          git commit -am "chore: bump version to v$(node -p "require('./package.json').version") [publish workflow]"
           git push
 
       - name: Publish to npm
