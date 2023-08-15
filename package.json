@@ -5,10 +5,7 @@
   "main": "lib/index.js",
   "type": "module",
   "types": "lib",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rango-exchange/rango-types.git"
-  },
+  "repository": "https://github.com/rango-exchange/rango-types",
   "homepage": "https://github.com/rango-exchange/rango-types",
   "bugs": {
     "url": "https://github.com/rango-exchange/rango-types/issues"
