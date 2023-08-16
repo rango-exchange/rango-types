@@ -6,7 +6,9 @@ on:
 
 jobs:
   publish:
-    if: "!contains(github.event.head_commit.message, 'publish workflow')"
+    if: |
+      !contains(github.event.head_commit.message, 'ci(release)') 
+        || !contains(github.event.head_commit.message, '(assets)')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -46,10 +48,8 @@ jobs:
         run: |
           # Replace 'patch' with 'minor' or 'major' if you want to bump a different version part
           npm version patch --no-git-tag-version
-          git commit -am "chore: bump version to v$(node -p "require('./package.json').version") [publish workflow]"
+          git commit -am "ci(release): bump version to v$(node -p "require('./package.json').version")"
           git push
 
       - name: Publish to npm
         run: npm publish
-
-
