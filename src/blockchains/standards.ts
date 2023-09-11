@@ -9,7 +9,7 @@ export type StdBlockchain = {
   transactionUrl: string
 }
 
-export type StdBasicBlockchainInfo = StdBlockchain & { mnifest: null }
+export type StdBasicBlockchainInfo = StdBlockchain & { manifest: null }
 
 export interface StdEvmBlockchainInfo extends StdBlockchain {
   type: TransactionType.EVM
