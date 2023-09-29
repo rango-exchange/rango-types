@@ -1,2 +1,2 @@
-export * from './standards'
-export * from './manifests'
+export * from './standards.js'
+export * from './manifests.js'

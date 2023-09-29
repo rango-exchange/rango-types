@@ -1,5 +1,5 @@
-import { TransactionType } from '../api/shared'
-import { StdCosmosManifest, StdEvmManifest } from './manifests'
+import { TransactionType } from '../api/shared/index.js'
+import { StdCosmosManifest, StdEvmManifest } from './manifests.js'
 
 export type StdBlockchain = {
   id: string
