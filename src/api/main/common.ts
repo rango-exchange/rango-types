@@ -35,6 +35,7 @@ export type RecommendedSlippage = {
  * @property {Asset} asset - Underlying asset for paying fee, example: BNB for BSC blockchain
  * @property {string} amount - The human readable amount of fee, example: 0.004
  * @property {ExpenseType} expenseType - Type of the fee, example: FROM_SOURCE_WALLET
+ * @property {number | null} price - Price of the fee asset
  *
  */
 export type SwapFee = {
@@ -42,6 +43,7 @@ export type SwapFee = {
   expenseType: ExpenseType
   asset: Asset
   amount: string
+  price: number | null
 }
 
 /**
@@ -194,15 +196,15 @@ export type SwapResult = {
   swapChainType: 'INTER_CHAIN' | 'INTRA_CHAIN'
   from: SwapResultAsset
   to: SwapResultAsset
-  fromAmount: string
   toAmount: string
-  routes: SwapRoute[] | null
-  internalSwaps: SwapResult[] | null
-  fee: SwapFee[]
+  fromAmount: string
   fromAmountMaxValue: string | null
   fromAmountMinValue: string | null
   fromAmountPrecision: string | null
   fromAmountRestrictionType: AmountRestrictionType
+  routes: SwapRoute[] | null
+  internalSwaps: SwapResult[] | null
+  fee: SwapFee[]
   estimatedTimeInSeconds: number
   timeStat: TimeStat | null
   includesDestinationTx: boolean

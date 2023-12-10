@@ -31,10 +31,9 @@ export enum PendingSwapNetworkStatus {
   NetworkChanged = 'networkChanged',
 }
 
-export type PendingSwapStep = {
-  // routing data
-  id: number
+export type SwapStepRoute = {
   fromBlockchain: string
+  fromBlockchainLogo: string | null
   fromSymbol: string
   fromSymbolAddress: string | null
   fromDecimals: number
@@ -43,27 +42,24 @@ export type PendingSwapStep = {
   fromAmountMaxValue: string | null
   fromAmountRestrictionType: AmountRestrictionType | null
   fromLogo: string
+  fromUsdPrice: number | null
   toBlockchain: string
+  toBlockchainLogo: string | null
   toSymbol: string
   toSymbolAddress: string | null
   toDecimals: number
   toLogo: string
+  toUsdPrice: number | null
   swapperId: string
+  swapperLogo: string | null
+  swapperType: string | null
   expectedOutputAmountHumanReadable: string | null
-  startTransactionTime: number
-  internalSteps: SwapperStatusStep[] | null
   estimatedTimeInSeconds: number | null
+  feeInUsd: string | null
+  internalSteps: SwapperStatusStep[] | null // used for solana internal steps
+}
 
-  // status data
-  status: StepStatus
-  networkStatus: PendingSwapNetworkStatus | null
-  executedTransactionId: string | null
-  executedTransactionTime: string | null
-  explorerUrl: SwapExplorerUrl[] | null
-  diagnosisUrl: string | null
-  outputAmount: string | null
-
-  // txs data
+export type SwapStepTransaction = {
   cosmosTransaction: CosmosTransaction | null
   transferTransaction: TransferTransaction | null
   solanaTransaction: SolanaTransaction | null
@@ -74,15 +70,24 @@ export type PendingSwapStep = {
   starknetApprovalTransaction: StarknetTransaction | null
   starknetTransaction: StarknetTransaction | null
   tonTransaction: TonTransaction | null
-
-  // missing fields in older versions
-  // keeping null for backward compatability
-  swapperLogo: string | null
-  swapperType: string | null
-  fromBlockchainLogo: string | null
-  toBlockchainLogo: string | null
-  feeInUsd: string | null
 }
+
+export type SwapStepStatus = {
+  startTransactionTime: number
+  status: StepStatus
+  networkStatus: PendingSwapNetworkStatus | null
+  executedTransactionId: string | null
+  executedTransactionTime: string | null
+  explorerUrl: SwapExplorerUrl[] | null
+  diagnosisUrl: string | null
+  outputAmount: string | null
+}
+
+export type PendingSwapStep = SwapStepRoute &
+  SwapStepTransaction & {
+    id: number
+    internalSwaps: SwapStepRoute[]
+  }
 
 export enum MessageSeverity {
   error = 'error',
