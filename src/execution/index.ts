@@ -84,9 +84,10 @@ export type SwapStepStatus = {
 }
 
 export type PendingSwapStep = SwapStepRoute &
-  SwapStepTransaction & {
+  SwapStepTransaction &
+  SwapStepStatus & {
     id: number
-    internalSwaps: SwapStepRoute[]
+    internalSwaps: SwapStepRoute[] | null
   }
 
 export enum MessageSeverity {
