@@ -29,7 +29,7 @@ export type Amount = {
  * Type of the swapper
  *
  */
-export type SwapperType = 'BRIDGE' | 'DEX' | 'AGGREGATOR'
+export type SwapperType = 'BRIDGE' | 'DEX' | 'AGGREGATOR' | 'OFF_CHAIN'
 
 /**
  * Type of the fee
