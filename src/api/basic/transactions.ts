@@ -1,6 +1,6 @@
 import { Asset, QuoteSimulationResult } from './common.js'
 import { Token } from './meta.js'
-import { CosmosTransaction, EvmTransaction, Transfer } from './txs/index.js'
+import { CosmosTransaction, EvmTransaction, Transfer, SolanaTransaction } from './txs/index.js'
 import {
   TransactionType,
   GenericTransactionType,
@@ -156,7 +156,7 @@ export type StatusResponse = {
  * @property {RoutingResultType} resultType - Type of result (OK or error type)
  * @property {QuoteSimulationResult | null} route - Suggested route
  * @property {string | null} error - Error message
- * @property {EvmTransaction | CosmosTransaction | Transfer | null} transaction - Transaction data
+ * @property {EvmTransaction | CosmosTransaction | Transfer | SolanaTransaction | null} transaction - Transaction data
  *
  */
 export type SwapResponse = {
@@ -164,5 +164,5 @@ export type SwapResponse = {
   resultType: RoutingResultType
   route: QuoteSimulationResult | null
   error: string | null
-  tx: EvmTransaction | CosmosTransaction | Transfer | null
+  tx: EvmTransaction | CosmosTransaction | SolanaTransaction | Transfer | null
 }
