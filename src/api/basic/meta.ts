@@ -33,7 +33,7 @@ export {
  * @property {string | null} chainId - The chainId which this token belongs to, e.g. 1 for ETH, 56 for BSC and ...
  * @property {string | null} address - Smart contract address of token, null for native tokens
  * @property {string} symbol - The token symbol, e.g: ADA
- * @property {string} name - The token name, e.g: Binance Pegged ETH
+ * @property {string | null} name - The token name, e.g: Binance Pegged ETH
  * @property {number} decimals - Decimals of token in blockchain, example: 18
  * @property {string} image - Url of its image, example: https://api.rango.exchange/tokens/ETH/ETH.png
  * @property {string} blockchainImage - Url of the blockchain image
@@ -45,7 +45,7 @@ export type Token = {
   chainId: string | null
   address: string | null
   symbol: string
-  name: string
+  name: string | null
   decimals: number
   image: string
   blockchainImage: string
