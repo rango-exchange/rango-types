@@ -320,7 +320,8 @@ export type MessagingProtocolsResponse = {
  * indicates whether non-popular token should be excluded from the response.
  * @property {boolean} [ignoreSupportedSwappers] - A boolean value indicating whether to include supported
  * swappers list per token in response.
- * @property {boolean} [enableCentralizedSwappers] - You could set this parameter to true if you want to enable centralized protocols like Exodus. By default, this parameter is false.
+ * @property {boolean} [enableCentralizedSwappers] - You could set this parameter to true if you want to enable routing from the centralized protocols like Exodus.
+ * By default, this parameter is false.
  */
 export type MetaRequest = {
   blockchains?: string[]
