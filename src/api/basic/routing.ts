@@ -19,6 +19,8 @@ export { RoutingResultType }
  * @property {string} [imMessage] - The message that you want to pass to your contract on the destination chain
  * @property {boolean} contractCall - Mark it true if you are going to call this quote via your own contract, so we
  * will filter routes that are not possible to be called from a contract
+ * @property {boolean} [enableCentralizedSwappers] - You could set this parameter to true if you want to enable routing from the centralized protocols like Exodus.
+ * By default, this parameter is false.
  *
  */
 export type QuoteRequest = {
@@ -34,6 +36,7 @@ export type QuoteRequest = {
   destinationContract?: string
   imMessage?: string
   contractCall?: boolean
+  enableCentralizedSwappers?: boolean
 }
 
 /**
