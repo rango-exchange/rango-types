@@ -40,6 +40,10 @@ export interface GenericSigner<Tx extends Transaction> {
     txResponse?: any,
     confirmations?: number
   ): Promise<{ hash: string; response?: any }>
+
+  // Set config related to signer
+  // @param signerConfig The related signer config
+  setConfig?(signerConfig: any): void
 }
 
 export interface SignerFactory {
@@ -53,15 +57,18 @@ export interface SignerFactory {
 export class DefaultSignerFactory implements SignerFactory {
   private signers: { [key in TransactionType]?: GenericSigner<Transaction> } =
     {}
+  private signerConfig: any
 
-  constructor() {
+  constructor(signerConfig: any) {
     this.signers = {}
+    this.signerConfig = signerConfig
   }
 
   registerSigner<Tx extends Transaction>(
     txType: TransactionType,
     signer: GenericSigner<Tx>
   ): void {
+    signer?.setConfig?.(this.signerConfig)
     this.signers[txType] = signer
   }
 
