@@ -59,7 +59,7 @@ export class DefaultSignerFactory implements SignerFactory {
     {}
   private signerConfig: any
 
-  constructor(signerConfig: any) {
+  constructor(signerConfig?: any) {
     this.signers = {}
     this.signerConfig = signerConfig
   }
