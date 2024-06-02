@@ -151,9 +151,7 @@ export class SignerError extends Error {
         : JSON.stringify(this.root)
 
     const rootStr =
-      typeof this.trace?.message === 'string' 
-        ? this.trace?.message 
-        : typeof this.root === 'string'
+        typeof this.root === 'string'
         ? this.root
         : this.root instanceof Error
         ? this.root.message
