@@ -2,9 +2,15 @@
   "name": "rango-types",
   "version": "0.1.63",
   "description": "Rango Exchange Types",
-  "main": "lib/index.js",
   "type": "module",
-  "types": "lib",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    }
+  },
   "repository": "https://github.com/rango-exchange/rango-types",
   "homepage": "https://github.com/rango-exchange/rango-types",
   "bugs": {
