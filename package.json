@@ -10,11 +10,11 @@
       "types": "./lib/index.d.ts",
       "default": "./lib/index.js"
     },
-    "./main": {
+    "./mainApi": {
       "types": "./lib/api/main/index.d.ts",
       "default": "./lib/api/main/index.js"
     },
-    "./basic": {
+    "./basicApi": {
       "types": "./lib/api/basic/index.d.ts",
       "default": "./lib/api/basic/index.js"
     }
