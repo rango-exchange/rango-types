@@ -1,4 +1,4 @@
-import { TransactionType } from '../index.js'
+import { TransactionType } from '../transactions.js'
 import { BaseTransaction } from './base.js'
 
 export enum TonChainID {
