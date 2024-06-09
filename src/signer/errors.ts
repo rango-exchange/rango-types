@@ -47,10 +47,11 @@ export type SignerOperationName =
   | 'signMessage'
 
 export class SignerError extends Error {
+  name = 'SignerError'
   public readonly code: SignerErrorCode
   public readonly root?: any
   public readonly rpcCode?: RPCErrorCode
-  public readonly trace?: any
+  public context?: Record<string, unknown>
   public _isSignerError = true
 
   constructor(
@@ -58,15 +59,16 @@ export class SignerError extends Error {
     m?: string | undefined,
     root?: any,
     rpcCode?: RPCErrorCode,
-    trace?: any
+    cause?: any,
+    context?: Record<string, unknown>
   ) {
-    super(m || getDefaultErrorMessage(code))
+    super(m || getDefaultErrorMessage(code), { cause })
     Object.setPrototypeOf(this, SignerError.prototype)
     SignerError.prototype._isSignerError = true
     this.code = code
     this.root = root
     this.rpcCode = rpcCode
-    this.trace = trace
+    this.context = context
     if (
       this.code === SignerErrorCode.REJECTED_BY_USER ||
       SignerError.isRejectedError(root)
@@ -93,6 +95,7 @@ export class SignerError extends Error {
       'user denied',
       'request rejected',
       'user abort',
+      'disapproved',
       'declined by user',
     ]
     if (!!error && typeof error === 'string') {
@@ -130,6 +133,15 @@ export class SignerError extends Error {
       SignerErrorCode.UNEXPECTED_BEHAVIOUR,
       'Assertion failed: ' + m
     )
+  }
+
+  getErrorContext(): Record<string, unknown> {
+    return {
+      code: this.code,
+      rpcCode: this.rpcCode,
+      message: this.message,
+      ...(this.context || {}),
+    }
   }
 
   getErrorDetail(): {
