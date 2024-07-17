@@ -18,12 +18,27 @@ export {
 }
 
 /**
+ * EVM Fee Info for the Swap Fee
+ *
+ * @property {string} type - type of the fee meta 
+ * @property {string} gasLimit - gas limit
+ * @property {string} gasPrice - gas price
+ *
+ */
+export type EVMFeeMeta = {
+  type: "EvmNetworkFeeMeta",
+  gasLimit: string,
+  gasPrice: string
+}
+
+/**
  * A fee unit, including the type of asset and the amount of fee
  *
  * @property {string} name - A display name for this fee, example: Network Fee
  * @property {Token} token - Underlying token for paying fee, example: BNB for BSC blockchain
  * @property {ExpenseType} expenseType - Type of the fee, example: FROM_SOURCE_WALLET
  * @property {string} amount - The human readable amount of fee, example: 0.004
+ * @property {EVMFeeMeta | null} meta - Fee meta info for this type of blockchain. ATM, used for the EVM quotes.
  *
  */
 export type SwapFee = {
@@ -31,6 +46,7 @@ export type SwapFee = {
   token: Token
   expenseType: ExpenseType
   amount: string
+  meta: EVMFeeMeta | null
 }
 
 /**
@@ -40,6 +56,7 @@ export type SwapFee = {
  * @property {Token} to - The destination asset
  * @property {SwapperMeta} swapper - Swapper for this path
  * @property {SwapperType} swapperType - Type of swapper
+ * @property {string} inputAmount - Input amount
  * @property {string} expectedOutput - Expected output
  * @property {number} estimatedTimeInSeconds - Expected duration
  *
@@ -49,6 +66,7 @@ export type QuotePath = {
   to: Token
   swapper: SwapperMeta
   swapperType: SwapperType
+  inputAmount: string
   expectedOutput: string
   estimatedTimeInSeconds: number
 }

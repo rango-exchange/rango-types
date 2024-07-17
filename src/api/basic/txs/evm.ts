@@ -1,11 +1,20 @@
-import { EvmBlockchainMeta } from '../meta.js'
+import { BlockchainMetaBase } from '../meta.js'
 import { TransactionType } from '../transactions.js'
+
+
+
+/**
+ * Blockchain info for basic API EVM transaction
+ */
+export type EvmTransactionBlockchain = Pick<
+  BlockchainMetaBase, 'name' | 'defaultDecimals' | 'addressPatterns' | 'feeAssets' | 'type' | 'chainId'
+>
 
 /**
  * The transaction object for all EVM-based blockchains, including Ethereum, BSC, Polygon, Harmony, etc
  *
  * @property {TransactionType} type - This fields equals to EVM for all EVMTransactions
- * @property {EvmBlockchainMeta} blockChain - The blockchain info that this transaction is going to run in
+ * @property {EvmTransactionBlockchain} blockChain - The blockchain info that this transaction is going to run in
  * @property {string | null} from - The source wallet address, it can be null
  * @property {string} approveTo - Address of source token erc20 contract for increasing approve amount
  * @property {string | null} approveData - The data of approve transaction
@@ -20,7 +29,7 @@ import { TransactionType } from '../transactions.js'
  */
 export interface EvmTransaction {
   type: TransactionType.EVM
-  blockChain: EvmBlockchainMeta
+  blockChain: EvmTransactionBlockchain
   from: string | null
   approveTo: string | null
   approveData: string | null

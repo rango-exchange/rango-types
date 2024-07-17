@@ -9,10 +9,9 @@ import {
   Transfer,
   SolanaTransaction,
   TronTransaction,
-  StarknetTransaction,
   TonTransaction,
 } from '../shared/index.js'
-import { EvmTransaction } from './txs/index.js'
+import { EvmTransaction, StarknetTransaction } from './txs/index.js'
 
 export {
   TransactionType,
@@ -55,7 +54,7 @@ export type TransactionStatusReferral = {
  * Settings of user for swaps
  *
  * @property {string} slippage - Amount of users' preferred slippage in percent
- * @property {string} infiniteApprove - Infinite approval settings, default is false
+ * @property {boolean} [infiniteApprove] - Infinite approval settings, default is false
  *
  */
 export type UserSettings = {

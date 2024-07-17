@@ -1,6 +1,6 @@
 import { Asset, QuoteSimulationResult } from './common.js'
 import { Token } from './meta.js'
-import { CosmosTransaction, EvmTransaction, Transfer, SolanaTransaction } from './txs/index.js'
+import { CosmosTransaction, EvmTransaction, Transfer, SolanaTransaction, StarknetTransaction } from './txs/index.js'
 import {
   TransactionType,
   GenericTransactionType,
@@ -9,6 +9,7 @@ import {
   TransactionStatus,
   CheckApprovalResponse,
   RoutingResultType,
+  TronTransaction,
 } from '../shared/index.js'
 
 export {
@@ -42,8 +43,9 @@ export type StatusRequest = {
  * @property {string} toAddress - User destination wallet address
  * @property {string} slippage - User slippage for this swap (e.g. 5.0 which means 5% slippage)
  * @property {boolean} [disableEstimate] - check pre-requests of a swap before creating tx (e.g. check having enough balance)
- * @property {string | number} [referrerAddress] - Referrer address
- * @property {string | number} [referrerFee] - Referrer fee in percent, (e.g. 0.3 means: 0.3% fee based on input amount)
+ * @property {string | null} [referrerCode] - Referrer code (or affiliate key) You could gnerate it using rango app affiliate menu
+ * @property {string | null} [referrerAddress] - Referrer address
+ * @property {string | null} [referrerFee] - Referrer fee in percent, (e.g. 0.3 means: 0.3% fee based on input amount)
  * @property {string[]} [swappers] - List of all accepted swappers, an empty list means no filter is required
  * @property {boolean} [swappersExclude] - Indicates include/exclude mode for the swappers param
  * @property {string[]} [swapperGroups] - List of all accepted swapper groups, an empty list means no filter is required
@@ -54,8 +56,10 @@ export type StatusRequest = {
  * @property {string} [imMessage] - The message that you want to pass to your contract on the destination chain
  * @property {boolean} [contractCall] - Mark it true if you are going to call this swap via your own contract, so we
  * will filter routes that are not possible to be called from a contract
- * @property {boolean} [enableCentralizedSwappers] - You could set this parameter to true if you want to enable routing from the centralized protocols like Exodus.
+ * @property {boolean} [enableCentralizedSwappers] - You could set this parameter to true if you want to enable routing from the centralized protocols like Xo Swap.
  * By default, this parameter is false.
+ * @property {boolean} [infiniteApprove] - Infinite approval settings, default is false
+ * @property {boolean} [avoidNativeFee] - When it is true, Swappers that have native tokens as fee must be excluded. example: when you call it from AA account.
  * 
  */
 export type SwapRequest = {
@@ -66,6 +70,7 @@ export type SwapRequest = {
   toAddress: string
   slippage: string
   disableEstimate?: boolean
+  referrerCode?: string
   referrerAddress?: string | null
   referrerFee?: string | null
   swappers?: string[]
@@ -78,6 +83,8 @@ export type SwapRequest = {
   imMessage?: string
   contractCall?: boolean
   enableCentralizedSwappers?: boolean
+  infiniteApprove?: boolean
+  avoidNativeFee?: boolean
 }
 
 /**
@@ -92,10 +99,10 @@ export type StatusOutput = {
   amount: string
   receivedToken: Token
   type:
-    | 'REVERTED_TO_INPUT'
-    | 'MIDDLE_ASSET_IN_SRC'
-    | 'MIDDLE_ASSET_IN_DEST'
-    | 'DESIRED_OUTPUT'
+  | 'REVERTED_TO_INPUT'
+  | 'MIDDLE_ASSET_IN_SRC'
+  | 'MIDDLE_ASSET_IN_DEST'
+  | 'DESIRED_OUTPUT'
 }
 
 /**
@@ -139,6 +146,7 @@ export type BridgeData = {
  * @property {StatusOutput | null} output - The output asset and amount, it could be different from destination asset in
  * case of failures and refund
  * @property {SwapExplorerUrl[] | null} explorerUrl - List of explorer URLs for the transactions of this swap.
+ * @property {string | null} diagnosisUrl - Some times transaction will fail and user need follow this diagnosis to redeem the assets.
  * @property {BridgeData | null} bridgeData - Status of bridge
  *
  */
@@ -147,6 +155,7 @@ export type StatusResponse = {
   error: string | null
   output: StatusOutput | null
   explorerUrl: SwapExplorerUrl[] | null
+  diagnosisUrl: string | null
   bridgeData: BridgeData | null
 }
 
@@ -159,7 +168,7 @@ export type StatusResponse = {
  * @property {RoutingResultType} resultType - Type of result (OK or error type)
  * @property {QuoteSimulationResult | null} route - Suggested route
  * @property {string | null} error - Error message
- * @property {EvmTransaction | CosmosTransaction | Transfer | SolanaTransaction | null} transaction - Transaction data
+ * @property {EvmTransaction | CosmosTransaction | SolanaTransaction | Transfer | StarknetTransaction | TronTransaction | null} transaction - Transaction data
  *
  */
 export type SwapResponse = {
@@ -167,5 +176,5 @@ export type SwapResponse = {
   resultType: RoutingResultType
   route: QuoteSimulationResult | null
   error: string | null
-  tx: EvmTransaction | CosmosTransaction | SolanaTransaction | Transfer | null
+  tx: EvmTransaction | CosmosTransaction | SolanaTransaction | Transfer | StarknetTransaction | TronTransaction | null
 }

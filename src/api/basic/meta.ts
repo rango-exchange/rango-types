@@ -3,6 +3,7 @@ import {
   CosmosChainInfo,
   SwapperMetaDto,
   SwapperMeta,
+  SwapperMetaExtended,
   BlockchainMetaBase,
   EvmBlockchainMeta,
   CosmosBlockchainMeta,
@@ -17,6 +18,7 @@ export {
   CosmosChainInfo,
   SwapperMetaDto,
   SwapperMeta,
+  SwapperMetaExtended,
   BlockchainMetaBase,
   EvmBlockchainMeta,
   CosmosBlockchainMeta,
@@ -39,6 +41,7 @@ export {
  * @property {string} blockchainImage - Url of the blockchain image
  * @property {number | null} usdPrice - The token unit price
  * @property {boolean} isPopular - If true, means that the token is popular
+ * @property {string[]} supportedSwappers - Supported Swappers for this token
  */
 export type Token = {
   blockchain: string
@@ -51,6 +54,7 @@ export type Token = {
   blockchainImage: string
   usdPrice: number | null
   isPopular: boolean
+  supportedSwappers: string[]
 }
 
 /**

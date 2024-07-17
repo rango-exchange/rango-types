@@ -30,6 +30,8 @@ export type ChainInfoBase = {
  * e.g. "https://bscscan.com/address/{wallet}"
  * @property {string} transactionUrl - Explorer transaction base url for this blockchain,
  * e.g. "https://bscscan.com/tx/{txHash}"
+ * @property {boolean} enableGasV2 - It's true for some chains like Ethereum which we support
+ * new model of gas price (i.e. maxFeePerGas and maxPriorityFeePerGas) for them
  *
  */
 export interface EVMChainInfo extends ChainInfoBase {
@@ -44,6 +46,7 @@ export interface EVMChainInfo extends ChainInfoBase {
   blockExplorerUrls: string[]
   addressUrl: string
   transactionUrl: string
+  enableGasV2: boolean
 }
 
 /**
@@ -76,6 +79,7 @@ export interface StarkNetChainInfo extends ChainInfoBase {
  * @property {MetaInfoType} infoType - equals to TronMetaInfo  for TronChainInfo
  * @property {string} chainName - Chain name
  * @property {name: string, symbol: string, decimals: number} nativeCurrency
+ * @property {string[]} rpcUrls - e.g. "https://api.trongrid.io/jsonrpc"
  * @property {string[]} blockExplorerUrls
  * @property {string} addressUrl - Explorer address base url for this blockchain
  * @property {string} transactionUrl - Explorer transaction base url for this blockchain
@@ -89,6 +93,7 @@ export interface TronChainInfo extends ChainInfoBase {
     symbol: string
     decimals: number
   }
+  rpcUrls: string[]
   blockExplorerUrls: string[]
   addressUrl: string
   transactionUrl: string
@@ -159,6 +164,7 @@ export interface CosmosChainInfo extends ChainInfoBase {
  * @property {string} logo - Icon logo for the swapper
  * @property {string} swapperGroup - Group name for swapper
  * @property {SwapperType[]} types - Type of the transaction supported by the swapper
+ * @property {boolean} enabled - It indicates whether swapper is currently enabled or not
  *
  */
 export type SwapperMeta = {
@@ -167,6 +173,29 @@ export type SwapperMeta = {
   logo: string
   swapperGroup: string
   types: SwapperType[]
+  enabled: boolean
+}
+
+/**
+ * Supported blockchains for a swapper
+ *
+ * @property {string} source - Name of the source blockchain
+ * @property {string} destinations - List of all possible target blockchains for this source blockchain 
+ *
+ */
+export type SupportedBlockchains = {
+  source: string
+  destinations: string[]
+}
+
+/**
+ * Metadata of Swapper plus additional info e.g. supported blockchains
+ *
+ * @property {SupportedBlockchains[]} supportedBlockchains - supported blockchains for the swapper
+ *
+ */
+export type SwapperMetaExtended = SwapperMeta & {
+  supportedBlockchains: SupportedBlockchains[]
 }
 
 /**
@@ -209,11 +238,11 @@ export type BlockchainMetaBase = {
   enabled: boolean
   chainId: string | null
   info:
-    | EVMChainInfo
-    | CosmosChainInfo
-    | StarkNetChainInfo
-    | TronChainInfo
-    | null
+  | EVMChainInfo
+  | CosmosChainInfo
+  | StarkNetChainInfo
+  | TronChainInfo
+  | null
 }
 
 export interface EvmBlockchainMeta extends BlockchainMetaBase {
