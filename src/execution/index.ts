@@ -3,12 +3,12 @@ import {
   EvmTransaction,
   SimulationResult,
   SolanaTransaction,
+  StarknetTransaction,
   SwapperStatusStep,
   Transfer as TransferTransaction,
 } from '../api/main/index.js'
 import {
   AmountRestrictionType,
-  StarknetTransaction,
   SwapExplorerUrl,
   TronTransaction,
   TonTransaction,
