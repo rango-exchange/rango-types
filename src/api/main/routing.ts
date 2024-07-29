@@ -154,7 +154,7 @@ export type BestRouteRequest = {
   maxLength?: number
   experimental?: boolean
   contractCall?: boolean
-  interChainMessage?: IMData | null
+  interChainMessage?: InterChainMessage | null
   enableCentralizedSwappers?: boolean
   avoidNativeFee?: boolean
 }
