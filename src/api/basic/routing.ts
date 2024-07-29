@@ -54,7 +54,7 @@ export type QuoteRequest = {
  * passed down to all other endpoints if this swap continues on. e.g. d10657ce-b13a-405c-825b-b47f8a5016ad
  * @property {RoutingResultType} resultType - Type of result for route (OK or error type)
  * @property {QuoteSimulationResult | null} route - Suggested route
- * @property {object | null} error - Error object
+ * @property {string | null} error - Error message
  * @property {number | null} errorCode - Error code
  * @property {number | null} traceId - Trace Id, for debug purpose
  *
@@ -63,7 +63,7 @@ export type QuoteResponse = {
   requestId: string
   resultType: RoutingResultType
   route: QuoteSimulationResult | null
-  error: object | null
+  error: string | null
   errorCode: number | null
   traceId: number | null
 }
