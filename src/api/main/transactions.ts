@@ -67,11 +67,13 @@ export type UserSettings = {
  *
  * @property {boolean} balance - If true [Recommended], Rango will check that user has the required balance for swap
  * @property {boolean} fee - If true [Recommended], Rango will check that user has the required fees in the wallet
+ * @property {boolean} approve - If false, Rango will skip creating approve transactions for each step.
  *
  */
 export type CreateTransactionValidation = {
   balance: boolean
   fee: boolean
+  approve: boolean
 }
 
 /**

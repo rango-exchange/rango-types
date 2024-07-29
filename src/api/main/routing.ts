@@ -80,16 +80,30 @@ export type BlockchainValidationStatus = {
 }
 
 /**
+ * The data required for relaying message from the source chain to the target chain in a cross-chain swap
+ *
+ * @property {string} sourceContract - Address of your contract on source chain (will be called in case of refund in the source chain)
+ * @property {string} destinationContract - Address of your contract on destination chain (will be called in case of success/refund in the destination chain)
+ * @property {string} imMessage - The message that you want to pass to your contract on the destination chain
+ *
+ */
+export type InterChainMessage = {
+  sourceContract: string
+  destinationContract: string
+  imMessage: string
+}
+
+/**
  * Body of routing request
  *
  * @property {Asset} from - The source asset
  * @property {Asset} to - The destination asset
  * @property {string} amount - The human-readable amount of asset X that is going to be swapped, example: 0.28
  * @property {{ [key: string]: string }} selectedWallets - Map of blockchain to selected address
- * @property {UserWalletBlockchain[]} connectedWallets - List of all user connected wallet addresses per each blockchain
- * @property {boolean} checkPrerequisites - It should be false when client just likes to preview the route to user,
- * and true when user really accepted to swap. If true, server will be much slower to respond, but will check some
- * pre-requisites including balance of X and required fees in user's wallets
+ * @property {UserWalletBlockchain[] | null} [connectedWallets] - List of all user connected wallet addresses per each blockchain
+ * @property {boolean} [checkPrerequisites] - It should be false when client just likes to preview the route to user,
+ * and true when user accepted to swap. If true, server will be slower to respond, but will check some pre-requisites including balance
+ * of token X and required fees in user's wallets. The default value is false.
  * @property {string} [slippage] - User slippage, used to filter routes which are incompatible with this slippage
  * @property {string} [destination] - Custom destination for the route
  * @property {boolean} [forceExecution] - Use this flag if you want to ignore checkPrerequisites before executing the route
@@ -98,31 +112,31 @@ export type BlockchainValidationStatus = {
  * @property {number | null} [affiliatePercent] - If you want to change the default affiliate fee percentage, you can provide a new value here.
  * @property {{ [key: string]: string }} [affiliateWallets] - If you want to change the default affiliate wallet addresses, you can provide new values here.
  * (Map of route blockchains to affiliate address)
- * @property {boolean} [disableMultiStepTx] - It should be true when the client doesn't want multi-step transactions
+ * @property {boolean} [disableMultiStepTx] - It should be false when the client wants multi-transactions step, default is true.
  * @property {string[]} [blockchains] - List of all accepted blockchains, an empty list means no filter is required
  * @property {string[]} [swappers] - List of all accepted swappers, an empty list means no filter is required
  * @property {boolean} [swappersExclude] - Indicates include/exclude mode for the swappers param
  * @property {string[]} [swapperGroups] - List of all accepted swapper groups, an empty list means no filter is required
  * @property {boolean} [swappersGroupsExclude] - Indicates include/exclude mode for the swappers group param
- * @property {TransactionType[]} [transactionTypes] - List of all accepted transaction types including [EVM, TRANSFER, COSMOS]
+ * @property {TransactionType[]} [transactionTypes] - List of all accepted transaction types including [EVM, TRANSFER, COSMOS, ...]
+ * @property {string[]} [messagingProtocols] - List of all messaging protocols, an empty list means no filter is required
  * @property {number} [maxLength] - Maximum number of steps in a route
- * @property {boolean} contractCall - Mark it true if you are going to call this route via your own contract, so we
- * will filter routes that are not possible to be called from a contract
  * @property {boolean} [experimental] - For enabling experimental features in routing
- * @property {string | null} [sourceContract] - Address of your contract on source chain (will be called in case of refund in the source chain)
- * @property {string | null} [destinationContract] - Address of your contract on destination chain (will be called in case of success/refund in the destination chain)
- * @property {string | null} [imMessage] - The message that you want to pass to your contract on the destination chain
+ * @property {boolean} [contractCall] - Mark it true if you are going to call this route via your own contract, so we
+ * will filter routes that are not possible to be called from a contract
+ * @property {InterChainMessage} [interChainMessage] - The data required for relaying message in a cross-chain swap
  * @property {boolean} [enableCentralizedSwappers] - You could set this parameter to true if you want to enable routing from the centralized protocols like Exodus.
  * By default, this parameter is false.
+ * @property {boolean} [avoidNativeFee] - When it is true, Swappers that have native tokens as fee must be excluded. example: when you call it from AA account.
  *
  */
 export type BestRouteRequest = {
   from: Asset
   to: Asset
   amount: string
-  connectedWallets: UserWalletBlockchain[]
   selectedWallets: { [key: string]: string }
-  checkPrerequisites: boolean
+  connectedWallets?: UserWalletBlockchain[] | null
+  checkPrerequisites?: boolean
   slippage?: string
   destination?: string
   forceExecution?: boolean
@@ -136,13 +150,13 @@ export type BestRouteRequest = {
   swapperGroups?: string[]
   swappersGroupsExclude?: boolean
   transactionTypes?: TransactionType[]
+  messagingProtocols?: string[]
   maxLength?: number
-  contractCall?: boolean
   experimental?: boolean
-  sourceContract?: string | null
-  destinationContract?: string | null
-  imMessage?: string | null
+  contractCall?: boolean
+  interChainMessage?: IMData | null
   enableCentralizedSwappers?: boolean
+  avoidNativeFee?: boolean
 }
 
 /**
@@ -164,6 +178,10 @@ export type BestRouteRequest = {
  * route and the server could not find any routes from X to Y
  * @property {boolean} walletNotSupportingFromBlockchain - A warning indicates that none of your wallets have the same
  * blockchain as X asset
+ * @property {boolean} boolean - A The state of confirm swap
+ * @property {string | null} error - Error message
+ * @property {number | null} errorCode - Error code
+ * @property {number | null} traceId - Trace Id, for debug purpose
  *
  */
 export type BestRouteResponse = {
@@ -178,6 +196,9 @@ export type BestRouteResponse = {
   processingLimitReached: boolean
   walletNotSupportingFromBlockchain: boolean
   confirmSwapStatus?: boolean
+  error: string | null
+  errorCode: number | null
+  traceId: number | null
 }
 
 export type Tag =
@@ -249,10 +270,10 @@ export type MultiRouteSimulationResult = {
 /**
  * The best route request body for multi-routing
  */
-export type MultiRouteRequest = BestRouteRequest
+export type MultiRouteRequest = Omit<BestRouteRequest, 'selectedWallets' | 'destination'>
 
 /**
- * The best route response for multi-routing, if the result fields is null, it means that no route is found
+ * The best route response for multi-routing, if the results field is empty, it means that no route is found
  *
  * @property {Asset} from - The source asset
  * @property {Asset} to - The destination asset
@@ -263,6 +284,9 @@ export type MultiRouteRequest = BestRouteRequest
  * route and the server could not find any routes from X to Y
  * @property {string[]} diagnosisMessages - list of string messages that might be cause of not finding the route.
  * It's just for display purposes
+ * @property {string | null} error - Error message
+ * @property {number | null} errorCode - Error code
+ * @property {number | null} traceId - Trace Id, for debug purpose
  */
 export type MultiRouteResponse = {
   from: Asset
@@ -272,6 +296,9 @@ export type MultiRouteResponse = {
   results: MultiRouteSimulationResult[]
   processingLimitReached: boolean
   diagnosisMessages: string[] | null
+  error: string | null
+  errorCode: number | null
+  traceId: number | null
 }
 
 /**
@@ -291,14 +318,16 @@ export type ConfirmRouteRequest = {
 /**
  * The response of confirmation request for selected route
  *
- * @property {string | null} error - Error message about the incident if ok == false.
- * @property {string | null} errorCode - Error code about the incident if ok == false.
  * @property {boolean} ok - If true, the result has a value and error message is null.
  * @property {BestRouteResponse | null} result - Result of confirm swap
+ * @property {string | null} error - Error message about the incident if ok == false.
+ * @property {string | null} errorCode - Error code about the incident if ok == false.
+ * @property {number | null} traceId - Trace Id, for debug purpose
  */
 export type ConfirmRouteResponse = {
+  ok: boolean
+  result: BestRouteResponse | null
   error: string | null
   errorCode: string | null
-  ok: boolean
-  result: BestRouteResponse
+  traceId: number | null
 }
