@@ -11,6 +11,7 @@ import {
   TronTransaction,
   TonTransaction,
 } from '../shared/index.js'
+import { Token } from './meta.js'
 import { EvmTransaction, StarknetTransaction } from './txs/index.js'
 
 export {
@@ -137,6 +138,8 @@ export type Transaction =
  * the status is successful or failed, example: 1635271424813
  * @property {string | null} extraMessage - A message in case of failure, that could be shown to the user
  * @property {string | null} outputAmount - The output amount of the transaction if it was successful, exmaple: 0.28
+ * @property {Token | null} outputToken - The output token, it could be the desired token or the refunded token
+ * @property {string | null} outputType - Type of output token
  * @property {Transaction | null} newTx - if a transaction needs more than one-step transaction to be signed by
  * the user, the next step transaction will be returned in this field.
  * @property {string | null} diagnosisUrl - In some special cases [e.g. AnySwap], the user should follow some steps
@@ -151,6 +154,8 @@ export type TransactionStatusResponse = {
   timestamp: number | null
   extraMessage: string | null
   outputAmount: string | null
+  outputToken: Token | null
+  outputType: null | 'REVERTED_TO_INPUT' | 'MIDDLE_ASSET_IN_SRC' | 'MIDDLE_ASSET_IN_DEST' | 'DESIRED_OUTPUT'
   newTx: Transaction | null
   diagnosisUrl: string | null
   explorerUrl: SwapExplorerUrl[] | null

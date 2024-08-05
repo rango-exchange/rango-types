@@ -39,3 +39,35 @@ export type WalletDetail = {
 export type WalletDetailsResponse = {
   wallets: WalletDetail[]
 }
+
+
+/**
+ * The token balance request
+ * 
+ * @property {string} walletAddress - The user wallet address
+ * @property {string} blockchain - The blockchain which this token belongs to
+ * @property {string} symbol - The token symbol, e.g: ADA
+ * @property {string | null} address - Smart contract address of token, null for native tokens
+ *
+ */
+export type TokenBalanceRequest = {
+  walletAddress: string
+  blockchain: string
+  symbol: string
+  address: string | null
+}
+
+/**
+ * The token balance response
+ *
+ * @property {number | null} balance - The balance for token
+ * @property {string | null} error - Error message
+ * @property {number | null} errorCode - Error code
+ * @property {number | null} traceId - Trace Id, for debug purpose
+ */
+export type TokenBalanceResponse = {
+  balance: number | null
+  error: string | null
+  errorCode: number | null
+  traceId: number | null
+}

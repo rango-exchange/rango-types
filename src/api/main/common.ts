@@ -202,7 +202,7 @@ export type TimeStat = {
  *
  * @property {RecommendedSlippage | null} recommendedSlippage
  *
- * @property {string[] | null} warnings - List of warnings for this swap step, usually null or empty
+ * @property {string[]} warnings - List of warnings for this swap step, it's usually an empty list
  *
  */
 export type SwapResult = {
@@ -226,5 +226,5 @@ export type SwapResult = {
   includesDestinationTx: boolean
   maxRequiredSign: number
   recommendedSlippage: RecommendedSlippage | null
-  warnings: string[] | null
+  warnings: string[]
 }

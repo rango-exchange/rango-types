@@ -108,3 +108,33 @@ export type CompactMetaResponse = {
   popularTokens: CompactToken[]
   swappers: SwapperMeta[]
 }
+
+
+/**
+ * Custom token request
+ *
+ * @property {string} blockchain - The blockchain that token belong to
+ * @property {string} address - The contract address for the desired token
+ *
+ */
+export type CustomTokenRequest = {
+  blockchain: string
+  address: string
+}
+
+/**
+ * The custom token response which includes:
+ * Token details for user desired token that is not available on Rango official list. 
+ * Currently supports Solana and EVM based blockchains.
+ *
+ * @property {Token} token - The destination asset
+ * @property {string | null} error - Error message
+ * @property {number | null} errorCode - Error code
+ * @property {number | null} traceId - Trace Id, for debug purpose
+ */
+export type CustomTokenResponse = {
+  token: Token
+  error: string | null
+  errorCode: number | null
+  traceId: number | null
+}
