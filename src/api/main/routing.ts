@@ -112,7 +112,7 @@ export type InterChainMessage = {
  * @property {number | null} [affiliatePercent] - If you want to change the default affiliate fee percentage, you can provide a new value here.
  * @property {{ [key: string]: string }} [affiliateWallets] - If you want to change the default affiliate wallet addresses, you can provide new values here.
  * (Map of route blockchains to affiliate address)
- * @property {boolean} [disableMultiStepTx] - It should be false when the client wants multi-transactions step, default is true.
+ * @property {boolean} [disableMultiStepTx] - It should be false when client wants to support multi-transactions per route step. default is true.
  * @property {string[]} [blockchains] - List of all accepted blockchains, an empty list means no filter is required
  * @property {string[]} [swappers] - List of all accepted swappers, an empty list means no filter is required
  * @property {boolean} [swappersExclude] - Indicates include/exclude mode for the swappers param
@@ -168,14 +168,12 @@ export type BestRouteRequest = {
  * @property {Asset} from - The source asset
  * @property {Asset} to - The destination asset
  * @property {SimulationResult | null} result
- * @property {BlockchainValidationStatus[] | null} validationStatus - Pre-requisites check result. It will be null if
+ * @property {BlockchainValidationStatus[]} validationStatus - Pre-requisites check result. It will be null if
  * the request checkPrerequisites was false
  * @property {string[]} diagnosisMessages - list of string messages that might be cause of not finding the route.
  * It's just for display purposes
  * @property {string[]} missingBlockchains - List of all blockchains which are necessary to be present for the best
  * route and user has not provided any connected wallets for it. A null or empty list indicates that there is no problem.
- * @property {boolean} processingLimitReached - A warning indicates that it took too much time to find the best
- * route and the server could not find any routes from X to Y
  * @property {boolean} walletNotSupportingFromBlockchain - A warning indicates that none of your wallets have the same
  * blockchain as X asset
  * @property {boolean} boolean - A The state of confirm swap
@@ -190,12 +188,10 @@ export type BestRouteResponse = {
   from: Asset
   to: Asset
   result: SimulationResult | null
-  validationStatus: BlockchainValidationStatus[] | null
-  diagnosisMessages: string[] | null
-  missingBlockchains: string[] | null
-  processingLimitReached: boolean
+  validationStatus: BlockchainValidationStatus[]
+  diagnosisMessages: string[]
+  missingBlockchains: string[]
   walletNotSupportingFromBlockchain: boolean
-  confirmSwapStatus?: boolean
   error: string | null
   errorCode: number | null
   traceId: number | null
@@ -248,8 +244,6 @@ export type SimulationScore = {
  * @property {SwapResult[]} swaps - List of required swaps to swap X to Y with the expected outputAmount
  * @property {SimulationScore[]} scores - List of scores calculated for each preference aspect
  * @property {RouteTag[]} tags - List of tags attributed to each route considering every aspect
- * @property {BlockchainValidationStatus[] | null} validationStatus - Pre-requisites check result. It will be null if
- * the request checkPrerequisites was false
  * @property {string[]} missingBlockchains - List of all blockchains which are necessary to be present for the best
  * route and user has not provided any connected wallets for it. A null or empty list indicates that there is no problem.
  * @property {boolean} walletNotSupportingFromBlockchain - A warning indicates that none of your wallets have the same
@@ -262,15 +256,14 @@ export type MultiRouteSimulationResult = {
   swaps: SwapResult[]
   scores: { preferenceType: PreferenceType; score: number }[]
   tags: RouteTag[]
-  validationStatus: BlockchainValidationStatus[] | null
-  missingBlockchains: string[] | null
+  missingBlockchains: string[] 
   walletNotSupportingFromBlockchain: boolean
 }
 
 /**
  * The best route request body for multi-routing
  */
-export type MultiRouteRequest = Omit<BestRouteRequest, 'selectedWallets' | 'destination'>
+export type MultiRouteRequest = Omit<BestRouteRequest, 'selectedWallets' | 'destination' | 'checkPrerequisites' | 'forceExecution' | 'maxLength'>
 
 /**
  * The best route response for multi-routing, if the results field is empty, it means that no route is found
@@ -280,8 +273,6 @@ export type MultiRouteRequest = Omit<BestRouteRequest, 'selectedWallets' | 'dest
  * @property {string} requestAmount - The human readable input amount from the request
  * @property {string} routeId - The unique roteId generated for this request by server
  * @property {MultiRouteSimulationResult} results - List of best routes data
- * @property {boolean} processingLimitReached - A warning indicates that it took too much time to find the best
- * route and the server could not find any routes from X to Y
  * @property {string[]} diagnosisMessages - list of string messages that might be cause of not finding the route.
  * It's just for display purposes
  * @property {string | null} error - Error message
@@ -294,8 +285,7 @@ export type MultiRouteResponse = {
   requestAmount: string
   routeId: string
   results: MultiRouteSimulationResult[]
-  processingLimitReached: boolean
-  diagnosisMessages: string[] | null
+  diagnosisMessages: string[]
   error: string | null
   errorCode: number | null
   traceId: number | null
@@ -326,7 +316,7 @@ export type ConfirmRouteRequest = {
  */
 export type ConfirmRouteResponse = {
   ok: boolean
-  result: BestRouteResponse | null
+  result: Omit<BestRouteResponse, 'error' | 'errorCode' | 'traceId'> | null
   error: string | null
   errorCode: string | null
   traceId: number | null
