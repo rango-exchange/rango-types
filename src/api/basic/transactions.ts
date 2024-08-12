@@ -41,7 +41,7 @@ export type StatusRequest = {
  * @property {string} amount - The human-readable amount of asset X that is going to be swapped, example: 0.28
  * @property {string} fromAddress - User source wallet address
  * @property {string} toAddress - User destination wallet address
- * @property {string} slippage - User slippage for this swap (e.g. 5.0 which means 5% slippage)
+ * @property {number} slippage - User slippage for this swap (e.g. 5.0 which means 5% slippage)
  * @property {boolean} [disableEstimate] - check pre-requests of a swap before creating tx (e.g. check having enough balance)
  * @property {string | null} [referrerCode] - Referrer code (or affiliate key) You could gnerate it using rango app affiliate menu
  * @property {string | null} [referrerAddress] - Referrer address
@@ -68,7 +68,7 @@ export type SwapRequest = {
   amount: string
   fromAddress: string
   toAddress: string
-  slippage: string
+  slippage: number
   disableEstimate?: boolean
   referrerCode?: string
   referrerAddress?: string | null
