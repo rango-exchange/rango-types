@@ -6,16 +6,26 @@ export type MetaInfoType =
   | 'EvmMetaInfo'
   | 'StarkNetMetaInfo'
   | 'TronMetaInfo'
+  | 'SolanaMetaInfo'
+  | 'TransferMetaInfo'
 
 /**
  * ChainInfoBase
  * Base type for all chains info type
  *
  * @property {MetaInfoType} infoType - Type of chain info
+ * @property {string[]} blockExplorerUrls - e.g. "https://polygonscan.com"
+ * @property {string} addressUrl - Explorer address base url for this blockchain,
+ * e.g. "https://bscscan.com/address/{wallet}"
+ * @property {string} transactionUrl - Explorer transaction base url for this blockchain,
+ * e.g. "https://bscscan.com/tx/{txHash}"
  *
  */
 export type ChainInfoBase = {
   infoType: MetaInfoType
+  blockExplorerUrls: string[]
+  addressUrl: string
+  transactionUrl: string
 }
 
 /**
@@ -25,11 +35,6 @@ export type ChainInfoBase = {
  * @property {string} chainName - Chain name, e.g. Polygon Mainnet
  * @property {name: string, symbol: string, decimals: number} nativeCurrency
  * @property {string[]} rpcUrls - e.g. "https://polygon-rpc.com"
- * @property {string[]} blockExplorerUrls - e.g. "https://polygonscan.com"
- * @property {string} addressUrl - Explorer address base url for this blockchain,
- * e.g. "https://bscscan.com/address/{wallet}"
- * @property {string} transactionUrl - Explorer transaction base url for this blockchain,
- * e.g. "https://bscscan.com/tx/{txHash}"
  * @property {boolean} enableGasV2 - It's true for some chains like Ethereum which we support
  * new model of gas price (i.e. maxFeePerGas and maxPriorityFeePerGas) for them
  *
@@ -43,21 +48,15 @@ export interface EVMChainInfo extends ChainInfoBase {
     decimals: number
   }
   rpcUrls: string[]
-  blockExplorerUrls: string[]
-  addressUrl: string
-  transactionUrl: string
   enableGasV2: boolean
 }
 
 /**
  * StarkNet Chain Info
  *
- * @property {MetaInfoType} infoType - equals to StarkNetMetaInfo for StarkNetChainInfo
+ * @property {MetaInfoType} infoType - equals to StarkNetMetaInfo for StarkNet
  * @property {string} chainName - Chain name
  * @property {name: string, symbol: string, decimals: number} nativeCurrency
- * @property {string[]} blockExplorerUrls
- * @property {string} addressUrl - Explorer address base url for this blockchain
- * @property {string} transactionUrl - Explorer transaction base url for this blockchain
  *
  */
 export interface StarkNetChainInfo extends ChainInfoBase {
@@ -68,35 +67,33 @@ export interface StarkNetChainInfo extends ChainInfoBase {
     symbol: string
     decimals: number
   }
-  blockExplorerUrls: string[]
-  addressUrl: string
-  transactionUrl: string
 }
 
 /**
  * Tron Chain Info
+ * 
+ */
+export type TronChainInfo = EVMChainInfo
+
+
+/**
+ * Solana Chain Info
  *
- * @property {MetaInfoType} infoType - equals to TronMetaInfo  for TronChainInfo
- * @property {string} chainName - Chain name
- * @property {name: string, symbol: string, decimals: number} nativeCurrency
- * @property {string[]} rpcUrls - e.g. "https://api.trongrid.io/jsonrpc"
- * @property {string[]} blockExplorerUrls
- * @property {string} addressUrl - Explorer address base url for this blockchain
- * @property {string} transactionUrl - Explorer transaction base url for this blockchain
+ * @property {MetaInfoType} infoType - equals to SolanaMetaInfo for Solana
  *
  */
-export interface TronChainInfo extends ChainInfoBase {
-  infoType: 'TronMetaInfo'
-  chainName: string
-  nativeCurrency: {
-    name: string
-    symbol: string
-    decimals: number
-  }
-  rpcUrls: string[]
-  blockExplorerUrls: string[]
-  addressUrl: string
-  transactionUrl: string
+export interface SolanaChainInfo extends ChainInfoBase {
+  infoType: 'SolanaMetaInfo'
+}
+
+/**
+ * Solana Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to SolanaMetaInfo for Solana
+ *
+ */
+export interface TransferChainInfo extends ChainInfoBase {
+  infoType: 'TransferMetaInfo'
 }
 
 /**
@@ -180,7 +177,7 @@ export type SwapperMeta = {
  * Supported blockchains for a swapper
  *
  * @property {string} source - Name of the source blockchain
- * @property {string} destinations - List of all possible target blockchains for this source blockchain 
+ * @property {string} destinations - List of all possible target blockchains for this source blockchain
  *
  */
 export type SupportedBlockchains = {
@@ -205,6 +202,18 @@ export type SwapperMetaExtended = SwapperMeta & {
  */
 export type SwapperMetaDto = SwapperMeta
 
+
+/**
+ * Chain specific information
+ */
+export type ChainInfo =
+  | EVMChainInfo
+  | CosmosChainInfo
+  | StarkNetChainInfo
+  | TronChainInfo
+  | SolanaChainInfo
+  | TransferChainInfo
+
 /**
  * Blockchain Meta Information
  *
@@ -221,7 +230,7 @@ export type SwapperMetaDto = SwapperMeta
  * @property {number} sort - Suggested sort for the blockchain
  * @property {boolean} enabled - Is blockchain enabled or not in Rango
  * @property {string | null} chainId - e.g. "0xa86a" for Avax, "osmosis-1" for Osmosis, etc.
- * @property {EVMChainInfo | CosmosChainInfo | null} info - Chain specific information
+ * @property {ChainInfo | null} info - Chain specific information
  *
  */
 export type BlockchainMetaBase = {
@@ -237,12 +246,7 @@ export type BlockchainMetaBase = {
   sort: number
   enabled: boolean
   chainId: string | null
-  info:
-  | EVMChainInfo
-  | CosmosChainInfo
-  | StarkNetChainInfo
-  | TronChainInfo
-  | null
+  info: ChainInfo | null
 }
 
 export interface EvmBlockchainMeta extends BlockchainMetaBase {
@@ -260,13 +264,13 @@ export interface CosmosBlockchainMeta extends BlockchainMetaBase {
 export interface TransferBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.TRANSFER
   chainId: null
-  info: null
+  info: TransferChainInfo
 }
 
 export interface SolanaBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.SOLANA
   chainId: string
-  info: null
+  info: SolanaChainInfo
 }
 
 export interface StarkNetBlockchainMeta extends BlockchainMetaBase {
