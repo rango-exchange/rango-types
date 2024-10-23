@@ -1,13 +1,13 @@
 import { RoutingResultType } from '../shared/index.js'
-import type { Asset, QuoteSimulationResult } from './common.js'
+import type { Asset, QuoteSimulationResult, RequestedAsset } from './common.js'
 
 export { RoutingResultType }
 
 /**
  * Body of quote request
  *
- * @property {Asset} from - The source asset
- * @property {Asset} to - The destination asset
+ * @property {RequestedAsset} from - The source asset
+ * @property {RequestedAsset} to - The destination asset
  * @property {string} amount - The human-readable amount of asset X that is going to be swapped, example: 0.28
  * @property {number} [slippage] - User slippage, used to filter routes which are incompatible with this slippage
  * @property {string} [referrerCode] - Referrer code (or affiliate key) You could gnerate it using rango app affiliate menu
@@ -28,8 +28,8 @@ export { RoutingResultType }
  *
  */
 export type QuoteRequest = {
-  from: Asset
-  to: Asset
+  from: RequestedAsset
+  to: RequestedAsset
   amount: string
   slippage?: number
   swappers?: string[]
@@ -71,22 +71,21 @@ export type QuoteResponse = {
 /**
  * The request body for connected assets API
  *
- * @property {Asset} from - the source asset which we are looking for the possible destination routes
+ * @property {RequestedAsset} from - the source asset which we are looking for the possible destination routes
  *
  */
 export type ConnectedAssetsRequest = {
-  from: Asset
+  from: RequestedAsset
 }
-
 
 /**
  * The type ConnectedAsset represents a blockchain with a list of assets
- * 
+ *
  * @property {string} blockchain - The `blockchain` property in the `ConnectedAsset` type represents
  * the name of the blockchain to which the assets belong.
  * @property {Asset[]} assets - The `assets` property in the `ConnectedAsset` type is an array of
  * `Asset` objects. Each `Asset` object represents a specific asset within the blockchain
- * 
+ *
  */
 export type ConnectedAsset = {
   blockchain: string

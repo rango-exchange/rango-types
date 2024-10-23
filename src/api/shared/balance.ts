@@ -40,20 +40,20 @@ export type WalletDetailsResponse = {
   wallets: WalletDetail[]
 }
 
-
 /**
  * The token balance request
- * 
+ *
  * @property {string} walletAddress - The user wallet address
  * @property {string} blockchain - The blockchain which this token belongs to
  * @property {string} symbol - The token symbol, e.g: ADA
+ * This property is required only for COSMOS blockchains.
  * @property {string | null} address - Smart contract address of token, null for native tokens
  *
  */
 export type TokenBalanceRequest = {
   walletAddress: string
   blockchain: string
-  symbol: string
+  symbol?: string
   address: string | null
 }
 

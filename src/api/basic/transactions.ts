@@ -1,6 +1,12 @@
-import { Asset, QuoteSimulationResult } from './common.js'
+import { QuoteSimulationResult, RequestedAsset } from './common.js'
 import { Token } from './meta.js'
-import { CosmosTransaction, EvmTransaction, Transfer, SolanaTransaction, StarknetTransaction } from './txs/index.js'
+import {
+  CosmosTransaction,
+  EvmTransaction,
+  Transfer,
+  SolanaTransaction,
+  StarknetTransaction,
+} from './txs/index.js'
 import {
   TransactionType,
   GenericTransactionType,
@@ -36,8 +42,8 @@ export type StatusRequest = {
 /**
  * Request body of swap endpoint
  *
- * @property {Asset} from - The source asset
- * @property {Asset} to - The destination asset
+ * @property {RequestedAsset} from - The source asset
+ * @property {RequestedAsset} to - The destination asset
  * @property {string} amount - The human-readable amount of asset X that is going to be swapped, example: 0.28
  * @property {string} fromAddress - User source wallet address
  * @property {string} toAddress - User destination wallet address
@@ -60,11 +66,11 @@ export type StatusRequest = {
  * By default, this parameter is false.
  * @property {boolean} [infiniteApprove] - Infinite approval settings, default is false
  * @property {boolean} [avoidNativeFee] - When it is true, Swappers that have native tokens as fee must be excluded. example: when you call it from AA account.
- * 
+ *
  */
 export type SwapRequest = {
-  from: Asset
-  to: Asset
+  from: RequestedAsset
+  to: RequestedAsset
   amount: string
   fromAddress: string
   toAddress: string
@@ -99,10 +105,10 @@ export type StatusOutput = {
   amount: string
   receivedToken: Token
   type:
-  | 'REVERTED_TO_INPUT'
-  | 'MIDDLE_ASSET_IN_SRC'
-  | 'MIDDLE_ASSET_IN_DEST'
-  | 'DESIRED_OUTPUT'
+    | 'REVERTED_TO_INPUT'
+    | 'MIDDLE_ASSET_IN_SRC'
+    | 'MIDDLE_ASSET_IN_DEST'
+    | 'DESIRED_OUTPUT'
 }
 
 /**
@@ -176,5 +182,12 @@ export type SwapResponse = {
   resultType: RoutingResultType
   route: QuoteSimulationResult | null
   error: string | null
-  tx: EvmTransaction | CosmosTransaction | SolanaTransaction | Transfer | StarknetTransaction | TronTransaction | null
+  tx:
+    | EvmTransaction
+    | CosmosTransaction
+    | SolanaTransaction
+    | Transfer
+    | StarknetTransaction
+    | TronTransaction
+    | null
 }

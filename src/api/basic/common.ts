@@ -6,6 +6,7 @@ import {
   ExpenseType,
   AmountRestrictionType,
   AssetWithTicker,
+  RequestedAsset,
 } from '../shared/index.js'
 
 export {
@@ -15,19 +16,20 @@ export {
   ExpenseType,
   AmountRestrictionType,
   AssetWithTicker,
+  RequestedAsset,
 }
 
 /**
  * EVM Fee Info for the Swap Fee
  *
- * @property {string} type - type of the fee meta 
+ * @property {string} type - type of the fee meta
  * @property {string} gasLimit - gas limit
  * @property {string} gasPrice - gas price
  *
  */
 export type EVMFeeMeta = {
-  type: "EvmNetworkFeeMeta",
-  gasLimit: string,
+  type: 'EvmNetworkFeeMeta'
+  gasLimit: string
   gasPrice: string
 }
 

@@ -64,3 +64,18 @@ export type AssetWithTicker = {
   symbol: string
   ticker: string
 }
+
+/**
+ * An asset which is unique by (blockchain, symbol, address)
+ *
+ * @property {string} blockchain - The blockchain which this token belongs to
+ * @property {string | null} address - Smart contract address of token, null for native tokens
+ * @property {string} [symbol]  symbol - The display token symbol, e.g. USDT, BTC, ...
+ * This property is required only for COSMOS blockchains.
+ *
+ */
+export type RequestedAsset = {
+  blockchain: string
+  address: string | null
+  symbol?: string
+}
