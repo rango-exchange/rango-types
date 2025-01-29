@@ -1,15 +1,17 @@
 import { Amount, Asset } from './common.js'
 
 /**
- * Pair of the asset and its amount in wallet balance
+ * The asset, its amount in the wallet balance, and its price
  *
  * @property {Amount} amount
  * @property {Asset} asset
+ * @property {number | null} price
  *
  */
 export type AssetAndAmount = {
   amount: Amount
   asset: Asset
+  price: number | null
 }
 
 /**
@@ -61,12 +63,14 @@ export type TokenBalanceRequest = {
  * The token balance response
  *
  * @property {number | null} balance - The balance for token
+ * @property {number | null} price - The token's price.
  * @property {string | null} error - Error message
  * @property {number | null} errorCode - Error code
  * @property {number | null} traceId - Trace Id, for debug purpose
  */
 export type TokenBalanceResponse = {
   balance: number | null
+  price: number | null
   error: string | null
   errorCode: number | null
   traceId: number | null
