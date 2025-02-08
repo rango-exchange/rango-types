@@ -142,8 +142,9 @@ export type CustomTokenResponse = {
  * The request to search for custom tokens
  *
  * @property {string} query - The search query string
+ * @property {string} [blockchain] - An optional parameter to specify the blockchain for filtering results
  */
-export type SearchCustomTokensRequest = { query: string }
+export type SearchCustomTokensRequest = { query: string; blockchain?: string }
 
 /**
  * The response for a custom token search
