@@ -109,7 +109,6 @@ export type CompactMetaResponse = {
   swappers: SwapperMeta[]
 }
 
-
 /**
  * Custom token request
  *
@@ -124,7 +123,7 @@ export type CustomTokenRequest = {
 
 /**
  * The custom token response which includes:
- * Token details for user desired token that is not available on Rango official list. 
+ * Token details for user desired token that is not available on Rango official list.
  * Currently supports Solana and EVM based blockchains.
  *
  * @property {Token} token - The destination asset
@@ -134,6 +133,28 @@ export type CustomTokenRequest = {
  */
 export type CustomTokenResponse = {
   token: Token
+  error: string | null
+  errorCode: number | null
+  traceId: number | null
+}
+
+/**
+ * The request to search for custom tokens
+ *
+ * @property {string} query - The search query string
+ */
+export type SearchCustomTokensRequest = { query: string }
+
+/**
+ * The response for a custom token search
+ *
+ * @property {Token[]} tokens - List of tokens found in the searcH
+ * @property {string | null} error - Error message
+ * @property {number | null} errorCode - Error code
+ * @property {number | null} traceId - Trace Id, for debug purpose
+ */
+export type SearchCustomTokensResponse = {
+  tokens: Token[]
   error: string | null
   errorCode: number | null
   traceId: number | null
