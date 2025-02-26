@@ -12,12 +12,17 @@ import {
   TonTransaction,
 } from '../shared/index.js'
 import { Token } from './meta.js'
-import { EvmTransaction, StarknetTransaction } from './txs/index.js'
+import {
+  EvmTransaction,
+  MoveTransaction,
+  StarknetTransaction,
+} from './txs/index.js'
 
 export {
   TransactionType,
   GenericTransactionType,
   SwapExplorerUrl,
+  MoveTransaction,
   ReportTransactionRequest,
   TransactionStatus,
   CheckApprovalResponse,
@@ -127,6 +132,7 @@ export type Transaction =
   | TronTransaction
   | StarknetTransaction
   | TonTransaction
+  | MoveTransaction
   | Transfer
 
 /**
@@ -155,7 +161,12 @@ export type TransactionStatusResponse = {
   extraMessage: string | null
   outputAmount: string | null
   outputToken: Token | null
-  outputType: null | 'REVERTED_TO_INPUT' | 'MIDDLE_ASSET_IN_SRC' | 'MIDDLE_ASSET_IN_DEST' | 'DESIRED_OUTPUT'
+  outputType:
+    | null
+    | 'REVERTED_TO_INPUT'
+    | 'MIDDLE_ASSET_IN_SRC'
+    | 'MIDDLE_ASSET_IN_DEST'
+    | 'DESIRED_OUTPUT'
   newTx: Transaction | null
   diagnosisUrl: string | null
   explorerUrl: SwapExplorerUrl[] | null
