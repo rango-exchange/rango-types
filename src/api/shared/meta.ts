@@ -8,6 +8,7 @@ export type MetaInfoType =
   | 'TronMetaInfo'
   | 'SolanaMetaInfo'
   | 'TransferMetaInfo'
+  | 'SuiMetaInfo'
 
 /**
  * ChainInfoBase
@@ -71,10 +72,9 @@ export interface StarkNetChainInfo extends ChainInfoBase {
 
 /**
  * Tron Chain Info
- * 
+ *
  */
 export type TronChainInfo = EVMChainInfo
-
 
 /**
  * Solana Chain Info
@@ -87,13 +87,23 @@ export interface SolanaChainInfo extends ChainInfoBase {
 }
 
 /**
- * Solana Chain Info
+ * Transfer Chain Info
  *
- * @property {MetaInfoType} infoType - equals to SolanaMetaInfo for Solana
+ * @property {MetaInfoType} infoType - equals to TransferMetaInfo for blockhains that uses UTXO
  *
  */
 export interface TransferChainInfo extends ChainInfoBase {
   infoType: 'TransferMetaInfo'
+}
+
+/**
+ * Move Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to SuiMetaInfo for move based blockchains
+ *
+ */
+export interface MoveChainInfo extends ChainInfoBase {
+  infoType: 'SuiMetaInfo'
 }
 
 /**
@@ -202,7 +212,6 @@ export type SwapperMetaExtended = SwapperMeta & {
  */
 export type SwapperMetaDto = SwapperMeta
 
-
 /**
  * Chain specific information
  */
@@ -213,6 +222,7 @@ export type ChainInfo =
   | TronChainInfo
   | SolanaChainInfo
   | TransferChainInfo
+  | MoveChainInfo
 
 /**
  * Blockchain Meta Information
@@ -291,6 +301,12 @@ export interface TonBlockchainMeta extends BlockchainMetaBase {
   info: null
 }
 
+export interface MoveBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.MOVE
+  chainId: string
+  info: MoveChainInfo
+}
+
 export type BlockchainMeta =
   | EvmBlockchainMeta
   | CosmosBlockchainMeta
@@ -299,6 +315,7 @@ export type BlockchainMeta =
   | StarkNetBlockchainMeta
   | TronBlockchainMeta
   | TonBlockchainMeta
+  | MoveBlockchainMeta
 
 /**
  * MessagingProtocol
