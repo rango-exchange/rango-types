@@ -1,6 +1,7 @@
 import {
   CosmosTransaction,
   EvmTransaction,
+  MoveTransaction,
   SimulationResult,
   SolanaTransaction,
   StarknetTransaction,
@@ -70,6 +71,7 @@ export type SwapStepTransaction = {
   starknetApprovalTransaction: StarknetTransaction | null
   starknetTransaction: StarknetTransaction | null
   tonTransaction: TonTransaction | null
+  moveTransaction: MoveTransaction | null
 }
 
 export type SwapStepStatus = {
