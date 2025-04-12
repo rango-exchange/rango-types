@@ -102,7 +102,7 @@ export interface TransferChainInfo extends ChainInfoBase {
  * @property {MetaInfoType} infoType - equals to SuiMetaInfo for move based blockchains
  *
  */
-export interface MoveChainInfo extends ChainInfoBase {
+export interface SuiChainInfo extends ChainInfoBase {
   infoType: 'SuiMetaInfo'
 }
 
@@ -222,7 +222,7 @@ export type ChainInfo =
   | TronChainInfo
   | SolanaChainInfo
   | TransferChainInfo
-  | MoveChainInfo
+  | SuiChainInfo
 
 /**
  * Blockchain Meta Information
@@ -301,10 +301,10 @@ export interface TonBlockchainMeta extends BlockchainMetaBase {
   info: null
 }
 
-export interface MoveBlockchainMeta extends BlockchainMetaBase {
-  type: TransactionType.MOVE
+export interface SuiBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.SUI
   chainId: string
-  info: MoveChainInfo
+  info: SuiChainInfo
 }
 
 export type BlockchainMeta =
@@ -315,7 +315,7 @@ export type BlockchainMeta =
   | StarkNetBlockchainMeta
   | TronBlockchainMeta
   | TonBlockchainMeta
-  | MoveBlockchainMeta
+  | SuiBlockchainMeta
 
 /**
  * MessagingProtocol
