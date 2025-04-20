@@ -136,6 +136,22 @@ export type Transaction =
   | Transfer
 
 /**
+ * Extra data about executed transaction
+ *
+ * @property {boolean} requireRefundAction - Indicates whether the user must take any action to recover their assets from the underlying protocol.
+ * While this situation is uncommon, there are rare cases where user assets may become stuck in the underlying protocol.
+ * In such cases, manual intervention may be required to identify the user and process the refund.
+ * @property {string | null} srcTx - Inbound transaction hash
+ * @property {string | null} destTx - Outbound transaction hash in case of cross chain transaction
+ *
+ */
+export type BridgeExtra = {
+  requireRefundAction: boolean
+  srcTx: string | null
+  destTx: string | null
+}
+
+/**
  * Response of check transaction status containing the latest status of transaction
  *
  * @property {TransactionStatus | null} status - Status of the transaction, while the status is running or null, the
@@ -153,7 +169,10 @@ export type Transaction =
  * @property {SwapExplorerUrl[] | null} explorerUrl - List of explorer URLs for the transactions that happened in this step.
  * @property {TransactionStatusReferral[] | null} referrals - List of referral reward for the dApp and Rango
  * @property {SwapperStatusStep[] | null} steps - Internal steps details of a route step, used for solana
- *
+ * @property {BridgeExtra | null} bridgeExtra - Extra data about executed transaction
+ * @property {string | null} error - Error message
+ * @property {number | null} errorCode - Error code
+ * @property {number | null} traceId - Trace Id, for debug purpose
  */
 export type TransactionStatusResponse = {
   status: TransactionStatus | null
@@ -172,6 +191,10 @@ export type TransactionStatusResponse = {
   explorerUrl: SwapExplorerUrl[] | null
   referrals: TransactionStatusReferral[] | null
   steps: SwapperStatusStep[] | null
+  bridgeExtra: BridgeExtra | null
+  error: string | null
+  errorCode: number | null
+  traceId: number | null
 }
 
 /**
