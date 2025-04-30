@@ -2,7 +2,7 @@ import { BaseTransaction, TransactionType } from '../../shared/index.js'
 
 export interface SuiTransaction extends BaseTransaction {
   type: TransactionType.SUI
-  unsignedPbtBase64: string
+  unsignedPtbBase64: string
 }
 
 export const isSuiTransaction = (transaction: {
