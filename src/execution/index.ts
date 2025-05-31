@@ -30,6 +30,7 @@ export enum PendingSwapNetworkStatus {
   WaitingForQueue = 'waitingForQueue',
   WaitingForNetworkChange = 'waitingForNetworkChange',
   NetworkChanged = 'networkChanged',
+  NetworkChangeFailed = 'networkChangeFailed',
 }
 
 export type SwapStepRoute = {
