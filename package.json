@@ -30,7 +30,8 @@
     "build": "tsc",
     "lint": "eslint */**/*.{js,ts} --quiet --fix",
     "semantic-release": "semantic-release",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "postinstall": "husky install"
   },
   "keywords": [
     "Rango Exchange",
@@ -51,10 +52,10 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
     "prettier": "^2.8.3",
     "typescript": "^4.9.4"
   },
-  "dependencies": {},
   "publishConfig": {
     "access": "public",
     "branches": [
