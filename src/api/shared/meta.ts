@@ -9,6 +9,7 @@ export type MetaInfoType =
   | 'SolanaMetaInfo'
   | 'TransferMetaInfo'
   | 'SuiMetaInfo'
+  | 'XRPLMetaInfo'
 
 /**
  * ChainInfoBase
@@ -97,13 +98,23 @@ export interface TransferChainInfo extends ChainInfoBase {
 }
 
 /**
- * Move Chain Info
+ * Sui Chain Info
  *
- * @property {MetaInfoType} infoType - equals to SuiMetaInfo for move based blockchains
+ * @property {MetaInfoType} infoType - equals to SuiMetaInfo for Sui
  *
  */
 export interface SuiChainInfo extends ChainInfoBase {
   infoType: 'SuiMetaInfo'
+}
+
+/**
+ * Xrpl Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to XrplMetaInfo for XRPL
+ *
+ */
+export interface XrplChainInfo extends ChainInfoBase {
+  infoType: 'XRPLMetaInfo'
 }
 
 /**
@@ -223,6 +234,7 @@ export type ChainInfo =
   | SolanaChainInfo
   | TransferChainInfo
   | SuiChainInfo
+  | XrplChainInfo
 
 /**
  * Blockchain Meta Information
@@ -307,6 +319,12 @@ export interface SuiBlockchainMeta extends BlockchainMetaBase {
   info: SuiChainInfo
 }
 
+export interface XrplBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.XRPL
+  chainId: string
+  info: XrplChainInfo
+}
+
 export type BlockchainMeta =
   | EvmBlockchainMeta
   | CosmosBlockchainMeta
@@ -316,6 +334,7 @@ export type BlockchainMeta =
   | TronBlockchainMeta
   | TonBlockchainMeta
   | SuiBlockchainMeta
+  | XrplBlockchainMeta
 
 /**
  * MessagingProtocol
