@@ -15,6 +15,7 @@ import { Token } from './meta.js'
 import {
   EvmTransaction,
   SuiTransaction,
+  XrplTransaction,
   StarknetTransaction,
 } from './txs/index.js'
 
@@ -23,6 +24,7 @@ export {
   GenericTransactionType,
   SwapExplorerUrl,
   SuiTransaction,
+  XrplTransaction,
   ReportTransactionRequest,
   TransactionStatus,
   CheckApprovalResponse,
@@ -133,6 +135,7 @@ export type Transaction =
   | StarknetTransaction
   | TonTransaction
   | SuiTransaction
+  | XrplTransaction
   | Transfer
 
 /**

@@ -7,6 +7,7 @@ import {
   StarknetTransaction,
   SwapperStatusStep,
   Transfer as TransferTransaction,
+  XrplTransaction,
 } from '../api/main/index.js'
 import {
   AmountRestrictionType,
@@ -73,6 +74,7 @@ export type SwapStepTransaction = {
   starknetTransaction: StarknetTransaction | null
   tonTransaction: TonTransaction | null
   suiTransaction: SuiTransaction | null
+  xrplTransaction: XrplTransaction | null
 }
 
 export type SwapStepStatus = {
