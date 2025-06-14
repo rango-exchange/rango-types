@@ -10,6 +10,7 @@ export enum TransactionType {
   STARKNET = 'STARKNET',
   TON = 'TON',
   SUI = 'SUI',
+  XRPL = 'XRPL',
 }
 
 /**
