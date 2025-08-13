@@ -121,6 +121,7 @@ export type PendingSwap = {
   inputAmount: string
   status: SwapStatus
   isPaused: boolean
+  mode?: 'swap' | 'refuel'
   extraMessage: string | null
   extraMessageSeverity: MessageSeverity | null
   extraMessageErrorCode: string | null
