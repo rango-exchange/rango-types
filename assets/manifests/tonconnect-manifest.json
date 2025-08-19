@@ -1,5 +1,7 @@
 {
   "url": "https://app.rango.exchange/",
   "name": "Rango Exchange",
-  "iconUrl": "https://app.rango.exchange/favicon.png"
+  "iconUrl": "https://app.rango.exchange/favicon.png",
+  "termsOfUseUrl": "https://docs.rango.exchange/terms-of-use",
+  "privacyPolicyUrl": "https://docs.rango.exchange/privacy-policy"
 }
