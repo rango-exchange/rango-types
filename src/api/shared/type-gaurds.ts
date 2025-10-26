@@ -7,6 +7,7 @@ import {
   TonBlockchainMeta,
   TransferBlockchainMeta,
   TronBlockchainMeta,
+  XrplBlockchainMeta,
 } from './meta.js'
 
 export const isEvmBlockchain = (
@@ -39,6 +40,10 @@ export const isTonBlockchain = (
   blockchainMeta: BlockchainMeta
 ): blockchainMeta is TonBlockchainMeta => blockchainMeta.type === 'TON'
 
+export const isXrplBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is XrplBlockchainMeta => blockchainMeta.type === 'XRPL'
+
 export const evmBlockchains = (blockchains: BlockchainMeta[]) =>
   blockchains.filter(isEvmBlockchain)
 
@@ -59,3 +64,6 @@ export const transferBlockchains = (blockchains: BlockchainMeta[]) =>
 
 export const tonBlockchain = (blockchains: BlockchainMeta[]) =>
   blockchains.filter(isTonBlockchain)
+
+export const xrplBlockchain = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isXrplBlockchain)
