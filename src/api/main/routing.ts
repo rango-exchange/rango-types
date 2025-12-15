@@ -203,6 +203,7 @@ export type Tag =
   | 'LOWEST_FEE'
   | 'HIGH_IMPACT'
   | 'CENTRALIZED'
+  | 'CAMPAIGN'
 
 /**
  * A tag that can be assigned to a route.
