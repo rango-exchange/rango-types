@@ -16,6 +16,7 @@ import {
   CheckApprovalResponse,
   RoutingResultType,
   TronTransaction,
+  TonTransaction,
 } from '../shared/index.js'
 
 export {
@@ -174,7 +175,7 @@ export type StatusResponse = {
  * @property {RoutingResultType} resultType - Type of result (OK or error type)
  * @property {QuoteSimulationResult | null} route - Suggested route
  * @property {string | null} error - Error message
- * @property {EvmTransaction | CosmosTransaction | SolanaTransaction | Transfer | StarknetTransaction | TronTransaction | null} transaction - Transaction data
+ * @property {EvmTransaction | CosmosTransaction | SolanaTransaction | Transfer | StarknetTransaction | TronTransaction | TonTransaction | null} transaction - Transaction data
  *
  */
 export type SwapResponse = {
@@ -189,5 +190,6 @@ export type SwapResponse = {
     | Transfer
     | StarknetTransaction
     | TronTransaction
+    | TonTransaction
     | null
 }
