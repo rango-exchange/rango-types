@@ -7,7 +7,7 @@ import {
 export interface XrplChangeTrustLinePrecondition
   extends BaseTransactionPrecondition {
   type: 'XRPL_CHANGE_TRUSTLINE'
-  blocchain: 'XRPL'
+  blockChain: 'XRPL'
   /** Xrpl Currency **/
   currency: string
   /** Xrpl Asset Issuer **/
