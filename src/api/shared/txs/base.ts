@@ -21,5 +21,5 @@ type TransactionPreconditionsType =
 
 export interface BaseTransactionPrecondition {
   type: TransactionPreconditionsType
-  blockchain: string
+  blockChain: string
 }

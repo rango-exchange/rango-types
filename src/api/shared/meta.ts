@@ -10,6 +10,7 @@ export type MetaInfoType =
   | 'TransferMetaInfo'
   | 'SuiMetaInfo'
   | 'XRPLMetaInfo'
+  | 'StellarMetaInfo'
 
 /**
  * ChainInfoBase
@@ -115,6 +116,16 @@ export interface SuiChainInfo extends ChainInfoBase {
  */
 export interface XrplChainInfo extends ChainInfoBase {
   infoType: 'XRPLMetaInfo'
+}
+
+/**
+ * Stellar Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to SteallarMetaInfo for STELLAR
+ *
+ */
+export interface StellarChainInfo extends ChainInfoBase {
+  infoType: 'StellarMetaInfo'
 }
 
 /**
@@ -235,6 +246,7 @@ export type ChainInfo =
   | TransferChainInfo
   | SuiChainInfo
   | XrplChainInfo
+  | StellarChainInfo
 
 /**
  * Blockchain Meta Information
@@ -325,6 +337,12 @@ export interface XrplBlockchainMeta extends BlockchainMetaBase {
   info: XrplChainInfo
 }
 
+export interface StellarBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.STELLAR
+  chainId: null
+  info: StellarChainInfo
+}
+
 export type BlockchainMeta =
   | EvmBlockchainMeta
   | CosmosBlockchainMeta
@@ -335,6 +353,7 @@ export type BlockchainMeta =
   | TonBlockchainMeta
   | SuiBlockchainMeta
   | XrplBlockchainMeta
+  | StellarBlockchainMeta
 
 /**
  * MessagingProtocol
