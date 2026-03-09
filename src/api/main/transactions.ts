@@ -16,6 +16,7 @@ import {
   EvmTransaction,
   SuiTransaction,
   XrplTransaction,
+  StellarTransaction,
   StarknetTransaction,
 } from './txs/index.js'
 
@@ -25,6 +26,7 @@ export {
   SwapExplorerUrl,
   SuiTransaction,
   XrplTransaction,
+  StellarTransaction,
   ReportTransactionRequest,
   TransactionStatus,
   CheckApprovalResponse,
@@ -136,6 +138,7 @@ export type Transaction =
   | TonTransaction
   | SuiTransaction
   | XrplTransaction
+  | StellarTransaction
   | Transfer
 
 /**

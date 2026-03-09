@@ -11,6 +11,7 @@ export enum TransactionType {
   TON = 'TON',
   SUI = 'SUI',
   XRPL = 'XRPL',
+  STELLAR = 'STELLAR',
 }
 
 /**
