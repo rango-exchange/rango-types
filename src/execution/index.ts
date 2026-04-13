@@ -16,6 +16,7 @@ import {
   TronTransaction,
   TonTransaction,
 } from '../api/shared/index.js'
+import { HyperliquidTransaction } from '../api/shared/txs/hyperliquid.js'
 
 export type StepStatus =
   | 'created'
@@ -77,6 +78,7 @@ export type SwapStepTransaction = {
   suiTransaction: SuiTransaction | null
   xrplTransaction: XrplTransaction | null
   stellarTransaction: StellarTransaction | null
+  hyperliquidTransaction: HyperliquidTransaction | null
 }
 
 export type SwapStepStatus = {
