@@ -18,6 +18,7 @@ import {
   XrplTransaction,
   StellarTransaction,
   StarknetTransaction,
+  HyperliquidTransaction,
 } from './txs/index.js'
 
 export {
@@ -26,6 +27,7 @@ export {
   SwapExplorerUrl,
   SuiTransaction,
   XrplTransaction,
+  HyperliquidTransaction,
   StellarTransaction,
   ReportTransactionRequest,
   TransactionStatus,
@@ -139,6 +141,7 @@ export type Transaction =
   | SuiTransaction
   | XrplTransaction
   | StellarTransaction
+  | HyperliquidTransaction
   | Transfer
 
 /**

@@ -11,6 +11,7 @@ export type MetaInfoType =
   | 'SuiMetaInfo'
   | 'XRPLMetaInfo'
   | 'StellarMetaInfo'
+  | 'HyperliquidMetaInfo'
 
 /**
  * ChainInfoBase
@@ -116,6 +117,16 @@ export interface SuiChainInfo extends ChainInfoBase {
  */
 export interface XrplChainInfo extends ChainInfoBase {
   infoType: 'XRPLMetaInfo'
+}
+
+/**
+ * Hyperliquid Chain Info
+ *
+ * @property {MetaInfoType} infoType - equals to HyperliquidMetaInfo for Hyperliquid
+ *
+ */
+export interface HyperliquidChainInfo extends ChainInfoBase {
+  infoType: 'HyperliquidMetaInfo'
 }
 
 /**
@@ -247,6 +258,7 @@ export type ChainInfo =
   | SuiChainInfo
   | XrplChainInfo
   | StellarChainInfo
+  | HyperliquidChainInfo
 
 /**
  * Blockchain Meta Information
@@ -337,6 +349,12 @@ export interface XrplBlockchainMeta extends BlockchainMetaBase {
   info: XrplChainInfo
 }
 
+export interface HyperliquidBlockchainMeta extends BlockchainMetaBase {
+  type: TransactionType.HYPERLIQUID
+  chainId: string
+  info: HyperliquidChainInfo
+}
+
 export interface StellarBlockchainMeta extends BlockchainMetaBase {
   type: TransactionType.STELLAR
   chainId: null
@@ -354,6 +372,7 @@ export type BlockchainMeta =
   | SuiBlockchainMeta
   | XrplBlockchainMeta
   | StellarBlockchainMeta
+  | HyperliquidBlockchainMeta
 
 /**
  * MessagingProtocol

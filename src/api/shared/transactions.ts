@@ -12,6 +12,7 @@ export enum TransactionType {
   SUI = 'SUI',
   XRPL = 'XRPL',
   STELLAR = 'STELLAR',
+  HYPERLIQUID = 'HYPERLIQUID',
 }
 
 /**

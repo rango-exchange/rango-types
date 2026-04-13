@@ -2,6 +2,7 @@ import {
   BlockchainMeta,
   CosmosBlockchainMeta,
   EvmBlockchainMeta,
+  HyperliquidBlockchainMeta,
   SolanaBlockchainMeta,
   StarkNetBlockchainMeta,
   TonBlockchainMeta,
@@ -44,6 +45,11 @@ export const isXrplBlockchain = (
   blockchainMeta: BlockchainMeta
 ): blockchainMeta is XrplBlockchainMeta => blockchainMeta.type === 'XRPL'
 
+export const isHyperliquidBlockchain = (
+  blockchainMeta: BlockchainMeta
+): blockchainMeta is HyperliquidBlockchainMeta =>
+  blockchainMeta.type === 'HYPERLIQUID'
+
 export const evmBlockchains = (blockchains: BlockchainMeta[]) =>
   blockchains.filter(isEvmBlockchain)
 
@@ -67,3 +73,6 @@ export const tonBlockchain = (blockchains: BlockchainMeta[]) =>
 
 export const xrplBlockchain = (blockchains: BlockchainMeta[]) =>
   blockchains.filter(isXrplBlockchain)
+
+export const hyperliquidBlockchain = (blockchains: BlockchainMeta[]) =>
+  blockchains.filter(isHyperliquidBlockchain)
