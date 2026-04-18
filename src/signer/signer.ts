@@ -28,6 +28,19 @@ export interface GenericSigner<Tx extends Transaction> {
   ): Promise<{ hash: string; response?: any }>
 
   /*
+   * Signs the typed data value with types data structure for domain using the EIP-712 specification. This method is specific to EVM namespace. https://docs.ethers.org/v6/api/providers/#Signer-signTypedData
+   * @param typedData The TypedData to sign.
+   * @param address The address of the account to sign with.
+   * @param chainId The chainId of the network to sign with.
+   * @returns The signed message.
+   */
+  signTypedData?(
+    typedData: any,
+    address: string,
+    chainId: string | null
+  ): Promise<string>
+
+  /*
    * Wait for the transaction receipt using txHash and txResponse
    * @param txHash signed transaction hash
    * @param chainId for the transaction
