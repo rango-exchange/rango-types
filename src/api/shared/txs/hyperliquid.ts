@@ -17,7 +17,7 @@ interface HyperliquidAction {
  * @property {HyperliquidAction} action - Hyperliquid transaction action
  * @property {string} message, message to be signed by wallet
  * @property {string} nonce, nonce of transaction
- * @property {string} preconditions, This field is an empty array for Hyperliquid transactions
+ * @property {string} prerequisites, This field is an empty array for Hyperliquid transactions
  * @property {string | null} expectedOutput, expected output of transaction
  *
  */
@@ -26,7 +26,7 @@ export interface HyperliquidTransaction extends BaseTransaction {
   action: HyperliquidAction
   message: string
   nonce: number
-  preconditions: []
+  prerequisites: []
   expectedOutput: string
 }
 

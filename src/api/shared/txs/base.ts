@@ -8,18 +8,18 @@ import { TransactionType } from '../transactions.js'
  *
  */
 export interface BaseTransaction<
-  P extends BaseTransactionPrecondition = never
+  P extends BaseTransactionPrerequisite = never
 > {
   type: TransactionType
   blockChain: string
-  preconditions: P[]
+  prerequisites: P[]
 }
 
-type TransactionPreconditionsType =
+type TransactionPrerequisitesType =
   | 'STELLAR_CHANGE_TRUSTLINE'
   | 'XRPL_CHANGE_TRUSTLINE'
 
-export interface BaseTransactionPrecondition {
-  type: TransactionPreconditionsType
+export interface BaseTransactionPrerequisite {
+  type: TransactionPrerequisitesType
   blockChain: string
 }

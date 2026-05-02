@@ -1,11 +1,11 @@
 import {
   BaseTransaction as RangoBaseTransaction,
   TransactionType,
-  BaseTransactionPrecondition,
+  BaseTransactionPrerequisite,
 } from '../../shared/index.js'
 
 /**
- *  Stellar Precondition Type
+ *  Stellar Prerequisite Type
  *
  * @property {string} type equals to STELLAR_CHANGE_TRUSTLINE
  * @property {string} blockChain, equals to STELLAR
@@ -15,8 +15,8 @@ import {
  * @property {string} wallet User's wallet address which must have this trustline allowed for the stellar asset
  *
  */
-export interface StellarChangeTrustLinePrecondition
-  extends BaseTransactionPrecondition {
+export interface StellarChangeTrustLinePrerequisite
+  extends BaseTransactionPrerequisite {
   type: 'STELLAR_CHANGE_TRUSTLINE'
   blockChain: 'STELLAR'
   code: string
@@ -26,7 +26,7 @@ export interface StellarChangeTrustLinePrecondition
 }
 
 export interface StellarTransaction
-  extends RangoBaseTransaction<StellarChangeTrustLinePrecondition> {
+  extends RangoBaseTransaction<StellarChangeTrustLinePrerequisite> {
   type: TransactionType.STELLAR
   xdrBase64: string
 }
