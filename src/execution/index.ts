@@ -16,6 +16,7 @@ import {
   TronTransaction,
   TonTransaction,
 } from '../api/shared/index.js'
+import { TransactionPrerequisiteResult } from '../api/shared/prerequisites'
 import { HyperliquidTransaction } from '../api/shared/txs/hyperliquid.js'
 
 export type StepStatus =
@@ -90,6 +91,7 @@ export type SwapStepStatus = {
   explorerUrl: SwapExplorerUrl[] | null
   diagnosisUrl: string | null
   outputAmount: string | null
+  prerequisiteResults: TransactionPrerequisiteResult[] | undefined
 }
 
 export type PendingSwapStep = SwapStepRoute &

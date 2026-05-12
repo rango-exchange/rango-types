@@ -1,3 +1,4 @@
+import { TransactionPrerequisite } from '../prerequisites/base.js'
 import { TransactionType } from '../transactions.js'
 
 /**
@@ -7,19 +8,8 @@ import { TransactionType } from '../transactions.js'
  * @property {string} blockChain - The blockchain that this transaction will be executed in
  *
  */
-export interface BaseTransaction<
-  P extends BaseTransactionPrerequisite = never
-> {
+export interface BaseTransaction {
   type: TransactionType
   blockChain: string
-  prerequisites: P[]
-}
-
-type TransactionPrerequisitesType =
-  | 'STELLAR_CHANGE_TRUSTLINE'
-  | 'XRPL_CHANGE_TRUSTLINE'
-
-export interface BaseTransactionPrerequisite {
-  type: TransactionPrerequisitesType
-  blockChain: string
+  prerequisites: TransactionPrerequisite[]
 }
