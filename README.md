@@ -1,3 +1,5 @@
+****NOTE:** This repo is merged into [rango-sdk](https://github.com/rango-exchange/rango-sdk) and will continue its life there.**
+
 # Rango Exchange Types
 
 [![npm version](https://badge.fury.io/js/rango-types.svg)](https://badge.fury.io/js/rango-types)
